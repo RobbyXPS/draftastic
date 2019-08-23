@@ -1,0 +1,60 @@
+header {
+  flex-direction: row;
+  background-color: $accent-color-one-gray-mid;
+  grid-column: col-start / span 12;
+  ul {
+    display: flex;
+    list-style: none;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      //border-bottom: 12px solid $accent-color-one-gray-mid;
+      color: $base-color;
+      //&:hover {
+      //border-bottom: 12px solid $accent-color-one-gray-dark;
+      //background-color: $accent-color-one-gray-light;
+      //color: $accent-color-one-gray-dark;
+      //}
+
+      a {
+        color: $base-color;
+        font-size: 1.25em;
+        padding: 1.25em;
+        border-bottom: 12px solid $accent-color-one-gray-mid;
+
+        //text-align: center;
+        //display: inline-block;
+        //padding: 1.25rem;
+        //background-color: slateblue;
+        &:hover {
+          //border-bottom: 12px solid $accent-color-one-gray-dark;
+          background-color: $accent-color-one-gray-light;
+          color: $accent-color-one-gray-dark;
+          border-bottom: 12px solid $base-color;
+        }
+      }
+    }
+  }
+}
+
+#nav-basketball-icon {
+  flex-basis: 80%;
+  justify-content: left;
+  font-size: 3em;
+  padding: 0.25em;
+}
+
+#nav-signin-btn {
+  flex-basis: 10%;
+  //background-color: #6a5acd;
+  //min-height: 3em;
+}
+
+#nav-signup-btn {
+  flex-basis: 10%;
+  //background-color: slateblue;
+  //min-height: 3em;
+}

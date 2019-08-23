@@ -1,0 +1,22 @@
+@import "config";
+@import "navbar";
+@import "navside";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Bree Serif", serif;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: $accent-color-one-gray-light;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+  grid-gap: 0.5%;
+}

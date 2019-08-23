@@ -1,0 +1,54 @@
+header {
+  flex-direction: row;
+  background-color: #2d3443;
+  grid-column: col-start / span 12; }
+  header ul {
+    display: flex;
+    list-style: none;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); }
+    header ul li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ff7600; }
+      header ul li a {
+        color: #ff7600;
+        font-size: 1.25em;
+        padding: 1.25em;
+        border-bottom: 12px solid #2d3443; }
+        header ul li a:hover {
+          background-color: #e0e2eb;
+          color: #131314;
+          border-bottom: 12px solid #ff7600; }
+
+#nav-basketball-icon {
+  flex-basis: 80%;
+  justify-content: left;
+  font-size: 3em;
+  padding: 0.25em; }
+
+#nav-signin-btn {
+  flex-basis: 10%; }
+
+#nav-signup-btn {
+  flex-basis: 10%; }
+
+#nav-side {
+  background-color: red;
+  height: 900px; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Bree Serif", serif; }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #e0e2eb; }
+
+.App {
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+  grid-gap: 0.5%; }
