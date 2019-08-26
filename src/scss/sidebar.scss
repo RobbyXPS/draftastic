@@ -1,0 +1,22 @@
+@import "config";
+
+#nav-side {
+  background-color: lighten($accent-color-one-gray-mid, 20%);
+  grid-column: col-start / span 2;
+  height: 1900px;
+  box-shadow: 4px 0px 4px $accent-color-one-gray-dark;
+  a {
+    color: $base-color;
+    margin: auto;
+    display: block;
+    font-size: 1.25em;
+    padding: 0.5em;
+    border-bottom: 1px solid $base-color;
+    border-left: 0.5em solid lighten($accent-color-one-gray-mid, 20%);
+
+    &:hover {
+      border-left: 0.5em solid $base-color;
+      background-color: darken($accent-color-one-gray-mid, 10%);
+    }
+  }
+}

@@ -5,7 +5,12 @@ const SideBar = () => {
   return (
     <nav id="nav-side">
       <ul>
-        <li>1.</li>
+        <li>
+          <NavLink to="/admin-tools">Admin tools</NavLink>
+        </li>
+        <li>
+          <NavLink to="/team:id">My Team</NavLink>
+        </li>
       </ul>
     </nav>
   );

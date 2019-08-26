@@ -1,31 +1,32 @@
 header {
   flex-direction: row;
   background-color: #2d3443;
-  grid-column: col-start / span 12; }
+  grid-column: col-start / span 12;
+  z-index: 1; }
   header ul {
     display: flex;
     list-style: none;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); }
+    box-shadow: 0 4px 4px #131314; }
     header ul li {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       color: #ff7600; }
       header ul li a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: #ff7600;
         font-size: 1.25em;
-        padding: 1.25em;
-        border-bottom: 12px solid #2d3443; }
+        border-bottom: 0.5em solid #2d3443;
+        height: 4em; }
         header ul li a:hover {
           background-color: #e0e2eb;
           color: #131314;
-          border-bottom: 12px solid #ff7600; }
+          border-bottom: 0.5em solid #ff7600; }
 
 #nav-basketball-icon {
   flex-basis: 80%;
-  justify-content: left;
+  justify-content: flex-start;
   font-size: 3em;
-  padding: 0.25em; }
+  padding: 0.1em 0em 0em 0.25em; }
 
 #nav-signin-btn {
   flex-basis: 10%; }
@@ -34,8 +35,21 @@ header {
   flex-basis: 10%; }
 
 #nav-side {
-  background-color: red;
-  height: 900px; }
+  background-color: #566380;
+  grid-column: col-start / span 2;
+  height: 1900px;
+  box-shadow: 4px 0px 4px #131314; }
+  #nav-side a {
+    color: #ff7600;
+    margin: auto;
+    display: block;
+    font-size: 1.25em;
+    padding: 0.5em;
+    border-bottom: 1px solid #ff7600;
+    border-left: 0.5em solid #566380; }
+    #nav-side a:hover {
+      border-left: 0.5em solid #ff7600;
+      background-color: #191c24; }
 
 * {
   margin: 0;
@@ -50,5 +64,4 @@ body {
 
 .App {
   display: grid;
-  grid-template-columns: repeat(12, [col-start] 1fr);
-  grid-gap: 0.5%; }
+  grid-template-columns: repeat(12, [col-start] 1fr); }
