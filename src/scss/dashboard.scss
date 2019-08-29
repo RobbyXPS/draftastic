@@ -1,0 +1,25 @@
+#dashboard-container {
+  display: flex;
+
+  #dashboard-intro {
+    background-color: green;
+    flex-grow: 1;
+    padding: 1em 3em 1em 3em;
+    border-radius: 1em;
+    margin: 1em;
+    background: darken($accent-color-one-gray-light, 10%);
+    border: 0.25em solid $accent-color-one-gray-mid;
+    box-shadow: 4px 4px 10px $accent-color-one-gray-dark;
+  }
+
+  #notifications-container {
+    background-color: red;
+    padding: 3em;
+    padding: 1em 3em 1em 3em;
+    border-radius: 1em;
+    margin: 1em;
+    background: darken($accent-color-one-gray-light, 10%);
+    border: 0.25em solid $accent-color-one-gray-mid;
+    box-shadow: 4px 4px 10px $accent-color-one-gray-dark;
+  }
+}

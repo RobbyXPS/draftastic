@@ -2,13 +2,16 @@
   background-color: #566380;
   grid-column: col-start / span 2;
   height: 1900px;
-  box-shadow: 4px 0px 4px #131314; }
+  box-shadow: 4px 0px 4px #131314;
+  display: flex;
+  flex-direction: column;
+  z-index: 1; }
   #nav-side a {
     color: #ff7600;
-    margin: auto;
-    display: block;
-    font-size: 1.25em;
+    display: flex;
+    flex-grow: 1;
     padding: 0.5em;
+    font-size: 1.25em;
     border-bottom: 1px solid #ff7600;
     border-left: 0.5em solid #566380; }
     #nav-side a:hover {

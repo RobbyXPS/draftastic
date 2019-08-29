@@ -1,0 +1,6 @@
+.btn-group button {
+  border: 1px solid green;
+  color: pink;
+  padding: 1em 2em;
+  cursor: pointer;
+  float: left; }

@@ -5,12 +5,16 @@
   grid-column: col-start / span 2;
   height: 1900px;
   box-shadow: 4px 0px 4px $accent-color-one-gray-dark;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+
   a {
     color: $base-color;
-    margin: auto;
-    display: block;
-    font-size: 1.25em;
+    display: flex;
+    flex-grow: 1;
     padding: 0.5em;
+    font-size: 1.25em;
     border-bottom: 1px solid $base-color;
     border-left: 0.5em solid lighten($accent-color-one-gray-mid, 20%);
 

@@ -1,6 +1,8 @@
 @import "config";
 @import "navbar";
 @import "sidebar";
+@import "dashboard";
+@import "teamlist";
 
 * {
   margin: 0;
@@ -12,11 +14,15 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: $accent-color-one-gray-light;
 }
 
 .App {
   display: grid;
   grid-template-columns: repeat(12, [col-start] 1fr);
-  //grid-gap: 0.5%;
+}
+
+.main-content-area {
+  padding: 1em;
+  background: $accent-color-one-gray-light;
+  grid-column: col-start 3 / span 12;
 }

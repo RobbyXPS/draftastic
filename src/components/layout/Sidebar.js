@@ -6,7 +6,7 @@ const SideBar = () => {
     <nav id="nav-side">
       <ul>
         <li>
-          <NavLink to="/admin-tools">Admin tools</NavLink>
+          <NavLink to="/admin-tools">Admin Tools</NavLink>
         </li>
         <li>
           <NavLink to="/team:id">My Team</NavLink>
