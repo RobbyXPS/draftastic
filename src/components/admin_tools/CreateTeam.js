@@ -6,7 +6,6 @@ class CreateTeam extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
       name: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -15,7 +14,6 @@ class CreateTeam extends React.Component {
 
   handleChange = e => {
     this.setState({
-      id: e.target.value,
       name: e.target.value
     });
   };

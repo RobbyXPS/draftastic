@@ -8,7 +8,7 @@ const TeamList = ({ teams }) => {
       <div>
         {teams &&
           teams.map(team => {
-            return <div key={team.id}>{team.name}</div>;
+            return <div key={team.name}>{team.name}</div>;
           })}
       </div>
     </div>

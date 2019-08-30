@@ -1,6 +1,4 @@
-const initState = {};
-
-const authReducer = (state = initState, action) => {
+const authReducer = (state = {}, action) => {
   return state;
 };
 
