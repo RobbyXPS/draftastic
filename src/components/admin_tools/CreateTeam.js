@@ -48,20 +48,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(CreateTeam);
-/*
-import React from "react";
-
-const CreateTeam = () => {
-  return (
-    <div id="create-team-container">
-      <h1>Create a new team:</h1>
-      <form>
-        <h2>Team Name:</h2>
-        <input type="text"></input>
-      </form>
-    </div>
-  );
-};
-
-export default CreateTeam;
-*/

@@ -8,28 +8,11 @@ const TeamList = ({ teams }) => {
       <div>
         {teams &&
           teams.map(team => {
-            return <div key={team.name}>{team.name}</div>;
+            return <button key={team.name}>{team.name}</button>;
           })}
       </div>
     </div>
   );
 };
-/*
-class TeamList extends React.Component {
-  
-  render() {
-    return (
-      <div id="team-list-container">
-        <h2>Teams</h2>
-        <div>
-          {teams &&
-            teams.map(team => {
-              return <div key={team.id}>{team.name}</div>;
-            })}
-        </div>
-      </div>
-    );
-  }
-}
-*/
+
 export default TeamList;

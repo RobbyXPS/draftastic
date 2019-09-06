@@ -1,19 +1,26 @@
 const initState = {
   teams: [
-    { id: "blazers", name: "blazers" },
-    { id: "lakers", name: "lakers" },
-    { id: "rockets", name: "rockets" }
+    { id: "blazers", name: "blazers1" },
+    { id: "lakers", name: "lakers1" },
+    { id: "rockets", name: "rockets1" }
   ]
 };
 
+/*
+const initState = {
+  teams: []
+};
+*/
+
 const teamReducer = (state = initState, action) => {
-  console.log("myaction", initState);
+  console.log(" ##### state here", state);
   switch (action.type) {
     case "CREATE_TEAM":
-      console.log("created team", action.team);
+      return state;
+    case "CREATE_TEAM_ERROR":
+      console.log("create team error", action.err);
       return state;
     default:
-      console.log("default reducer");
       return state;
   }
 
