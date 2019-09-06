@@ -1,0 +1,11 @@
+.player-card {
+  background-color: gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#player-card-contract {
+  display: flex;
+  flex-direction: column;
+}

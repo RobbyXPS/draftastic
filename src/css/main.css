@@ -103,6 +103,29 @@ nav {
   cursor: pointer;
   float: left; }
 
+.team-list {
+  display: flex;
+  flex-direction: column; }
+
+#team-one-container,
+#team-two-container {
+  background-color: red;
+  width: 50%;
+  padding: 1%; }
+
+.player-card {
+  background-color: gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+#player-card-contract {
+  display: flex;
+  flex-direction: column; }
+
+#team-rosters-container {
+  display: flex; }
+
 * {
   margin: 0;
   padding: 0;

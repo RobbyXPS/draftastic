@@ -1,11 +1,9 @@
-import authReducer from "./authReducer";
-import teamReducer from "./teamReducer";
 import { combineReducers } from "redux";
 import { firestoreReducer } from "redux-firestore";
+import teamReducer from "./teamReducer";
 
 const rootReducer = combineReducers({
-  auth: authReducer,
-  team: teamReducer,
+  selected_teams: teamReducer,
   firestore: firestoreReducer
 });
 

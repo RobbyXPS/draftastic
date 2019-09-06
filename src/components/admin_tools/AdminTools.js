@@ -9,34 +9,48 @@ import { compose } from "redux";
 class AdminTools extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentTeam: "blazers"
-    };
   }
 
   render() {
+    // deconstruct props passed in from store
     const { teams } = this.props;
     const { players } = this.props;
-    console.log("hey1", this);
-    console.log("its state", this.state);
+    const { selected_team } = this.props;
 
     return (
       <div className="main-content-area" id="admin-tools-container">
-        <div>current team is: {this.state.currentTeam}</div>
         <CreateTeam />
-        <TeamList teams={teams} />
-        <PlayerList players={players} currentTeam={this.state.currentTeam} />
+        <div id="team-rosters-container">
+          <div id="team-one-container">
+            <h2>TEAM ONE:</h2>
+            <TeamList
+              class="team-list"
+              teams={teams}
+              containerValue="teamOne"
+            />
+            <PlayerList players={players} currentTeam={selected_team} />
+          </div>
+          <div id="team-two-container">
+            <h2>TEAM TWO:</h2>
+            <TeamList
+              class="team-list"
+              teams={teams}
+              containerValue="teamTwo"
+            />
+            <PlayerList players={players} currentTeam={selected_team} />
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log("alsdfjklaskdf1", state);
-  //console.log("alsdfjklaskdf2", store.getState());
+  console.log("$$$$$$$$$$$$$$$$$$", state);
   return {
     teams: state.firestore.ordered.teams,
-    players: state.firestore.ordered.players
+    players: state.firestore.ordered.players,
+    selected_team: state.selected_teams
   };
 };
 

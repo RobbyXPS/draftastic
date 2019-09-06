@@ -4,3 +4,13 @@
   padding: 1em 2em;
   cursor: pointer;
   float: left; }
+
+.team-list {
+  display: flex;
+  flex-direction: column; }
+
+#team-one-container,
+#team-two-container {
+  background-color: red;
+  width: 50%;
+  padding: 1%; }
