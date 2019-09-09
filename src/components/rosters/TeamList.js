@@ -10,10 +10,10 @@ class TeamList extends React.Component {
 
   handleClick = e => {
     //this.props.selectTeam(e.target.innerHTML);
-    console.log("************<>><><><", this.props.containerValue);
+    console.log("inside handle click", this.props.containerValue);
 
     this.props.selectTeam({
-      team_container: "teamOne",
+      team_container: this.props.containerValue,
       team_name: e.target.innerHTML
     });
   };
