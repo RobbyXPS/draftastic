@@ -14,24 +14,32 @@ class AdminTools extends React.Component {
     const { selected_teams } = this.props;
     const { selected_players } = this.props;
 
-    console.log("mines players", players);
-    console.log("mines selected_players", selected_players);
-    console.log("mines selected_players 0", selected_players["teamOne"]);
+    /*
 
     if (players !== undefined) {
       function filterByPlayer(item) {
-        console.log("this is the item in filter", item);
-
-        let tempFullName = item.first_name + " " + item.last_name;
-        console.log("TEMP FULL NAME YO", tempFullName);
-        console.log("IS IT IN LIST ONE?");
-
-        return true;
+        if (selected_players.teamOne.includes(item.id)) {
+          return true;
+        } else {
+          return false;
+        }
       }
 
-      let filteredPlayerList = players.filter(filterByPlayer);
-      console.log("filteredPlayerList", filteredPlayerList);
+      const filteredPlayerListOne = players.filter(filterByPlayer);
     }
+
+
+    const filteredPlayerListOne = {
+      contract_amount: 4767000,
+      contract_length: 2,
+      first_name: "Avery",
+      id: "3MII2fK6w0O5QBuPl0f7",
+      last_name: "Bradley",
+      position: "SG",
+      team: "Lakers"
+    };
+
+*/
 
     return (
       <div className="main-content-area" id="admin-tools-container">
@@ -43,6 +51,8 @@ class AdminTools extends React.Component {
               players={players}
               currentTeams={selected_teams}
               containerValue="teamOne"
+              isTradeUI="true"
+              selected_players={selected_players}
             />
           </div>
         </div>
@@ -80,7 +90,6 @@ class AdminTools extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("$$$$$ INSIDE ADMINTOOLS MAP STATE", state);
   return {
     teams: state.firestore.ordered.teams,
     players: state.firestore.ordered.players,
