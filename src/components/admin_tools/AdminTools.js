@@ -2,6 +2,7 @@ import React from "react";
 import TeamList from "../rosters/TeamList";
 import CreateTeam from "../admin_tools/CreateTeam";
 import PlayerList from "../rosters/PlayerList";
+import TradeInfo from "../rosters/TradeInfo";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
@@ -20,6 +21,12 @@ class AdminTools extends React.Component {
         <div id="team-trades-container">
           <div id="team-two-container-trade">
             <h2>TEAM ONE: (TRADE)</h2>
+            <TradeInfo
+              selected_players={selected_players}
+              players={players}
+              currentTeams={selected_teams}
+              containerValue="teamOne"
+            />
             <PlayerList
               class="team-list"
               players={players}
@@ -31,6 +38,12 @@ class AdminTools extends React.Component {
           </div>
           <div id="team-one-container-trade">
             <h2>TEAM TWO: (TRADE)</h2>
+            <TradeInfo
+              selected_players={selected_players}
+              players={players}
+              currentTeams={selected_teams}
+              containerValue="teamTwo"
+            />
             <PlayerList
               class="team-list"
               players={players}

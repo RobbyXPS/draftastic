@@ -13,6 +13,11 @@ class PlayerList extends React.Component {
 
   // track when a player selects a player to be added to the trade
   handleClick = event => {
+    console.log(
+      "$$$$$ INSIDE HANDLECLICK",
+      event.currentTarget.getAttribute("playerobj")
+    );
+
     this.props.selectPlayer({
       team_container: this.props.containerValue,
       player_name: event.currentTarget.getAttribute("playerid")
