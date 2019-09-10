@@ -14,45 +14,25 @@ class AdminTools extends React.Component {
     const { selected_teams } = this.props;
     const { selected_players } = this.props;
 
-    console.log(
-      "*&*&*&*&*&*&&* >>>> LOOKING AT SELECTED PLAYERS",
-      selected_players
-    );
-
-    /*
-
-    if (players !== undefined) {
-      function filterByPlayer(item) {
-        if (selected_players.teamOne.includes(item.id)) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-
-      const filteredPlayerListOne = players.filter(filterByPlayer);
-    }
-
-
-    const filteredPlayerListOne = {
-      contract_amount: 4767000,
-      contract_length: 2,
-      first_name: "Avery",
-      id: "3MII2fK6w0O5QBuPl0f7",
-      last_name: "Bradley",
-      position: "SG",
-      team: "Lakers"
-    };
-
-*/
-
     return (
       <div className="main-content-area" id="admin-tools-container">
         <CreateTeam />
         <div id="team-trades-container">
+          <div id="team-two-container-trade">
+            <h2>TEAM ONE: (TRADE)</h2>
+            <PlayerList
+              class="team-list"
+              players={players}
+              currentTeams={selected_teams}
+              containerValue="teamTwo"
+              isTradeUI="true"
+              selected_players={selected_players}
+            />
+          </div>
           <div id="team-one-container-trade">
             <h2>TEAM TWO: (TRADE)</h2>
             <PlayerList
+              class="team-list"
               players={players}
               currentTeams={selected_teams}
               containerValue="teamOne"

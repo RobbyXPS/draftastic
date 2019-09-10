@@ -10,7 +10,9 @@
   flex-direction: column; }
 
 #team-one-container,
-#team-two-container {
+#team-two-container,
+#team-one-container-trade,
+#team-two-container-trade {
   background-color: red;
   width: 50%;
   padding: 1%; }
