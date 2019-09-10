@@ -8,13 +8,10 @@ class TeamList extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick = e => {
-    //this.props.selectTeam(e.target.innerHTML);
-    console.log("inside handle click", this.props.containerValue);
-
+  handleClick = event => {
     this.props.selectTeam({
       team_container: this.props.containerValue,
-      team_name: e.target.innerHTML
+      team_name: event.target.innerHTML
     });
   };
 
@@ -27,7 +24,7 @@ class TeamList extends React.Component {
           {teams &&
             teams.map(team => {
               return (
-                <button onClick={this.handleClick} key={team.name}>
+                <button onClick={this.handleClick} key={team.id}>
                   {team.name}
                 </button>
               );
@@ -38,12 +35,6 @@ class TeamList extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    selectedTeam: state.team
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     selectTeam: team => dispatch(selectTeam(team))
@@ -51,6 +42,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(TeamList);
