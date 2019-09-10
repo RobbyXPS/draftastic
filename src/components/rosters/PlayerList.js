@@ -11,16 +11,16 @@ class PlayerList extends React.Component {
     this.filterByPlayer = this.filterByPlayer.bind(this);
   }
 
+  // track when a player selects a player to be added to the trade
   handleClick = event => {
-    console.log("im selecting yo", event.currentTarget);
     this.props.selectPlayer({
       team_container: this.props.containerValue,
       player_name: event.currentTarget.getAttribute("playerid")
     });
   };
 
+  // track when a player selects a player to be removed from the trade
   handleDelete = event => {
-    console.log("im deleting yo", event.currentTarget.parentNode.parentNode);
     this.props.deletePlayer({
       team_container: this.props.containerValue,
       player_name: event.currentTarget.parentNode.parentNode.getAttribute(
@@ -30,19 +30,8 @@ class PlayerList extends React.Component {
   };
 
   filterByPlayer(item) {
-    console.log("()()()()() inside filter plz work", this.props.containerValue);
-    console.log("---- 1", this.props.containerValue);
-    const thingy = this.props.containerValue;
-    console.log("---- 1.5", thingy);
-    console.log("---- 2", this.props.selected_players.teamOne);
-    console.log(
-      "---- 2.5",
-      this.props.selected_players[thingy].includes(item.id)
-    );
-
-    //this.props.selected_players.[val]
-    //if (this.props.selected_players.teamOne.includes(item.id)) {
-    if (this.props.selected_players[thingy].includes(item.id)) {
+    const containerValue = this.props.containerValue;
+    if (this.props.selected_players[containerValue].includes(item.id)) {
       return true;
     } else {
       return false;
@@ -53,21 +42,16 @@ class PlayerList extends React.Component {
     // HANDLE LISTS THAT ARE FOR THE TRADE UI
 
     if (this.props.isTradeUI == "true") {
-      console.log("inside true", this.props.containerValue);
-
       // get list of players from parent component via props
       const playerList = this.props.players;
 
       // wait for playerlist to populate from db
       if (playerList !== undefined) {
         // only filter in players that the user has selected in the roster ui
-        const filteredPlayerListOne = playerList.filter(
-          this.filterByPlayer,
-          "thing"
-        );
+        const filteredPlayerList = playerList.filter(this.filterByPlayer);
 
         // construct the list items for each player
-        const listItems = filteredPlayerListOne.map(player => (
+        const listItems = filteredPlayerList.map(player => (
           <li className="player-card" playerid={player.id} key={player.id}>
             <div id="player-card-name">
               <p>

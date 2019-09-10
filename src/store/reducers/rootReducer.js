@@ -4,6 +4,7 @@ import teamReducer from "./teamReducer";
 import playerReducer from "./playerReducer";
 
 const rootReducer = combineReducers({
+  // used with FE team selection input to populate trade UI
   selected_players: playerReducer,
   // used with FE team selection input to filter rosters
   selected_teams: teamReducer,
