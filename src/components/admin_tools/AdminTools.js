@@ -14,6 +14,11 @@ class AdminTools extends React.Component {
     const { selected_teams } = this.props;
     const { selected_players } = this.props;
 
+    console.log(
+      "*&*&*&*&*&*&&* >>>> LOOKING AT SELECTED PLAYERS",
+      selected_players
+    );
+
     /*
 
     if (players !== undefined) {
