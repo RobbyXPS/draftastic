@@ -1,10 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
+import { storeSalariesTotal } from "../../store/actions/capActions";
 
 class TradeInfo extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      incomingPlayersMessage: "",
+      capAmountMessage: ""
+    };
     this.filterIncomingPlayers = this.filterIncomingPlayers.bind(this);
     this.calculateSalaries = this.calculateSalaries.bind(this);
+    this.handleSendingSalaries = this.handleSendingSalaries.bind(this);
+  }
+
+  handleSendingSalaries(containerValue, wholeTeamSalary) {
+    this.props.storeSalariesTotal({
+      team_container: containerValue,
+      team_salary_total: wholeTeamSalary
+    });
   }
 
   calculateSalaries(list) {
@@ -27,17 +41,115 @@ class TradeInfo extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    console.log(
+      "========= 1ST TRY this.props.selected_teams",
+      this.props.currentTeams
+    );
+    console.log("========= 2nd TRY this.props.selected_teams", prevProps);
+    console.log(
+      "++++++ comPAIRE",
+      this.props.currentTeams !== prevProps.selected_teams
+    );
+
+    if (
+      this.props.currentTeams !== prevProps.currentTeams ||
+      this.props.selected_players !== prevProps.selected_players
+    ) {
+      console.log("^^^^^ componentDidUpdate is fired - prevProps", prevProps);
+
+      const containerValue = this.props.containerValue;
+      const playerList = this.props.players;
+
+      if (playerList !== undefined) {
+        //const filteredPlayerList = playerList.filter(this.filterIncomingPlayers);
+        const incomingPlayersList = playerList.filter(
+          this.filterIncomingPlayers
+        );
+
+        // construct text that should be displayed when user selects a player to trade
+        let numofplayers = incomingPlayersList.length;
+
+        let incomingPlayersMessage;
+        const totalSalary = this.calculateSalaries(incomingPlayersList);
+
+        console.log("~~~~~~~~ check numofplayer", numofplayers);
+        if (numofplayers == 0) {
+          incomingPlayersMessage = "";
+        } else {
+          incomingPlayersMessage =
+            "aquireing " +
+            numofplayers +
+            " players with salaries totaling " +
+            totalSalary;
+        }
+
+        let currentTeams = this.props.currentTeams;
+
+        // filter helper to return list based on team name
+        function filterByTeam(item) {
+          if (item.team === currentTeams[containerValue]) {
+            return true;
+          }
+          return false;
+        }
+        // construct the caproom for the selected team
+        let filteredList = playerList.filter(filterByTeam);
+        let wholeTeamSalary = this.calculateSalaries(filteredList);
+
+        // this is what causes the state transition error
+        this.handleSendingSalaries(containerValue, wholeTeamSalary);
+
+        //2019-2020 cap room is 109,140,000
+        let caproom = 109140000 - wholeTeamSalary;
+
+        // construct the cap number text displayed when a user selects a team
+        let capAmountMessage;
+        // if a user hasn't selected a team yet don't display anything
+        if (wholeTeamSalary == 0) {
+          capAmountMessage = "";
+        }
+        // once they select a team show the cap room for that team
+        else {
+          capAmountMessage = "cap room " + caproom;
+        }
+
+        /// HERE ////
+
+        /*
+      // construct the cap number text displayed when a user selects a team
+      var capAmountMessage;
+      // if a user hasn't selected a team yet don't display anything
+      if (wholeTeamSalary == 0) {
+        capAmountMessage = "";
+      }
+      // once they select a team show the cap room for that team
+      else {
+        capAmountMessage = "cap room " + caproom;
+      }
+*/
+        console.log("[][][][] incomingPlayersMessage", incomingPlayersMessage);
+        this.setState({ incomingPlayersMessage: incomingPlayersMessage });
+        this.setState({ capAmountMessage: capAmountMessage });
+      }
+    }
+  }
+
   render() {
     const containerValue = this.props.containerValue;
     const playerList = this.props.players;
 
     if (playerList !== undefined) {
+      /*
+
+
+
       //const filteredPlayerList = playerList.filter(this.filterIncomingPlayers);
       const incomingPlayersList = playerList.filter(this.filterIncomingPlayers);
 
       // construct text that should be displayed when user selects a player to trade
       let numofplayers = incomingPlayersList.length;
-      //var returntext;
+
       let incomingPlayersMessage;
       const totalSalary = this.calculateSalaries(incomingPlayersList);
 
@@ -61,12 +173,36 @@ class TradeInfo extends React.Component {
         return false;
       }
 
+
+*/
+
+      /// HERE ////
+      /*
+        // this is what causes the state transition error
+        this.handleSendingSalaries(containerValue, wholeTeamSalary);
+
+
       // construct the caproom for the selected team
       let filteredList = playerList.filter(filterByTeam);
       let wholeTeamSalary = this.calculateSalaries(filteredList);
-      //2019-2020 cap room is 109,140,000
-      let caproom = 109140000 - wholeTeamSalary;
 
+
+
+      */
+      /*
+      console.log("<<<<<< whole team salary", wholeTeamSalary);
+      console.log("<<<<<< cont value", containerValue);
+
+      console.log(
+        "<<<<<< send that ish",
+        this.handleSendingSalaries(containerValue, wholeTeamSalary)
+      );
+      */
+
+      //2019-2020 cap room is 109,140,000
+      //let caproom = 109140000 - wholeTeamSalary;
+
+      /*
       // construct the cap number text displayed when a user selects a team
       var capAmountMessage;
       // if a user hasn't selected a team yet don't display anything
@@ -77,13 +213,21 @@ class TradeInfo extends React.Component {
       else {
         capAmountMessage = "cap room " + caproom;
       }
+*/
 
+      //capAmountMessage
+      //let a = "";
+      //let incomingPlayersMessage = "";
+
+      let incomingPlayersMessage = "";
+      let capAmountMessage = "";
+      //console.log("MNMNMNMNMNMNMNMNMNMNN", this.state.myVariable);
       // return the jsx to the user
       return (
         <div>
           <h1>{this.props.currentTeams[containerValue]}</h1>
-          <p>{incomingPlayersMessage}</p>
-          <p>{capAmountMessage}</p>
+          <p>{this.state.incomingPlayersMessage}</p>
+          <p>{this.state.capAmountMessage}</p>
         </div>
       );
     }
@@ -94,4 +238,15 @@ class TradeInfo extends React.Component {
   }
 }
 
-export default TradeInfo;
+const mapDispatchToProps = dispatch => {
+  return {
+    storeSalariesTotal: teamSalary => dispatch(storeSalariesTotal(teamSalary))
+  };
+};
+
+//export default TradeInfo;
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(TradeInfo);

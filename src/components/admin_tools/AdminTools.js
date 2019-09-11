@@ -88,11 +88,13 @@ class AdminTools extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log("@@@@@ state at 1st load mang", state);
   return {
     teams: state.firestore.ordered.teams,
     players: state.firestore.ordered.players,
     selected_teams: state.selected_teams,
-    selected_players: state.selected_players
+    selected_players: state.selected_players,
+    team_salaries_total: state.team_salaries_total
   };
 };
 
