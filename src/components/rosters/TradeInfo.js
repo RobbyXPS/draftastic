@@ -3,25 +3,23 @@ import React from "react";
 class TradeInfo extends React.Component {
   constructor(props) {
     super(props);
-    this.filterByPlayer = this.filterByPlayer.bind(this);
+    this.filterIncomingPlayers = this.filterIncomingPlayers.bind(this);
     this.calculateSalaries = this.calculateSalaries.bind(this);
   }
 
   calculateSalaries(list) {
-    var mines = list.reduce(function(accumulator, currentValue) {
+    return list.reduce(function(accumulator, currentValue) {
       return accumulator + currentValue.contract_amount;
     }, 0);
-
-    return mines;
   }
 
-  filterByPlayer(item) {
+  filterIncomingPlayers(item) {
+    // filp which container value is because we want the top portion populating for the other teams players
     let selectedPlayersList = "teamOne";
     if (this.props.containerValue == "teamOne") {
       selectedPlayersList = "teamTwo";
     }
 
-    //const containerValue = this.props.containerValue;
     if (this.props.selected_players[selectedPlayersList].includes(item.id)) {
       return true;
     } else {
@@ -30,109 +28,67 @@ class TradeInfo extends React.Component {
   }
 
   render() {
-    let contValue = this.props.containerValue;
-
-    /*
-    let selectedPlayersList = "teamOne";
-    if (this.props.containerValue == "teamOne") {
-      selectedPlayersList = "teamTwo";
-    }
-    */
-    let selectedPlayersList = this.props.containerValue;
-
+    const containerValue = this.props.containerValue;
     const playerList = this.props.players;
+
     if (playerList !== undefined) {
-      const filteredPlayerList = playerList.filter(this.filterByPlayer);
+      //const filteredPlayerList = playerList.filter(this.filterIncomingPlayers);
+      const incomingPlayersList = playerList.filter(this.filterIncomingPlayers);
 
-      if (filteredPlayerList.length >= 1) {
-        var initialValue = 0;
-        var sum = [{ x: 1 }, { x: 2 }, { x: 3 }].reduce(function(
-          accumulator,
-          currentValue
-        ) {
-          return accumulator + currentValue.x;
-        },
-        initialValue);
-
-        var initialValue2 = 0;
-        var sum2 = filteredPlayerList.reduce(function(
-          accumulator,
-          currentValue
-        ) {
-          return accumulator + currentValue.contract_amount;
-        },
-        initialValue);
-      }
-      var numofplayers = filteredPlayerList.length;
-
-      var returntext;
+      // construct text that should be displayed when user selects a player to trade
+      let numofplayers = incomingPlayersList.length;
+      //var returntext;
+      let incomingPlayersMessage;
+      const totalSalary = this.calculateSalaries(incomingPlayersList);
 
       if (numofplayers == 0) {
-        returntext = "";
+        incomingPlayersMessage = "";
       } else {
-        returntext =
+        incomingPlayersMessage =
           "aquireing " +
           numofplayers +
           " players with salaries totaling " +
-          sum2;
+          totalSalary;
       }
-
-      //var returntext = "aquireing" + numofplayers + "players @" + sum2;
-
-      //if (filteredPlayerList.length >= 1) return aquireing {numofplayers} players @ {sum2}
-
-      console.log("FILTER LIST", filteredPlayerList);
-      const totalSalary = this.calculateSalaries(filteredPlayerList);
-      console.log("totalSalary", totalSalary);
-
-      /*
-      if (totalSalary == 0) {
-        returntext = "";
-      } else {
-        returntext =
-          "aquireing " +
-          numofplayers +
-          " players with salaries totaling " +
-          sum2;
-      }
-      */
 
       let currentTeams = this.props.currentTeams;
 
       // filter helper to return list based on team name
       function filterByTeam(item) {
-        console.log("inside filter 1", contValue);
-        console.log("inside filter 2", currentTeams[contValue]);
-        if (item.team === currentTeams[contValue]) {
+        if (item.team === currentTeams[containerValue]) {
           return true;
         }
         return false;
       }
 
-      console.log("playerList", playerList);
-      // filter the list
+      // construct the caproom for the selected team
       let filteredList = playerList.filter(filterByTeam);
-      console.log("filteredList", filteredList);
       let wholeTeamSalary = this.calculateSalaries(filteredList);
-      console.log("wholeTeamSalary", wholeTeamSalary);
+      //2019-2020 cap room is 109,140,000
       let caproom = 109140000 - wholeTeamSalary;
 
-      //console.log("<<<< RIGHT HERE >>>>", wholeTeamSalary);
-      var returntext2;
+      // construct the cap number text displayed when a user selects a team
+      var capAmountMessage;
+      // if a user hasn't selected a team yet don't display anything
       if (wholeTeamSalary == 0) {
-        returntext2 = "";
-      } else {
-        returntext2 = "cap room " + caproom;
+        capAmountMessage = "";
+      }
+      // once they select a team show the cap room for that team
+      else {
+        capAmountMessage = "cap room " + caproom;
       }
 
+      // return the jsx to the user
       return (
         <div>
-          <h1>{this.props.currentTeams[contValue]}</h1>
-          <p>{returntext}</p>
-          <p>{returntext2}</p>
+          <h1>{this.props.currentTeams[containerValue]}</h1>
+          <p>{incomingPlayersMessage}</p>
+          <p>{capAmountMessage}</p>
         </div>
       );
-    } else {
+    }
+    // display placeholder text until you get data from db
+    else {
       return <div>loading...</div>;
     }
   }
