@@ -32,6 +32,7 @@ class TradeProposer extends React.Component {
 
   handleTrade() {
     // get team salary
+
     //team one
     let teamOneTotalSalary = this.props.team_salaries_total.teamOne;
     let teamOneContractList = this.props.selected_players.teamOne
@@ -40,8 +41,6 @@ class TradeProposer extends React.Component {
       (accumulator, currentValue) => accumulator + Number(currentValue),
       0
     );
-    console.log("*** teamOneTotalContracts OUTGOING", teamOneTotalContracts);
-    console.log("*** teamOneTotalSalary", teamOneTotalSalary);
 
     //team two
     let teamTwoTotalSalary = this.props.team_salaries_total.teamTwo;
@@ -51,49 +50,51 @@ class TradeProposer extends React.Component {
       (accumulator, currentValue) => accumulator + Number(currentValue),
       0
     );
-    console.log("*** teamTwoTotalContracts", teamTwoTotalContracts);
-    console.log("*** teamTwoTotalSalary", teamTwoTotalSalary);
 
     //trade logic branching
 
-    //teamone
+    // TEAM ONE LOGIC
     if (teamOneTotalSalary > 109140000) {
-      // do scenario 1
-      console.log("inside scenario 1");
-      // TEAM ONE LOGIC
-
-      console.log("team ones incoming contracts", teamTwoTotalContracts);
-      console.log("team ones outgoing contracts", teamOneTotalContracts);
-
+      // do the math for the trade buffer per NBA rules
       let tradeBufferOne = teamOneTotalContracts * 1.25 + 100000;
-      console.log("trade buffer", tradeBufferOne);
 
-      //let answer = teamTwoTotalContracts <= tradeBufferOne;
-      console.log("math", teamTwoTotalContracts <= tradeBufferOne);
+      // check to see if the trade logic is valid for team two
+      if (teamTwoTotalContracts <= tradeBufferOne == false) {
+        this.setState({
+          team_two_failure_message:
+            "Error: 'Lakers' incoming slaries exceed the 125% plus $100,000 rule. Cut $'some amount' from the 'Lakers' incoming trade value to make the trade successful."
+        });
+      } else {
+        this.setState({
+          team_two_failure_message: ""
+        });
+      }
 
       // TEAM TWO LOGIC
-
-      console.log("team twos incoming contracts", teamOneTotalContracts);
-      console.log("team twos outgoing contracts", teamTwoTotalContracts);
-
+      // do the math for the trade buffer per NBA rules
       let tradeBufferTwo = teamTwoTotalContracts * 1.25 + 100000;
-      console.log("trade buffer", tradeBufferTwo);
 
-      //let answer = teamTwoTotalContracts <= tradeBufferOne;
-      console.log("math", teamOneTotalContracts <= tradeBufferTwo);
-
+      // check to see if the trade logic is valid for team two
       if (teamOneTotalContracts <= tradeBufferTwo == false) {
         this.setState({
           team_one_failure_message:
             "Error: 'Blazers' incoming slaries exceed the 125% plus $100,000 rule. Cut $'some amount' from the 'Blazers' incoming trade value to make the trade successful."
         });
       } else {
-        console.log(
-          "success !! 1",
-          this.props.selected_players.teamOne.player_contract
-        );
         this.setState({
-          team_one_failure_message: "",
+          team_one_failure_message: ""
+        });
+      }
+
+      if (
+        this.state.team_one_failure_message.length == 0 &&
+        this.state.team_two_failure_message.length == 0
+      ) {
+        console.log("inside last if 1");
+        console.log("inside last if 2", this.state);
+        console.log("inside last if 3", this.state.team_one_failure_message);
+        console.log("inside last if 4", this.state.team_two_failure_message);
+        this.setState({
           success_message: "TRADE SUCCESSFUL"
         });
       }
@@ -104,18 +105,6 @@ class TradeProposer extends React.Component {
   }
 
   render() {
-    console.log(
-      "!!!!!!!!!!!!!!! 1",
-      this.props.selected_players.teamOne.player_contract
-    );
-    console.log(
-      "!!!!!!!!!!!!!!! 2",
-      this.props.selected_players.teamTwo.player_contract
-    );
-
-    console.log("props1", this.props);
-    console.log("props2", this.props.selected_players.teamOne.player_id.length);
-    console.log("props3", this.props.selected_players.teamTwo.player_id);
     if (
       this.props.selected_players.teamOne.player_id.length !== 0 &&
       this.props.selected_players.teamTwo.player_id.length !== 0
