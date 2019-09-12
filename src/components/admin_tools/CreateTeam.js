@@ -20,7 +20,6 @@ class CreateTeam extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log("submit", this.props);
     this.props.createTeam(this.state);
   };
 

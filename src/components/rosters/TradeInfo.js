@@ -34,7 +34,11 @@ class TradeInfo extends React.Component {
       selectedPlayersList = "teamTwo";
     }
 
-    if (this.props.selected_players[selectedPlayersList].includes(item.id)) {
+    if (
+      this.props.selected_players[selectedPlayersList].player_id.includes(
+        item.id
+      )
+    ) {
       return true;
     } else {
       return false;

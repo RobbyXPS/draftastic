@@ -13,14 +13,12 @@ class PlayerList extends React.Component {
 
   // track when a player selects a player to be added to the trade
   handleClick = event => {
-    console.log(
-      "$$$$$ INSIDE HANDLECLICK",
-      event.currentTarget.getAttribute("playerobj")
-    );
-
     this.props.selectPlayer({
       team_container: this.props.containerValue,
-      player_name: event.currentTarget.getAttribute("playerid")
+      player_name: event.currentTarget.getAttribute("playerid"),
+      player_contract_amount: event.currentTarget.getAttribute(
+        "player_contract_amount"
+      )
     });
   };
 
@@ -30,13 +28,19 @@ class PlayerList extends React.Component {
       team_container: this.props.containerValue,
       player_name: event.currentTarget.parentNode.parentNode.getAttribute(
         "playerid"
+      ),
+      player_contract_amount: event.currentTarget.parentNode.parentNode.getAttribute(
+        "player_contract_amount"
       )
     });
   };
 
   filterByPlayer(item) {
     const containerValue = this.props.containerValue;
-    if (this.props.selected_players[containerValue].includes(item.id)) {
+
+    if (
+      this.props.selected_players[containerValue].player_id.includes(item.id)
+    ) {
       return true;
     } else {
       return false;
@@ -57,7 +61,12 @@ class PlayerList extends React.Component {
 
         // construct the list items for each player
         const listItems = filteredPlayerList.map(player => (
-          <li className="player-card" playerid={player.id} key={player.id}>
+          <li
+            className="player-card"
+            playerid={player.id}
+            player_contract_amount={player.contract_amount}
+            key={player.id}
+          >
             <div id="player-card-name">
               <p>
                 {player.first_name} {player.last_name}
@@ -116,6 +125,7 @@ class PlayerList extends React.Component {
         <li
           className="player-card"
           playerid={player.id}
+          player_contract_amount={player.contract_amount}
           key={player.id}
           onClick={this.handleClick}
         >
