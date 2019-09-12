@@ -3,6 +3,7 @@ import TeamList from "../rosters/TeamList";
 import CreateTeam from "../admin_tools/CreateTeam";
 import PlayerList from "../rosters/PlayerList";
 import TradeInfo from "../rosters/TradeInfo";
+import TradeProposer from "../rosters/TradeProposer";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
@@ -14,10 +15,15 @@ class AdminTools extends React.Component {
     const { players } = this.props;
     const { selected_teams } = this.props;
     const { selected_players } = this.props;
+    const { team_salaries_total } = this.props;
 
     return (
       <div className="main-content-area" id="admin-tools-container">
         <CreateTeam />
+        <TradeProposer
+          selected_players={selected_players}
+          team_salaries_total={team_salaries_total}
+        />
         <div id="team-trades-container">
           <div id="team-two-container-trade">
             <h2>TEAM ONE: (TRADE)</h2>
@@ -88,6 +94,7 @@ class AdminTools extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     teams: state.firestore.ordered.teams,
     players: state.firestore.ordered.players,

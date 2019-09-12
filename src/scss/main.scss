@@ -28,3 +28,18 @@ body {
   background: $accent-color-one-gray-light;
   grid-column: col-start 3 / span 12;
 }
+
+#trade-proposer-container {
+  text-align: center;
+  background-color: green;
+}
+
+#trade-validator-error-message-one,
+#trade-validator-error-message-one {
+  width: 50%;
+}
+
+#trade-validator-success-message {
+  font-weight: 900;
+  color: greenyellow;
+}
