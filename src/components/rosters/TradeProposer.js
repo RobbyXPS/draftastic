@@ -29,12 +29,13 @@ class TradeProposer extends React.Component {
   }
 
   handleTrade() {
-    // setting local vars to check for trade success because setstate is having race conditions
-    let mytestvar1 = "";
-    let mytestvar2 = "";
-    // get team salary
+    // SET VARS THAT TRADE WILL USE FOR FORMULAS
 
-    //team one
+    // setting local vars to check for trade success because setstate is having race conditions
+    let teamOneTradeTest = "";
+    let teamTwoTradeTest = "";
+
+    // team one vars
     let teamOneTotalSalary = this.props.team_salaries_total.teamOne;
     let teamOneContractList = this.props.selected_players.teamOne
       .player_contract;
@@ -43,10 +44,10 @@ class TradeProposer extends React.Component {
       (accumulator, currentValue) => accumulator + Number(currentValue),
       0
     );
-    // do the math for the trade buffer per NBA rules
+    // do the math for the trade buffer per NBA trade rules
     let tradeBufferOne = teamOneTotalContracts * 1.25 + 100000;
 
-    //team two
+    //team two vars
     let teamTwoTotalSalary = this.props.team_salaries_total.teamTwo;
     let teamTwoContractList = this.props.selected_players.teamTwo
       .player_contract;
@@ -58,48 +59,52 @@ class TradeProposer extends React.Component {
     // do the math for the trade buffer per NBA rules
     let tradeBufferTwo = teamTwoTotalContracts * 1.25 + 100000;
 
-    //trade logic branching
+    // TRADE LOGIC FORMULAS
+    // IF TEAM INITIATES TRADE WHILE OVER THE CAP (scenario 1)
+    // 1. they must only have incoming salaries that are <= 125% + 100k of their outgoing salaries
+    // IF TEAM INITIATES TRADE WHILE UNDER THE CAP (scenario 2)
+    // 1. they can trade however they like if they start and end under the cap
+    // 2. if they end up over the cap + 100k, they must follow the normal 125% + 100k rules (aka scenario 1)
 
     // TEAM ONE LOGIC
 
+    // team 1 | scenario 1
     if (teamOneTotalSalary > 109140000) {
-      // sceanrio one
-
-      // check to see if the trade logic is valid for team two
+      // check to see if incoming contracts from team two are less then the outgoing contracts
       if (teamTwoTotalContracts <= tradeBufferOne == false) {
         let teamOneName = this.props.currentTeams.teamOne;
         let teamOneTradeDeficit = Math.ceil(
           teamTwoTotalContracts - tradeBufferOne
         );
-
-        mytestvar1 = "fail";
+        // if team one is over the cap, and their incoming contracts are more then they outgoing contracts...the trade fails
+        teamOneTradeTest = "fail";
         this.setState({
           team_one_failure_message: `Error: ${teamOneName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
         });
-      } else {
+      }
+      // if team one is over the cap, and their incoming contracts are not more then their outgoing contracts...the trade is successful
+      else {
         this.setState({
           team_one_failure_message: ""
         });
       }
-    } else {
-      // sceanrio two
-
-      // trade logic for teams under cap.
-      // 1. they can trade however they like if they start and end under the cap
-      // 2. if they end up over the cap + 100k they must follow the normal 125% + 100k rules
+    }
+    // if the team has a team salary under the cap then they can trade however they want as long as they stay under the cap
+    else {
+      // team 1 | scenario 2
+      // check to see if team will remain under the cap after trade, if so its valid
       if (
         teamOneTotalSalary + teamTwoTotalContracts - teamOneTotalContracts <
         109240000
       ) {
-        console.log("branch logic t1, s2");
         this.setState({
           team_one_failure_message: ""
         });
-      } else {
-        console.log("branch logic t1, s1");
-        // run s1 logic
-
-        /// re-use s1 logic, combine at some point
+      }
+      // if they will end up over the cap they must follow scenario 1 rules
+      else {
+        // back to team 1 | scenario 1
+        // TODO (reast): copied logic from top of if statement, combine them
 
         // check to see if the trade logic is valid for team two
         if (teamTwoTotalContracts <= tradeBufferOne == false) {
@@ -107,7 +112,7 @@ class TradeProposer extends React.Component {
           let teamOneTradeDeficit = Math.ceil(
             teamTwoTotalContracts - tradeBufferOne
           );
-          mytestvar1 = "fail";
+          teamOneTradeTest = "fail";
           this.setState({
             team_one_failure_message: `Error: ${teamOneName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
           });
@@ -120,53 +125,54 @@ class TradeProposer extends React.Component {
     }
 
     // TEAM TWO LOGIC
+
+    // team 2 | scenario 1
     if (teamTwoTotalSalary > 109140000) {
       // sceanrio one
 
-      // check to see if the trade logic is valid for team two
+      // check to see if incoming contracts from team one are less then the outgoing contracts
       if (teamOneTotalContracts <= tradeBufferTwo == false) {
         let teamTwoName = this.props.currentTeams.teamTwo;
         let teamTwoTradeDeficit = Math.ceil(
           teamOneTotalContracts - tradeBufferTwo
         );
-        mytestvar2 = "fail";
+        // if team two is over the cap, and their incoming contracts are more then they outgoing contracts...the trade fails
+        teamTwoTradeTest = "fail";
         this.setState({
           team_two_failure_message: `Error: ${teamTwoName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
         });
-      } else {
+      }
+      // if team two is over the cap, and their incoming contracts are not more then their outgoing contracts...the trade is successful
+      else {
         this.setState({
           team_two_failure_message: ""
         });
       }
-    } else {
-      // sceanrio two
-
-      // trade logic for teams under cap.
-      // 1. they can trade however they like if they start and end under the cap
-      // 2. if they end up over the cap + 100k they must follow the normal 125% + 100k rules
+    }
+    // if the team has a team salary under the cap then they can trade however they want as long as they stay under the cap
+    else {
+      // team 2 | scenario 2
+      // check to see if team will remain under the cap after trade, if so its valid
       if (
         teamTwoTotalSalary + teamOneTotalContracts - teamTwoTotalContracts <
         109240000
       ) {
-        // just pass sucess for this part
-        console.log("branch logic t2, s2");
-
         this.setState({
           team_two_failure_message: ""
         });
-      } else {
-        console.log("branch logic t2, s1");
-        // run s1 logic
+      }
+      // if they will end up over the cap they must follow scenario 1 rules
+      else {
+        // back to team 2 | scenario 1
+        // TODO (reast): copied logic from top of if statement, combine them
 
-        /// re-use s1 logic, combine at some point
-
-        // check to see if the trade logic is valid for team two
+        // check to see if the trade logic is valid for team one
         if (teamOneTotalContracts <= tradeBufferTwo == false) {
           let teamTwoName = this.props.currentTeams.teamTwo;
           let teamTwoTradeDeficit = Math.ceil(
             teamOneTotalContracts - tradeBufferTwo
           );
-          mytestvar2 = "fail";
+          teamTwoTradeTest = "fail";
           this.setState({
             team_two_failure_message: `Error: ${teamTwoName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
           });
@@ -179,8 +185,7 @@ class TradeProposer extends React.Component {
     }
 
     // BOTH TEAM SUCCESS LOGIC
-
-    if (mytestvar1.length == 0 && mytestvar2.length == 0) {
+    if (teamOneTradeTest.length == 0 && teamTwoTradeTest.length == 0) {
       this.setState({
         success_message: "TRADE SUCCESSFUL"
       });
