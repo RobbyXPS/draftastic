@@ -37,6 +37,7 @@ class TradeProposer extends React.Component {
     let teamOneTotalSalary = this.props.team_salaries_total.teamOne;
     let teamOneContractList = this.props.selected_players.teamOne
       .player_contract;
+    // probably should name this outgoing contracts
     let teamOneTotalContracts = teamOneContractList.reduce(
       (accumulator, currentValue) => accumulator + Number(currentValue),
       0
@@ -46,6 +47,7 @@ class TradeProposer extends React.Component {
     let teamTwoTotalSalary = this.props.team_salaries_total.teamTwo;
     let teamTwoContractList = this.props.selected_players.teamTwo
       .player_contract;
+    // probably should name this outgoing contracts
     let teamTwoTotalContracts = teamTwoContractList.reduce(
       (accumulator, currentValue) => accumulator + Number(currentValue),
       0
@@ -58,27 +60,28 @@ class TradeProposer extends React.Component {
       // do the math for the trade buffer per NBA rules
       let tradeBufferOne = teamOneTotalContracts * 1.25 + 100000;
 
+      console.log("^^^^ insdie team one logic - buffer", tradeBufferOne);
+      console.log(
+        "^^^^ insdie team two total contracts",
+        teamTwoTotalContracts
+      );
+
       // check to see if the trade logic is valid for team two
       if (teamTwoTotalContracts <= tradeBufferOne == false) {
-        this.setState({
-          team_two_failure_message:
-            "Error: 'Lakers' incoming slaries exceed the 125% plus $100,000 rule. Cut $'some amount' from the 'Lakers' incoming trade value to make the trade successful."
-        });
-      } else {
-        this.setState({
-          team_two_failure_message: ""
-        });
-      }
+        console.log("lakers should be ", this.props.currentTeams.teamOne);
 
-      // TEAM TWO LOGIC
-      // do the math for the trade buffer per NBA rules
-      let tradeBufferTwo = teamTwoTotalContracts * 1.25 + 100000;
+        console.log(
+          "lakers need to cut",
+          Math.ceil(teamTwoTotalContracts - tradeBufferOne)
+        );
 
-      // check to see if the trade logic is valid for team two
-      if (teamOneTotalContracts <= tradeBufferTwo == false) {
+        let teamOneName = this.props.currentTeams.teamOne;
+        let teamOneTradeDeficit = Math.ceil(
+          teamTwoTotalContracts - tradeBufferOne
+        );
+
         this.setState({
-          team_one_failure_message:
-            "Error: 'Blazers' incoming slaries exceed the 125% plus $100,000 rule. Cut $'some amount' from the 'Blazers' incoming trade value to make the trade successful."
+          team_one_failure_message: `Error: ${teamOneName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
         });
       } else {
         this.setState({
@@ -86,6 +89,64 @@ class TradeProposer extends React.Component {
         });
       }
 
+      // TEAM TWO LOGIC
+      // do the math for the trade buffer per NBA rules
+      let tradeBufferTwo = teamTwoTotalContracts * 1.25 + 100000;
+
+      console.log("^^^^ insdie team two logic - buffer", tradeBufferTwo);
+      console.log(
+        "^^^^ insdie team one total contracts",
+        teamOneTotalContracts
+      );
+
+      // check to see if the trade logic is valid for team two
+      if (teamOneTotalContracts <= tradeBufferTwo == false) {
+        console.log("blazers should be ", this.props.currentTeams.teamTwo);
+        console.log(
+          "blazers need to cut",
+          Math.ceil(teamOneTotalContracts - tradeBufferTwo)
+        );
+
+        let teamTwoName = this.props.currentTeams.teamTwo;
+        let teamTwoTradeDeficit = Math.ceil(
+          teamOneTotalContracts - tradeBufferTwo
+        );
+        this.setState({
+          team_two_failure_message: `Error: ${teamTwoName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
+        });
+      } else {
+        this.setState({
+          team_two_failure_message: ""
+        });
+      }
+
+      console.log(
+        "check all logic 1",
+        teamOneTotalContracts <= tradeBufferTwo == false
+      );
+
+      console.log(
+        "check all logic 2",
+        teamTwoTotalContracts <= tradeBufferOne == false
+      );
+
+      console.log(
+        "check all logic 3",
+        teamOneTotalContracts <= tradeBufferTwo == false &&
+          teamTwoTotalContracts <= tradeBufferOne == false
+      );
+
+      // BOTH TEAM SUCCESS LOGIC
+      if (
+        teamOneTotalContracts <= tradeBufferTwo == true &&
+        teamTwoTotalContracts <= tradeBufferOne == true
+      ) {
+        this.setState({
+          success_message: "TRADE SUCCESSFUL"
+        });
+      }
+
+      /*
       if (
         this.state.team_one_failure_message.length == 0 &&
         this.state.team_two_failure_message.length == 0
@@ -98,6 +159,7 @@ class TradeProposer extends React.Component {
           success_message: "TRADE SUCCESSFUL"
         });
       }
+      */
     } else {
       // do scenario 2
       console.log("inside scenario 2");

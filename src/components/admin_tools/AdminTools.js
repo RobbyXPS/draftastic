@@ -23,6 +23,7 @@ class AdminTools extends React.Component {
         <TradeProposer
           selected_players={selected_players}
           team_salaries_total={team_salaries_total}
+          currentTeams={selected_teams}
         />
         <div id="team-trades-container">
           <div id="team-two-container-trade">
