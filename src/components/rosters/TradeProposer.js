@@ -20,8 +20,6 @@ class TradeProposer extends React.Component {
       this.props.selected_players.teamTwo.player_contract !==
         prevProps.selected_players.teamTwo.player_contract
     ) {
-      console.log("^^^^^^^ inside didupdate logic");
-
       this.setState({
         team_one_failure_message: "",
         team_two_failure_message: "",
@@ -42,6 +40,8 @@ class TradeProposer extends React.Component {
       (accumulator, currentValue) => accumulator + Number(currentValue),
       0
     );
+    // do the math for the trade buffer per NBA rules
+    let tradeBufferOne = teamOneTotalContracts * 1.25 + 100000;
 
     //team two
     let teamTwoTotalSalary = this.props.team_salaries_total.teamTwo;
@@ -52,29 +52,27 @@ class TradeProposer extends React.Component {
       (accumulator, currentValue) => accumulator + Number(currentValue),
       0
     );
+    // do the math for the trade buffer per NBA rules
+    let tradeBufferTwo = teamTwoTotalContracts * 1.25 + 100000;
 
     //trade logic branching
 
     // TEAM ONE LOGIC
+
+    console.log(
+      "... this part is broken - teamTwoTotalContracts",
+      teamTwoTotalContracts
+    );
+    console.log("... this part is broken - tradeBufferOne", tradeBufferOne);
+    console.log(
+      "... this part is broken - comp",
+      teamTwoTotalContracts <= tradeBufferOne == false
+    );
+
     if (teamOneTotalSalary > 109140000) {
-      // do the math for the trade buffer per NBA rules
-      let tradeBufferOne = teamOneTotalContracts * 1.25 + 100000;
-
-      console.log("^^^^ insdie team one logic - buffer", tradeBufferOne);
-      console.log(
-        "^^^^ insdie team two total contracts",
-        teamTwoTotalContracts
-      );
-
+      console.log("INSIDE TEAMONE s1");
       // check to see if the trade logic is valid for team two
       if (teamTwoTotalContracts <= tradeBufferOne == false) {
-        console.log("lakers should be ", this.props.currentTeams.teamOne);
-
-        console.log(
-          "lakers need to cut",
-          Math.ceil(teamTwoTotalContracts - tradeBufferOne)
-        );
-
         let teamOneName = this.props.currentTeams.teamOne;
         let teamOneTradeDeficit = Math.ceil(
           teamTwoTotalContracts - tradeBufferOne
@@ -88,25 +86,57 @@ class TradeProposer extends React.Component {
           team_one_failure_message: ""
         });
       }
+    } else {
+      console.log("INSIDE TEAMONE under cap branch logic");
+      // sceanrio two
 
-      // TEAM TWO LOGIC
-      // do the math for the trade buffer per NBA rules
-      let tradeBufferTwo = teamTwoTotalContracts * 1.25 + 100000;
+      console.log("INSIDE TEAMONE s1 - nuffins");
 
-      console.log("^^^^ insdie team two logic - buffer", tradeBufferTwo);
+      console.log("INSIDE TEAMONE s1 - teamOneTotalSalary", teamOneTotalSalary);
       console.log(
-        "^^^^ insdie team one total contracts",
+        "INSIDE TEAMONE s1 - teamTwoTotalContracts",
+        teamTwoTotalContracts
+      );
+      console.log(
+        "INSIDE TEAMONE s1 - teamOneTotalContracts",
         teamOneTotalContracts
       );
 
+      console.log(
+        "added up",
+        teamOneTotalSalary + teamTwoTotalContracts - teamOneTotalContracts
+      );
+
+      console.log(
+        "added up check",
+        teamOneTotalSalary + teamTwoTotalContracts - teamOneTotalContracts <
+          109240000
+      );
+      //if (teamOneTotalSalary + teamTwoTotalContracts - teamOneTotalContracts)
+
+      // trade logic for teams under cap.
+      // 1. they can trade however they like if they start and end under the cap
+      // 2. if they end up over the cap + 100k they must follow the normal 125% + 100k rules
+      if (
+        teamOneTotalSalary + teamTwoTotalContracts - teamOneTotalContracts <
+        109240000
+      ) {
+        // just pass sucess for this part
+        console.log("branch logic t1, s2");
+        this.setState({
+          team_one_failure_message: ""
+        });
+      } else {
+        console.log("branch logic t1, s1");
+        // run s1 logic
+      }
+    }
+
+    // TEAM TWO LOGIC
+    if (teamTwoTotalSalary > 109140000) {
+      console.log("INSIDE TEAMTWO s1");
       // check to see if the trade logic is valid for team two
       if (teamOneTotalContracts <= tradeBufferTwo == false) {
-        console.log("blazers should be ", this.props.currentTeams.teamTwo);
-        console.log(
-          "blazers need to cut",
-          Math.ceil(teamOneTotalContracts - tradeBufferTwo)
-        );
-
         let teamTwoName = this.props.currentTeams.teamTwo;
         let teamTwoTradeDeficit = Math.ceil(
           teamOneTotalContracts - tradeBufferTwo
@@ -119,50 +149,70 @@ class TradeProposer extends React.Component {
           team_two_failure_message: ""
         });
       }
-
-      console.log(
-        "check all logic 1",
-        teamOneTotalContracts <= tradeBufferTwo == false
-      );
-
-      console.log(
-        "check all logic 2",
-        teamTwoTotalContracts <= tradeBufferOne == false
-      );
-
-      console.log(
-        "check all logic 3",
-        teamOneTotalContracts <= tradeBufferTwo == false &&
-          teamTwoTotalContracts <= tradeBufferOne == false
-      );
-
-      // BOTH TEAM SUCCESS LOGIC
-      if (
-        teamOneTotalContracts <= tradeBufferTwo == true &&
-        teamTwoTotalContracts <= tradeBufferOne == true
-      ) {
-        this.setState({
-          success_message: "TRADE SUCCESSFUL"
-        });
-      }
-
-      /*
-      if (
-        this.state.team_one_failure_message.length == 0 &&
-        this.state.team_two_failure_message.length == 0
-      ) {
-        console.log("inside last if 1");
-        console.log("inside last if 2", this.state);
-        console.log("inside last if 3", this.state.team_one_failure_message);
-        console.log("inside last if 4", this.state.team_two_failure_message);
-        this.setState({
-          success_message: "TRADE SUCCESSFUL"
-        });
-      }
-      */
     } else {
-      // do scenario 2
-      console.log("inside scenario 2");
+      /*
+      // sceanrio two
+      console.log("INSIDE TEAMTWO s2 - nuffins");
+
+      console.log("INSIDE TEAMTWO s2 - teamOneTotalSalary", teamOneTotalSalary);
+      console.log(
+        "INSIDE TEAMTWO s2 - teamTwoTotalContracts",
+        teamTwoTotalContracts
+      );
+      console.log(
+        "INSIDE TEAMTWO s2 - teamOneTotalContracts",
+        teamOneTotalContracts
+      );
+
+      console.log(
+        "added up",
+        teamOneTotalSalary + teamTwoTotalContracts - teamOneTotalContracts
+      );
+      //if (teamOneTotalSalary + teamTwoTotalContracts - teamOneTotalContracts)
+
+*/
+
+      if (
+        teamTwoTotalSalary + teamOneTotalContracts - teamTwoTotalContracts <
+        109240000
+      ) {
+        // just pass sucess for this part
+        console.log("branch logic t2, s2");
+        this.setState({
+          team_two_failure_message: ""
+        });
+      } else {
+        console.log("branch logic t2, s1");
+        // run s1 logic
+
+        // THIS IS ALL THE SAME CODE FROM SCENARIO 1 IN ABOVE IF CASE. COMBINE AT SOME POINT
+
+        // check to see if the trade logic is valid for team two
+        if (teamOneTotalContracts <= tradeBufferTwo == false) {
+          let teamTwoName = this.props.currentTeams.teamTwo;
+          let teamTwoTradeDeficit = Math.ceil(
+            teamOneTotalContracts - tradeBufferTwo
+          );
+
+          this.setState({
+            team_two_failure_message: `Error: ${teamTwoName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
+          });
+        } else {
+          this.setState({
+            team_two_failure_message: ""
+          });
+        }
+      }
+    }
+
+    // BOTH TEAM SUCCESS LOGIC
+    if (
+      this.state.team_one_failure_message.length == 0 &&
+      this.state.team_two_failure_message.length == 0
+    ) {
+      this.setState({
+        success_message: "TRADE SUCCESSFUL"
+      });
     }
   }
 
