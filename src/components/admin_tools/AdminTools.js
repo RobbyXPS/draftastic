@@ -74,6 +74,7 @@ class AdminTools extends React.Component {
               players={players}
               currentTeams={selected_teams}
               containerValue="teamOne"
+              selected_players={selected_players}
             />
           </div>
           <div id="team-two-container">
@@ -88,6 +89,7 @@ class AdminTools extends React.Component {
               players={players}
               currentTeams={selected_teams}
               containerValue="teamTwo"
+              selected_players={selected_players}
             />
           </div>
         </div>

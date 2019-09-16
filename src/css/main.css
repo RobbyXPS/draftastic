@@ -117,13 +117,24 @@ nav {
 
 .player-card {
   background-color: gray;
-  display: flex;
-  flex-direction: row;
+  display: flex !important;
+  flex-direction: column;
   justify-content: space-between; }
 
 #player-card-contract {
   display: flex;
   flex-direction: column; }
+
+#player-card-name {
+  width: 100%; }
+
+#player-extended-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+p {
+  margin: 0 !important; }
 
 #team-rosters-container,
 #team-trades-container {
@@ -160,3 +171,9 @@ body {
 #trade-validator-success-message {
   font-weight: 900;
   color: greenyellow; }
+
+.disabled {
+  background-color: #f0f1f5 !important; }
+
+.player-info-highlight {
+  font-weight: 900; }

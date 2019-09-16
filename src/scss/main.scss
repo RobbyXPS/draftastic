@@ -44,3 +44,12 @@ body {
   font-weight: 900;
   color: greenyellow;
 }
+
+.disabled {
+  //background-color: pink !important;
+  background-color: lighten($accent-color-one-gray-light, 5%) !important;
+}
+
+.player-info-highlight {
+  font-weight: 900;
+}
