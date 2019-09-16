@@ -68,6 +68,7 @@ class AdminTools extends React.Component {
               class="team-list"
               teams={teams}
               containerValue="teamOne"
+              currentTeams={selected_teams}
             />
             <PlayerList
               players={players}
@@ -81,6 +82,7 @@ class AdminTools extends React.Component {
               class="team-list"
               teams={teams}
               containerValue="teamTwo"
+              currentTeams={selected_teams}
             />
             <PlayerList
               players={players}
@@ -95,6 +97,7 @@ class AdminTools extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log("state", state);
   return {
     teams: state.firestore.ordered.teams,
     players: state.firestore.ordered.players,
