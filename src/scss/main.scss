@@ -53,3 +53,33 @@ body {
 .player-info-highlight {
   font-weight: 900;
 }
+
+#player-info-container {
+  display: flex;
+  flex-direction: row;
+  pointer-events: none;
+}
+
+.player-card {
+  cursor: pointer !important;
+}
+
+.trade-card {
+  display: flex;
+  flex-direction: row;
+  pointer-events: none;
+}
+
+#danger {
+  pointer-events: auto;
+  height: 100%;
+}
+
+.player-info-container {
+  width: 90%;
+}
+
+.disabled {
+  pointer-events: none !important;
+  cursor: none !important;
+}

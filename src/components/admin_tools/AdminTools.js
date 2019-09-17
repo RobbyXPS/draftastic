@@ -99,7 +99,6 @@ class AdminTools extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state", state);
   return {
     teams: state.firestore.ordered.teams,
     players: state.firestore.ordered.players,

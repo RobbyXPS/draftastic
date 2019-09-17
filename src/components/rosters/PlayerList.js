@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { selectPlayer } from "../../store/actions/playerActions";
 import { deletePlayer } from "../../store/actions/playerActions";
-import { ListGroup, ListGroupItem } from "reactstrap";
+import { ListGroup, ListGroupItem, Button } from "reactstrap";
 
 class PlayerList extends React.Component {
   constructor(props) {
@@ -39,7 +39,6 @@ class PlayerList extends React.Component {
 
   filterByPlayer(item) {
     const containerValue = this.props.containerValue;
-
     if (
       this.props.selected_players[containerValue].player_id.includes(item.id)
     ) {
@@ -49,43 +48,16 @@ class PlayerList extends React.Component {
     }
   }
 
+  // helper function to add class based on if player has been selected for trade
   isActive(selectedPlayers, playerId) {
-    console.log("&&&&& inside isactive", selectedPlayers);
-    console.log("^^^^^ inside isactive", playerId);
-
-    console.log("**** is array", Array.isArray(selectedPlayers.player_id));
-
-    console.log("## check inside", selectedPlayers.player_id.indexOf(playerId));
-
     if (selectedPlayers.player_id.indexOf(playerId) == -1) {
-      console.log("inside top branch");
       return "";
     } else {
-      console.log("inside bottom branch");
       return "disabled";
     }
   }
 
-  isColorActive(selectedPlayers, playerId) {
-    console.log("&&&&& inside isactive", selectedPlayers);
-    console.log("^^^^^ inside isactive", playerId);
-
-    console.log("**** is array", Array.isArray(selectedPlayers.player_id));
-
-    console.log("## check inside", selectedPlayers.player_id.indexOf(playerId));
-
-    if (selectedPlayers.player_id.indexOf(playerId) == -1) {
-      console.log("inside top branch");
-      return "";
-    } else {
-      console.log("inside bottom branch");
-      return "warning";
-    }
-  }
-
   render() {
-    //const selectedPlayers = this.props.selectedPlayers;
-
     // HANDLE LISTS THAT ARE FOR THE TRADE UI
 
     if (this.props.isTradeUI == "true") {
@@ -99,36 +71,63 @@ class PlayerList extends React.Component {
 
         // construct the list items for each player
         const listItems = filteredPlayerList.map(player => (
-          <li
-            className="player-card"
+          <ListGroupItem
+            className="player-card trade-card"
+            tag="li"
+            action
             playerid={player.id}
             player_contract_amount={player.contract_amount}
             key={player.id}
           >
-            <div id="player-card-name">
-              <p>
-                {player.first_name} {player.last_name}
-              </p>
-            </div>
-            <div id="player-card-position">
-              <p>{player.position}</p>
-            </div>
-
-            <div id="player-card-contract">
-              <p>{player.contract_amount}</p>
-              <p>{player.contract_length}</p>
+            <div className="player-info-container">
+              <div id="player-card-name">
+                <p>
+                  <span className="player-info-highlight">
+                    {player.first_name} {player.last_name}
+                  </span>
+                </p>
+              </div>
+              <div id="player-extended-info-container">
+                <div id="player-card-position">
+                  <p>
+                    Position:
+                    <span className="player-info-highlight">
+                      {" " + player.position}
+                    </span>
+                  </p>
+                </div>
+                <p>
+                  Contract:
+                  <span className="player-info-highlight">
+                    {" " + player.contract_amount}
+                  </span>
+                </p>
+                <p>
+                  Contract Length:
+                  <span className="player-info-highlight">
+                    {" " + player.contract_length}
+                  </span>
+                </p>
+              </div>
             </div>
             <div id="player-card-options">
-              <button onClick={this.handleDelete}>X</button>
+              <Button
+                onClick={this.handleDelete}
+                id="player-card-delete"
+                outline
+                color="danger"
+              >
+                X
+              </Button>
             </div>
-          </li>
+          </ListGroupItem>
         ));
 
         // construct the list from the list items
         return (
           <div id="team-list-one-container">
             <h2>Players</h2>
-            <ul id="team-list-one">{listItems}</ul>
+            <ListGroup id="team-trade-list-one">{listItems}</ListGroup>
           </div>
         );
       } else {
@@ -163,13 +162,10 @@ class PlayerList extends React.Component {
       // construct the list items for each player
       const listItems = filteredList.map(player => (
         <ListGroupItem
-          //active
-          //className="disabled"
           className={
             "player-card " + this.isActive(selectedPlayerList, player.id)
           }
-          tag="a"
-          href="#"
+          tag="li"
           action
           playerid={player.id}
           player_contract_amount={player.contract_amount}
@@ -192,7 +188,6 @@ class PlayerList extends React.Component {
                 </span>
               </p>
             </div>
-
             <p>
               Contract:
               <span className="player-info-highlight">

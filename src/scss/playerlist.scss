@@ -5,11 +5,6 @@
   justify-content: space-between;
 }
 
-#player-card-contract {
-  display: flex;
-  flex-direction: column;
-}
-
 #player-card-name {
   width: 100%;
 }
@@ -22,4 +17,39 @@
 
 p {
   margin: 0 !important;
+}
+
+.disabled {
+  pointer-events: none !important;
+  cursor: none !important;
+  background-color: lighten($accent-color-one-gray-light, 5%) !important;
+}
+
+.player-info-highlight {
+  font-weight: 900;
+}
+
+#player-info-container {
+  display: flex;
+  flex-direction: row;
+  pointer-events: none;
+}
+
+.player-card {
+  cursor: pointer !important;
+}
+
+.trade-card {
+  display: flex;
+  flex-direction: row;
+  pointer-events: none;
+}
+
+#player-card-delete {
+  pointer-events: auto;
+  height: 100%;
+}
+
+.player-info-container {
+  width: 90%;
 }

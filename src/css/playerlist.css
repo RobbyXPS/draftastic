@@ -4,10 +4,6 @@
   flex-direction: column;
   justify-content: space-between; }
 
-#player-card-contract {
-  display: flex;
-  flex-direction: column; }
-
 #player-card-name {
   width: 100%; }
 
