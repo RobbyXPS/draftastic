@@ -1,11 +1,55 @@
 .player-card {
   background-color: gray;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#player-card-name {
+  width: 100%;
+}
+
+#player-extended-info-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-#player-card-contract {
+p {
+  margin: 0 !important;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: none;
+  background-color: lighten($accent-color-one-gray-light, 5%) !important;
+}
+
+.player-info-highlight {
+  font-weight: 900;
+}
+
+#player-info-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  pointer-events: none;
+}
+
+.player-card {
+  cursor: pointer;
+}
+
+.trade-card {
+  display: flex;
+  flex-direction: row;
+  pointer-events: none;
+}
+
+#player-card-delete {
+  pointer-events: auto;
+  height: 100%;
+}
+
+.player-info-container {
+  width: 90%;
 }

@@ -1,6 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import { storeSalariesTotal } from "../../store/actions/capActions";
+import TeamList from "../rosters/TeamList";
+import {
+  Card,
+  Button,
+  CardHeader,
+  CardFooter,
+  CardBody,
+  CardTitle,
+  CardText
+} from "reactstrap";
 
 class TradeInfo extends React.Component {
   constructor(props) {
@@ -96,31 +106,64 @@ class TradeInfo extends React.Component {
         let caproom = 109140000 - wholeTeamSalary;
 
         // construct the cap number text displayed when a user selects a team
+        let capAmountMessagePrefix;
         let capAmountMessage;
         // if a user hasn't selected a team yet don't display anything
         if (wholeTeamSalary == 0) {
           capAmountMessage = "";
+          capAmountMessagePrefix = "";
         }
         // once they select a team show the cap room for that team
         else {
-          capAmountMessage = "cap room " + caproom;
+          //capAmountMessage = "Cap Room: " + caproom;
+          capAmountMessage = caproom;
+          capAmountMessagePrefix = "Cap Room: ";
         }
         this.setState({ incomingPlayersMessage: incomingPlayersMessage });
         this.setState({ capAmountMessage: capAmountMessage });
+        this.setState({ capAmountMessagePrefix: capAmountMessagePrefix });
       }
     }
   }
 
   render() {
     const containerValue = this.props.containerValue;
+    const currentTeams = this.props.currentTeams;
+    const teams = this.props.teams;
 
-    return (
-      <div>
-        <h1>{this.props.currentTeams[containerValue]}</h1>
-        <p>{this.state.incomingPlayersMessage}</p>
-        <p>{this.state.capAmountMessage}</p>
-      </div>
-    );
+    if (teams !== undefined) {
+      return (
+        <div>
+          <Card>
+            <CardHeader>
+              <span className="team-info-highlight">
+                {this.props.currentTeams[containerValue]
+                  ? this.props.currentTeams[containerValue]
+                  : "Select a team"}
+              </span>
+            </CardHeader>
+            <CardBody>
+              <CardText>
+                <span className="team-info-highlight">
+                  {this.state.capAmountMessagePrefix}
+                </span>
+                {this.state.capAmountMessage}
+              </CardText>
+
+              <TeamList
+                class="team-list"
+                teams={teams}
+                containerValue={containerValue}
+                currentTeams={currentTeams}
+              />
+            </CardBody>
+            <CardFooter>{this.state.incomingPlayersMessage}</CardFooter>
+          </Card>
+        </div>
+      );
+    } else {
+      return <div>loading...</div>;
+    }
   }
 }
 

@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { selectPlayer } from "../../store/actions/playerActions";
 import { deletePlayer } from "../../store/actions/playerActions";
+import { ListGroup, ListGroupItem, Button } from "reactstrap";
 
 class PlayerList extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class PlayerList extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.filterByPlayer = this.filterByPlayer.bind(this);
+    this.isActive = this.isActive;
   }
 
   // track when a player selects a player to be added to the trade
@@ -37,13 +39,21 @@ class PlayerList extends React.Component {
 
   filterByPlayer(item) {
     const containerValue = this.props.containerValue;
-
     if (
       this.props.selected_players[containerValue].player_id.includes(item.id)
     ) {
       return true;
     } else {
       return false;
+    }
+  }
+
+  // helper function to add class based on if player has been selected for trade
+  isActive(selectedPlayers, playerId) {
+    if (selectedPlayers.player_id.indexOf(playerId) == -1) {
+      return "";
+    } else {
+      return "disabled";
     }
   }
 
@@ -61,36 +71,62 @@ class PlayerList extends React.Component {
 
         // construct the list items for each player
         const listItems = filteredPlayerList.map(player => (
-          <li
-            className="player-card"
+          <ListGroupItem
+            className="player-card trade-card"
+            tag="li"
+            action
             playerid={player.id}
             player_contract_amount={player.contract_amount}
             key={player.id}
           >
-            <div id="player-card-name">
-              <p>
-                {player.first_name} {player.last_name}
-              </p>
-            </div>
-            <div id="player-card-position">
-              <p>{player.position}</p>
-            </div>
-
-            <div id="player-card-contract">
-              <p>{player.contract_amount}</p>
-              <p>{player.contract_length}</p>
+            <div className="player-info-container">
+              <div id="player-card-name">
+                <p>
+                  <span className="player-info-highlight">
+                    {player.first_name} {player.last_name}
+                  </span>
+                </p>
+              </div>
+              <div id="player-extended-info-container">
+                <div id="player-card-position">
+                  <p>
+                    Position:
+                    <span className="player-info-highlight">
+                      {" " + player.position}
+                    </span>
+                  </p>
+                </div>
+                <p>
+                  Contract:
+                  <span className="player-info-highlight">
+                    {" " + player.contract_amount}
+                  </span>
+                </p>
+                <p>
+                  Contract Length:
+                  <span className="player-info-highlight">
+                    {" " + player.contract_length}
+                  </span>
+                </p>
+              </div>
             </div>
             <div id="player-card-options">
-              <button onClick={this.handleDelete}>X</button>
+              <Button
+                onClick={this.handleDelete}
+                id="player-card-delete"
+                outline
+                color="danger"
+              >
+                X
+              </Button>
             </div>
-          </li>
+          </ListGroupItem>
         ));
 
         // construct the list from the list items
         return (
           <div id="team-list-one-container">
-            <h2>Players</h2>
-            <ul id="team-list-one">{listItems}</ul>
+            <ListGroup id="team-trade-list-one">{listItems}</ListGroup>
           </div>
         );
       } else {
@@ -120,10 +156,16 @@ class PlayerList extends React.Component {
       // filter the list
       let filteredList = playerList.filter(filterByTeam);
 
+      const selectedPlayerList = this.props.selected_players[containerValue];
+
       // construct the list items for each player
       const listItems = filteredList.map(player => (
-        <li
-          className="player-card"
+        <ListGroupItem
+          className={
+            "player-card " + this.isActive(selectedPlayerList, player.id)
+          }
+          tag="li"
+          action
           playerid={player.id}
           player_contract_amount={player.contract_amount}
           key={player.id}
@@ -131,25 +173,40 @@ class PlayerList extends React.Component {
         >
           <div id="player-card-name">
             <p>
-              {player.first_name} {player.last_name}
+              <span className="player-info-highlight">
+                {player.first_name} {player.last_name}
+              </span>
             </p>
           </div>
-          <div id="player-card-position">
-            <p>{player.position}</p>
+          <div id="player-extended-info-container">
+            <div id="player-card-position">
+              <p>
+                Position:
+                <span className="player-info-highlight">
+                  {" " + player.position}
+                </span>
+              </p>
+            </div>
+            <p>
+              Contract:
+              <span className="player-info-highlight">
+                {" " + player.contract_amount}
+              </span>
+            </p>
+            <p>
+              Contract Length:
+              <span className="player-info-highlight">
+                {" " + player.contract_length}
+              </span>
+            </p>
           </div>
-
-          <div id="player-card-contract">
-            <p>{player.contract_amount}</p>
-            <p>{player.contract_length}</p>
-          </div>
-        </li>
+        </ListGroupItem>
       ));
 
       // construct the list from the list items
       return (
         <div id="team-list-one-container">
-          <h2>Players</h2>
-          <ul id="team-list-one">{listItems}</ul>
+          <ListGroup id="team-list-one">{listItems}</ListGroup>
         </div>
       );
     }
