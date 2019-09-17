@@ -27,12 +27,12 @@ class AdminTools extends React.Component {
         />
         <div id="team-trades-container">
           <div id="team-two-container-trade">
-            <h2>TEAM ONE: (TRADE)</h2>
             <TradeInfo
               selected_players={selected_players}
               players={players}
               currentTeams={selected_teams}
               containerValue="teamOne"
+              teams={teams}
             />
             <PlayerList
               class="team-list"
@@ -64,12 +64,14 @@ class AdminTools extends React.Component {
         <div id="team-rosters-container">
           <div id="team-one-container">
             <h2>TEAM ONE:</h2>
+            {/*
             <TeamList
               class="team-list"
               teams={teams}
               containerValue="teamOne"
               currentTeams={selected_teams}
             />
+            */}
             <PlayerList
               players={players}
               currentTeams={selected_teams}

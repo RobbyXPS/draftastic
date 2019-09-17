@@ -195,3 +195,9 @@ body {
 #trade-validator-success-message {
   font-weight: 900;
   color: greenyellow; }
+
+.team-info-highlight {
+  font-weight: 900; }
+
+.dropdown {
+  margin: 1.25rem 0rem 0rem 0rem; }

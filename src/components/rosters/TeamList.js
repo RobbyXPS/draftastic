@@ -48,34 +48,52 @@ class TeamList extends React.Component {
     const teams = this.props.teams;
     const currentTeams = this.props.currentTeams;
     const containerValue = this.props.containerValue;
-    return (
-      <div id="team-list-container">
-        <h2>Teams</h2>
-        <div>
-          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-            <DropdownToggle caret>
-              {currentTeams[containerValue]
-                ? currentTeams[containerValue]
-                : "Select Team"}
-            </DropdownToggle>
-            <DropdownMenu>
-              {teams &&
-                teams.map(team => {
-                  return (
-                    <DropdownItem
-                      onClick={this.handleClick}
-                      key={team.id}
-                      className={this.isActive(currentTeams, team.name)}
-                    >
-                      {team.name}
-                    </DropdownItem>
-                  );
-                })}
-            </DropdownMenu>
-          </Dropdown>
+    console.log("<<<<<<<<< right here 1", currentTeams);
+    console.log("<<<<<<<<< right here 2", containerValue);
+    console.log("<<<<<<<<< right here 3", this.props);
+    //console.log("<<<<<<<<< right here", currentTeams[containerValue]);
+
+    if (currentTeams !== undefined) {
+      return (
+        <div id="team-list-container">
+          <div>
+            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+              <DropdownToggle caret>
+                {/*{currentTeams[containerValue]}*/}
+                {currentTeams[containerValue]
+                  ? currentTeams[containerValue]
+                  : "Select Team"}
+              </DropdownToggle>
+              {/* 
+    <DropdownToggle caret>
+      {currentTeams[containerValue]
+                  ? currentTeams[containerValue]
+                  : "Select Team"}
+  
+              </DropdownToggle>
+    */}
+
+              <DropdownMenu>
+                {teams &&
+                  teams.map(team => {
+                    return (
+                      <DropdownItem
+                        onClick={this.handleClick}
+                        key={team.id}
+                        className={this.isActive(currentTeams, team.name)}
+                      >
+                        {team.name}
+                      </DropdownItem>
+                    );
+                  })}
+              </DropdownMenu>
+            </Dropdown>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return <div>loading...</div>;
+    }
   }
 }
 

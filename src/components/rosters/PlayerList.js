@@ -126,7 +126,6 @@ class PlayerList extends React.Component {
         // construct the list from the list items
         return (
           <div id="team-list-one-container">
-            <h2>Players</h2>
             <ListGroup id="team-trade-list-one">{listItems}</ListGroup>
           </div>
         );
@@ -207,7 +206,6 @@ class PlayerList extends React.Component {
       // construct the list from the list items
       return (
         <div id="team-list-one-container">
-          <h2>Players 2</h2>
           <ListGroup id="team-list-one">{listItems}</ListGroup>
         </div>
       );

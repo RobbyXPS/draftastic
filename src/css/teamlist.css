@@ -3,11 +3,13 @@
   color: pink;
   padding: 1em 2em;
   cursor: pointer;
-  float: left; }
+  float: left;
+}
 
 .team-list {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+}
 
 #team-one-container,
 #team-two-container,
@@ -15,4 +17,5 @@
 #team-two-container-trade {
   background-color: red;
   width: 50%;
-  padding: 1%; }
+  padding: 1%;
+}
