@@ -130,9 +130,6 @@ class TradeInfo extends React.Component {
     const containerValue = this.props.containerValue;
     const currentTeams = this.props.currentTeams;
     const teams = this.props.teams;
-    console.log("uhh", currentTeams);
-
-    console.log("maybe this works?", this.props.currentTeams[containerValue]);
 
     if (teams !== undefined) {
       return (
@@ -156,7 +153,7 @@ class TradeInfo extends React.Component {
               <TeamList
                 class="team-list"
                 teams={teams}
-                containerValue="teamOne"
+                containerValue={containerValue}
                 currentTeams={currentTeams}
               />
             </CardBody>
