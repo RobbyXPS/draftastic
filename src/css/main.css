@@ -133,8 +133,8 @@ p {
   margin: 0 !important; }
 
 .disabled {
-  pointer-events: none !important;
-  cursor: none !important;
+  pointer-events: none;
+  cursor: none;
   background-color: #f0f1f5 !important; }
 
 .player-info-highlight {
@@ -146,7 +146,7 @@ p {
   pointer-events: none; }
 
 .player-card {
-  cursor: pointer !important; }
+  cursor: pointer; }
 
 .trade-card {
   display: flex;
@@ -195,33 +195,3 @@ body {
 #trade-validator-success-message {
   font-weight: 900;
   color: greenyellow; }
-
-.disabled {
-  background-color: #f0f1f5 !important; }
-
-.player-info-highlight {
-  font-weight: 900; }
-
-#player-info-container {
-  display: flex;
-  flex-direction: row;
-  pointer-events: none; }
-
-.player-card {
-  cursor: pointer !important; }
-
-.trade-card {
-  display: flex;
-  flex-direction: row;
-  pointer-events: none; }
-
-#danger {
-  pointer-events: auto;
-  height: 100%; }
-
-.player-info-container {
-  width: 90%; }
-
-.disabled {
-  pointer-events: none !important;
-  cursor: none !important; }
