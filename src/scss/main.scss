@@ -13,20 +13,17 @@
   font-family: "Bree Serif", serif;
 }
 
+html {
+}
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
-  display: grid;
-  grid-template-columns: repeat(12, [col-start] 1fr);
-}
-
 .main-content-area {
   padding: 1em;
-  background: $accent-color-one-gray-light;
-  grid-column: col-start 3 / span 12;
+  background: gray;
+  min-height: 100vh;
 }
 
 #trade-proposer-container {

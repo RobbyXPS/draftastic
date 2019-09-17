@@ -1,6 +1,4 @@
 import React from "react";
-import TeamList from "../rosters/TeamList";
-import CreateTeam from "../admin_tools/CreateTeam";
 import PlayerList from "../rosters/PlayerList";
 import TradeInfo from "../rosters/TradeInfo";
 import TradeProposer from "../rosters/TradeProposer";
@@ -19,7 +17,6 @@ class AdminTools extends React.Component {
 
     return (
       <div className="main-content-area" id="admin-tools-container">
-        <CreateTeam />
         <TradeProposer
           selected_players={selected_players}
           team_salaries_total={team_salaries_total}
