@@ -1,5 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
+import {
+  Card,
+  Button,
+  CardHeader,
+  CardFooter,
+  CardBody,
+  CardTitle,
+  CardText,
+  Toast,
+  ToastBody,
+  ToastHeader
+} from "reactstrap";
 
 class TradeProposer extends React.Component {
   constructor(props) {
@@ -10,6 +22,9 @@ class TradeProposer extends React.Component {
       success_message: ""
     };
     this.handleTrade = this.handleTrade.bind(this);
+    this.isHiddenFailMessageOne = this.isHiddenFailMessageOne.bind(this);
+    this.isHiddenFailMessageTwo = this.isHiddenFailMessageTwo.bind(this);
+    this.isHiddenSuccessMessage = this.isHiddenSuccessMessage.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -79,7 +94,7 @@ class TradeProposer extends React.Component {
         // if team one is over the cap, and their incoming contracts are more then they outgoing contracts...the trade fails
         teamOneTradeTest = "fail";
         this.setState({
-          team_one_failure_message: `Error: ${teamOneName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
+          team_one_failure_message: `${teamOneName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
         });
       }
       // if team one is over the cap, and their incoming contracts are not more then their outgoing contracts...the trade is successful
@@ -114,7 +129,7 @@ class TradeProposer extends React.Component {
           );
           teamOneTradeTest = "fail";
           this.setState({
-            team_one_failure_message: `Error: ${teamOneName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
+            team_one_failure_message: `${teamOneName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
           });
         } else {
           this.setState({
@@ -139,7 +154,7 @@ class TradeProposer extends React.Component {
         // if team two is over the cap, and their incoming contracts are more then they outgoing contracts...the trade fails
         teamTwoTradeTest = "fail";
         this.setState({
-          team_two_failure_message: `Error: ${teamTwoName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
+          team_two_failure_message: `${teamTwoName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
         });
       }
       // if team two is over the cap, and their incoming contracts are not more then their outgoing contracts...the trade is successful
@@ -174,7 +189,7 @@ class TradeProposer extends React.Component {
           );
           teamTwoTradeTest = "fail";
           this.setState({
-            team_two_failure_message: `Error: ${teamTwoName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
+            team_two_failure_message: `${teamTwoName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
           });
         } else {
           this.setState({
@@ -192,6 +207,30 @@ class TradeProposer extends React.Component {
     }
   }
 
+  isHiddenFailMessageOne() {
+    if (this.state.team_one_failure_message.length == 0) {
+      return "p-3 bg-danger my-2 rounded hide";
+    } else {
+      return "p-3 bg-danger my-2 rounded";
+    }
+  }
+
+  isHiddenFailMessageTwo() {
+    if (this.state.team_two_failure_message.length == 0) {
+      return "p-3 bg-danger my-2 rounded hide";
+    } else {
+      return "p-3 bg-danger my-2 rounded";
+    }
+  }
+
+  isHiddenSuccessMessage() {
+    if (this.state.success_message.length == 0) {
+      return "p-3 bg-success my-2 rounded hide";
+    } else {
+      return "p-3 bg-success my-2 rounded";
+    }
+  }
+
   render() {
     if (
       this.props.selected_players.teamOne.player_id.length !== 0 &&
@@ -199,6 +238,7 @@ class TradeProposer extends React.Component {
     ) {
       return (
         <div id="trade-proposer-container">
+          {/*
           <h2 id="trade-proposer-header">Make the TRADE!</h2>
           <button
             id="trade-proposer-button"
@@ -218,6 +258,59 @@ class TradeProposer extends React.Component {
               {this.state.success_message}
             </h2>
           </div>
+*/}
+
+          <Card>
+            <CardHeader>
+              <span className="team-info-highlight">Make the TRADE!</span>
+            </CardHeader>
+            <CardBody id="trade-proposer-card-body">
+              <button
+                id="trade-proposer-button"
+                type="button"
+                onClick={this.handleTrade}
+              >
+                SUBMIT
+              </button>
+
+              <CardText>
+                <div id="trade-validator-error-message-container">
+                  <div
+                    className={this.isHiddenFailMessageOne()}
+                    id="trade-validator-error-message-one"
+                  >
+                    <Toast class="toast">
+                      <ToastHeader>ERROR</ToastHeader>
+                      <ToastBody>
+                        {this.state.team_one_failure_message}
+                      </ToastBody>
+                    </Toast>
+                  </div>
+
+                  <div
+                    className={this.isHiddenFailMessageTwo()}
+                    id="trade-validator-error-message-two"
+                  >
+                    <Toast>
+                      <ToastHeader>ERROR</ToastHeader>
+                      <ToastBody>
+                        {this.state.team_two_failure_message}
+                      </ToastBody>
+                    </Toast>
+                  </div>
+                </div>
+
+                <div
+                  className={this.isHiddenSuccessMessage()}
+                  id="trade-validator-success-message"
+                >
+                  <Toast>
+                    <ToastBody>{this.state.success_message}</ToastBody>
+                  </Toast>
+                </div>
+              </CardText>
+            </CardBody>
+          </Card>
         </div>
       );
     } else {

@@ -34,7 +34,6 @@ body {
 
 #trade-validator-success-message {
   font-weight: 900;
-  color: greenyellow;
 }
 
 .team-info-highlight {
@@ -59,4 +58,35 @@ body {
 #trade-proposition-sub-container {
   display: flex;
   flex-direction: row;
+}
+
+.hide {
+  display: none !important;
+}
+
+.toast {
+  min-width: 100%;
+}
+
+#trade-proposer-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+#trade-validator-error-message-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#trade-validator-error-message-two {
+  margin-left: auto;
+}
+
+#trade-validator-error-message-one {
+  margin-right: auto;
+}
+
+#trade-proposer-button {
+  width: 15%;
+  margin: auto;
 }
