@@ -1,4 +1,3 @@
-@import "dashboard";
 @import "teamlist";
 @import "playerlist";
 @import "admintools";
@@ -15,15 +14,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
-  display: grid;
-  grid-template-columns: repeat(12, [col-start] 1fr);
-}
+//.App {
+//  display: grid;
+//  grid-template-columns: repeat(12, [col-start] 1fr);
+//}
 
 .main-content-area {
   padding: 1em;
-  //background: $accent-color-one-gray-light;
-  background: orange;
+  background: gray;
   grid-column: col-start 3 / span 12;
 }
 
