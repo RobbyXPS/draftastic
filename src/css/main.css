@@ -11,8 +11,13 @@
 
 #team-one-container,
 #team-two-container,
-#team-one-container-trade,
-#team-two-container-trade {
+#team-one-container-selection,
+#team-two-container-selection {
+  background-color: red;
+  width: 50%;
+  padding: 1%; }
+
+.area-container {
   background-color: red;
   width: 50%;
   padding: 1%; }
@@ -75,7 +80,7 @@ body {
 .main-content-area {
   padding: 1em;
   background: gray;
-  height: 100vh; }
+  min-height: 100vh; }
 
 #trade-proposer-container {
   text-align: center;
@@ -97,5 +102,14 @@ body {
   margin: 1.25rem 0rem 0rem 0rem; }
 
 #team-rosters-container,
-#team-trades-container {
+#team-selection-main-container {
   display: flex; }
+
+#team-selection-main-container,
+#trade-proposition-main-container {
+  flex-direction: column; }
+
+#team-selection-sub-container,
+#trade-proposition-sub-container {
+  display: flex;
+  flex-direction: row; }

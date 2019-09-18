@@ -23,15 +23,23 @@ class AdminTools extends React.Component {
           team_salaries_total={team_salaries_total}
           currentTeams={selected_teams}
         />
-        <div id="team-trades-container">
-          <div id="team-two-container-trade">
-            <TradeInfo
-              selected_players={selected_players}
-              players={players}
-              currentTeams={selected_teams}
-              containerValue="teamOne"
-              teams={teams}
-            />
+        {/* <div id="team-trades-container"> */}
+        <div id="team-selection-main-container">
+          <h1>Select teams:</h1>
+          {/*<div id="team-selection-container"> */}
+          <div id="team-selection-sub-container">
+            {/* <div id="team-two-container-selection"> */}
+            <div class="area-container">
+              <TradeInfo
+                selected_players={selected_players}
+                players={players}
+                currentTeams={selected_teams}
+                containerValue="teamOne"
+                teams={teams}
+              />
+
+              {/* 
+            
             <PlayerList
               class="team-list"
               players={players}
@@ -40,41 +48,75 @@ class AdminTools extends React.Component {
               isTradeUI="true"
               selected_players={selected_players}
             />
-          </div>
-          <div id="team-one-container-trade">
-            <TradeInfo
-              selected_players={selected_players}
-              players={players}
-              currentTeams={selected_teams}
-              containerValue="teamTwo"
-              teams={teams}
-            />
-            <PlayerList
+            
+            */}
+            </div>
+            {/* <div id="team-one-container-selection"> */}
+            <div class="area-container">
+              <TradeInfo
+                selected_players={selected_players}
+                players={players}
+                currentTeams={selected_teams}
+                containerValue="teamTwo"
+                teams={teams}
+              />
+              {/*<PlayerList
               class="team-list"
               players={players}
               currentTeams={selected_teams}
               containerValue="teamOne"
               isTradeUI="true"
               selected_players={selected_players}
-            />
+            /> */}
+            </div>
           </div>
         </div>
-        <div id="team-rosters-container">
-          <div id="team-one-container">
-            <PlayerList
-              players={players}
-              currentTeams={selected_teams}
-              containerValue="teamOne"
-              selected_players={selected_players}
-            />
+
+        <div id="trade-proposition-main-container">
+          <h1>Trade proposition:</h1>
+          <div id="trade-proposition-sub-container">
+            <div class="area-container">
+              <PlayerList
+                class="team-list"
+                players={players}
+                currentTeams={selected_teams}
+                containerValue="teamTwo"
+                isTradeUI="true"
+                selected_players={selected_players}
+              />
+            </div>
+            <div class="area-container">
+              <PlayerList
+                class="team-list"
+                players={players}
+                currentTeams={selected_teams}
+                containerValue="teamOne"
+                isTradeUI="true"
+                selected_players={selected_players}
+              />
+            </div>
           </div>
-          <div id="team-two-container">
-            <PlayerList
-              players={players}
-              currentTeams={selected_teams}
-              containerValue="teamTwo"
-              selected_players={selected_players}
-            />
+        </div>
+
+        <div id="team-rosters-main-container">
+          <h1>Team Roster:</h1>
+          <div id="team-rosters-container">
+            <div id="team-one-container">
+              <PlayerList
+                players={players}
+                currentTeams={selected_teams}
+                containerValue="teamOne"
+                selected_players={selected_players}
+              />
+            </div>
+            <div id="team-two-container">
+              <PlayerList
+                players={players}
+                currentTeams={selected_teams}
+                containerValue="teamTwo"
+                selected_players={selected_players}
+              />
+            </div>
           </div>
         </div>
       </div>

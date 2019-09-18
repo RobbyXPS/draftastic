@@ -21,7 +21,8 @@ body {
 .main-content-area {
   padding: 1em;
   background: gray;
-  height: 100vh;
+  min-height: 100vh;
+  //min-height: 100%;
   //grid-column: col-start 3 / span 12;
 }
 
@@ -50,6 +51,17 @@ body {
 }
 
 #team-rosters-container,
-#team-trades-container {
+#team-selection-main-container {
   display: flex;
+}
+
+#team-selection-main-container,
+#trade-proposition-main-container {
+  flex-direction: column;
+}
+
+#team-selection-sub-container,
+#trade-proposition-sub-container {
+  display: flex;
+  flex-direction: row;
 }

@@ -11,10 +11,17 @@
   flex-direction: column;
 }
 
+//team-two-container-selection
 #team-one-container,
 #team-two-container,
-#team-one-container-trade,
-#team-two-container-trade {
+#team-one-container-selection,
+#team-two-container-selection {
+  background-color: red;
+  width: 50%;
+  padding: 1%;
+}
+
+.area-container {
   background-color: red;
   width: 50%;
   padding: 1%;
