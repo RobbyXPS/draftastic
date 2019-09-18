@@ -25,7 +25,7 @@ class AdminTools extends React.Component {
         />
         {/* <div id="team-trades-container"> */}
         <div id="team-selection-main-container">
-          <h1>Select teams:</h1>
+          <h1>Select Teams:</h1>
           {/*<div id="team-selection-container"> */}
           <div id="team-selection-sub-container">
             {/* <div id="team-two-container-selection"> */}
@@ -73,7 +73,7 @@ class AdminTools extends React.Component {
         </div>
 
         <div id="trade-proposition-main-container">
-          <h1>Trade proposition:</h1>
+          <h1>Trade Proposition:</h1>
           <div id="trade-proposition-sub-container">
             <div class="area-container">
               <PlayerList
