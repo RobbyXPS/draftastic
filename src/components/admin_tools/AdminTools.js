@@ -1,5 +1,4 @@
 import React from "react";
-import TeamList from "../rosters/TeamList";
 import PlayerList from "../rosters/PlayerList";
 import TradeInfo from "../rosters/TradeInfo";
 import TradeProposer from "../rosters/TradeProposer";
