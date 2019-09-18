@@ -1,6 +1,3 @@
-@import "config";
-@import "navbar";
-@import "sidebar";
 @import "dashboard";
 @import "teamlist";
 @import "playerlist";
@@ -25,7 +22,8 @@ body {
 
 .main-content-area {
   padding: 1em;
-  background: $accent-color-one-gray-light;
+  //background: $accent-color-one-gray-light;
+  background: orange;
   grid-column: col-start 3 / span 12;
 }
 
