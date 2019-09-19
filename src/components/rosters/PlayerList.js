@@ -2,7 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { selectPlayer } from "../../store/actions/playerActions";
 import { deletePlayer } from "../../store/actions/playerActions";
-import { ListGroup, ListGroupItem, Button } from "reactstrap";
+import {
+  ListGroup,
+  ListGroupItem,
+  Button,
+  Card,
+  CardHeader,
+  CardFooter,
+  CardBody
+} from "reactstrap";
 
 class PlayerList extends React.Component {
   constructor(props) {
@@ -58,6 +66,7 @@ class PlayerList extends React.Component {
   }
 
   render() {
+    const contvalue = this.props.containerValue;
     // HANDLE LISTS THAT ARE FOR THE TRADE UI
 
     if (this.props.isTradeUI == "true") {
@@ -126,7 +135,15 @@ class PlayerList extends React.Component {
         // construct the list from the list items
         return (
           <div id="team-list-one-container">
-            <ListGroup id="team-trade-list-one">{listItems}</ListGroup>
+            {/* <ListGroup id="team-trade-list-one">{listItems}</ListGroup> */}
+
+            <Card>
+              <CardHeader>
+                Players being aquired from {this.props.currentTeams[contvalue]}
+              </CardHeader>
+              <CardBody>{listItems}</CardBody>
+              <CardFooter></CardFooter>
+            </Card>
           </div>
         );
       } else {
@@ -202,11 +219,19 @@ class PlayerList extends React.Component {
           </div>
         </ListGroupItem>
       ));
-
+      console.log("+++++++ uhhh 1", this.props.currentTeams.containerValue);
+      const contvalue = this.props.containerValue;
+      console.log("+++++++ uhhh 2", this.props.currentTeams[contvalue]);
+      console.log("+++++++ uhhh 3", contvalue);
       // construct the list from the list items
       return (
         <div id="team-list-one-container">
-          <ListGroup id="team-list-one">{listItems}</ListGroup>
+          {/* <ListGroup id="team-list-one">{listItems}</ListGroup> */}
+          <Card>
+            <CardHeader>{this.props.currentTeams[contvalue]}</CardHeader>
+            <CardBody>{listItems}</CardBody>
+            <CardFooter></CardFooter>
+          </Card>
         </div>
       );
     }

@@ -11,6 +11,9 @@ class AdminTools extends React.Component {
     super(props);
     this.isHiddenPlayers = this.isHiddenPlayers.bind(this);
     this.isHiddenTeams = this.isHiddenTeams.bind(this);
+    this.isHiddenTeamOne = this.isHiddenTeamOne.bind(this);
+    this.isHiddenTeamTwo = this.isHiddenTeamTwo.bind(this);
+    this.marginSpacer = this.marginSpacer.bind(this);
   }
   // helper function to add class based on if player has been selected for trade
   isHiddenPlayers(selected_players) {
@@ -30,6 +33,53 @@ class AdminTools extends React.Component {
     ) {
       return "hide";
     }
+  }
+
+  // helper function to add class based on if team has been selected for trade
+  isHiddenTeamOne(selected_teams) {
+    console.log("inside hidden one selected_teams 1", selected_teams);
+    console.log(
+      "inside hidden one selected_teams 2",
+      selected_teams.teamOne.length
+    );
+    if (selected_teams.teamOne.length == 0) {
+      return "area-container hide";
+    } else {
+      return "area-container";
+    }
+  }
+
+  // helper function to add class based on if team has been selected for trade
+  isHiddenTeamTwo(selected_teams) {
+    console.log("inside hidden one selected_teams 1", selected_teams);
+    console.log(
+      "inside hidden one selected_teams 2",
+      selected_teams.teamTwo.length
+    );
+    if (selected_teams.teamTwo.length == 0) {
+      return "area-container hide";
+    } else {
+      return "area-container";
+    }
+  }
+
+  marginSpacer(selected_teams) {
+    console.log("selected_teams.teamOne.length", selected_teams.teamOne.length);
+    console.log("selected_teams.teamTwo.length", selected_teams.teamTwo.length);
+    const marginObj = {
+      leftCont: "1rem",
+      rightCont: "1rem"
+    };
+
+    if (selected_teams.teamOne.length == 0) {
+      marginObj.rightCont = "51%";
+    }
+
+    if (selected_teams.teamTwo.length == 0) {
+      marginObj.leftCont = "51%";
+    }
+    console.log("return marginObj", marginObj);
+    return marginObj;
   }
 
   render() {
@@ -135,7 +185,13 @@ class AdminTools extends React.Component {
           {/* <div id="team-rosters-container"> */}
           <div id="team-rosters-sub-container">
             {/* <div id="team-one-container"> */}
-            <div class="area-container">
+            <div
+              id="team-rosters-team-one"
+              className={this.isHiddenTeamOne(selected_teams)}
+              style={{
+                "margin-right": this.marginSpacer(selected_teams).leftCont
+              }}
+            >
               <PlayerList
                 players={players}
                 currentTeams={selected_teams}
@@ -144,7 +200,14 @@ class AdminTools extends React.Component {
               />
             </div>
             {/* <div id="team-two-container"> */}
-            <div class="area-container">
+            <div
+              id="team-rosters-team-two"
+              className={this.isHiddenTeamTwo(selected_teams)}
+              //style="color:red"
+              style={{
+                "margin-left": this.marginSpacer(selected_teams).rightCont
+              }}
+            >
               <PlayerList
                 players={players}
                 currentTeams={selected_teams}

@@ -147,3 +147,6 @@ h1 {
   margin-top: 2rem !important;
   border-bottom: solid 5px #ff9900;
   box-shadow: 0 4px 2px -2px gray; }
+
+.card {
+  min-height: 13rem; }

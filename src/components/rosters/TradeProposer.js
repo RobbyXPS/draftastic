@@ -281,7 +281,7 @@ class TradeProposer extends React.Component {
                     id="trade-validator-error-message-one"
                   >
                     <Toast class="toast">
-                      <ToastHeader>ERROR</ToastHeader>
+                      <ToastHeader>TRADE UNSUCCESSFUL:</ToastHeader>
                       <ToastBody>
                         {this.state.team_one_failure_message}
                       </ToastBody>
@@ -293,7 +293,7 @@ class TradeProposer extends React.Component {
                     id="trade-validator-error-message-two"
                   >
                     <Toast>
-                      <ToastHeader>ERROR</ToastHeader>
+                      <ToastHeader>TRADE UNSUCCESSFUL:</ToastHeader>
                       <ToastBody>
                         {this.state.team_two_failure_message}
                       </ToastBody>
