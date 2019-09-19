@@ -132,8 +132,10 @@ class AdminTools extends React.Component {
           className={this.isHiddenTeams(selected_teams)}
         >
           <h1>Team Roster:</h1>
-          <div id="team-rosters-container">
-            <div id="team-one-container">
+          {/* <div id="team-rosters-container"> */}
+          <div id="team-rosters-sub-container">
+            {/* <div id="team-one-container"> */}
+            <div class="area-container">
               <PlayerList
                 players={players}
                 currentTeams={selected_teams}
@@ -141,7 +143,8 @@ class AdminTools extends React.Component {
                 selected_players={selected_players}
               />
             </div>
-            <div id="team-two-container">
+            {/* <div id="team-two-container"> */}
+            <div class="area-container">
               <PlayerList
                 players={players}
                 currentTeams={selected_teams}

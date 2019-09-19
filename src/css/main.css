@@ -9,18 +9,24 @@
   display: flex;
   flex-direction: column; }
 
+/*
+//team-two-container-selection
 #team-one-container,
 #team-two-container,
 #team-one-container-selection,
 #team-two-container-selection {
-  background-color: red;
+  background-color: #ff9900;
   width: 50%;
-  padding: 1%; }
-
+  padding: 1%;
+}
+*/
 .area-container {
-  background-color: red;
+  background-color: #ff9900;
   width: 50%;
-  padding: 1%; }
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
 
 .player-card {
   background-color: gray;
@@ -79,12 +85,12 @@ body {
 
 .main-content-area {
   padding: 1em;
-  background: gray;
+  background: #a6a6a6;
   min-height: 100vh; }
 
 #trade-proposer-container {
   text-align: center;
-  background-color: green; }
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
 
 #trade-validator-error-message-one,
 #trade-validator-error-message-two {
@@ -100,8 +106,8 @@ body {
 .dropdown {
   margin: 1.25rem 0rem 0rem 0rem; }
 
-#team-rosters-container,
-#team-selection-main-container {
+#team-selection-main-container,
+#team-rosters-sub-container {
   display: flex; }
 
 #team-selection-main-container,
@@ -135,4 +141,9 @@ body {
 
 #trade-proposer-button {
   width: 15%;
-  margin: auto; }
+  margin: auto auto 1% auto; }
+
+h1 {
+  margin-top: 2rem !important;
+  border-bottom: solid 5px #ff9900;
+  box-shadow: 0 4px 2px -2px gray; }

@@ -8,8 +8,6 @@
   font-family: "Bree Serif", serif;
 }
 
-html {
-}
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -17,13 +15,14 @@ body {
 
 .main-content-area {
   padding: 1em;
-  background: gray;
+  background: #a6a6a6;
   min-height: 100vh;
 }
 
 #trade-proposer-container {
   text-align: center;
-  background-color: green;
+  //  background-color: green;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #trade-validator-error-message-one,
@@ -44,8 +43,9 @@ body {
   margin: 1.25rem 0rem 0rem 0rem;
 }
 
-#team-rosters-container,
-#team-selection-main-container {
+//#team-rosters-container,
+#team-selection-main-container,
+#team-rosters-sub-container {
   display: flex;
 }
 
@@ -88,5 +88,13 @@ body {
 
 #trade-proposer-button {
   width: 15%;
-  margin: auto;
+  margin: auto auto 1% auto;
+}
+
+h1 {
+  margin-top: 2rem !important;
+  border-bottom: solid 5px #ff9900;
+  //box-shadow: 0px 10px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 2px -2px gray;
+  //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

@@ -265,13 +265,14 @@ class TradeProposer extends React.Component {
               <span className="team-info-highlight">Make the TRADE!</span>
             </CardHeader>
             <CardBody id="trade-proposer-card-body">
-              <button
+              <Button
+                color="success"
                 id="trade-proposer-button"
                 type="button"
                 onClick={this.handleTrade}
               >
                 SUBMIT
-              </button>
+              </Button>
 
               <CardText>
                 <div id="trade-validator-error-message-container">
