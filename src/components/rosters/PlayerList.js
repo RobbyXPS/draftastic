@@ -219,10 +219,9 @@ class PlayerList extends React.Component {
           </div>
         </ListGroupItem>
       ));
-      console.log("+++++++ uhhh 1", this.props.currentTeams.containerValue);
+
       const contvalue = this.props.containerValue;
-      console.log("+++++++ uhhh 2", this.props.currentTeams[contvalue]);
-      console.log("+++++++ uhhh 3", contvalue);
+
       // construct the list from the list items
       return (
         <div id="team-list-one-container">

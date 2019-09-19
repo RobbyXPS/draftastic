@@ -14,6 +14,9 @@ class AdminTools extends React.Component {
     this.isHiddenTeamOne = this.isHiddenTeamOne.bind(this);
     this.isHiddenTeamTwo = this.isHiddenTeamTwo.bind(this);
     this.marginSpacer = this.marginSpacer.bind(this);
+    this.marginSpacerTwo = this.marginSpacerTwo.bind(this);
+    this.isHiddenPlayerSelectOne = this.isHiddenPlayerSelectOne.bind(this);
+    this.isHiddenPlayerSelectTwo = this.isHiddenPlayerSelectTwo.bind(this);
   }
   // helper function to add class based on if player has been selected for trade
   isHiddenPlayers(selected_players) {
@@ -37,11 +40,6 @@ class AdminTools extends React.Component {
 
   // helper function to add class based on if team has been selected for trade
   isHiddenTeamOne(selected_teams) {
-    console.log("inside hidden one selected_teams 1", selected_teams);
-    console.log(
-      "inside hidden one selected_teams 2",
-      selected_teams.teamOne.length
-    );
     if (selected_teams.teamOne.length == 0) {
       return "area-container hide";
     } else {
@@ -51,11 +49,6 @@ class AdminTools extends React.Component {
 
   // helper function to add class based on if team has been selected for trade
   isHiddenTeamTwo(selected_teams) {
-    console.log("inside hidden one selected_teams 1", selected_teams);
-    console.log(
-      "inside hidden one selected_teams 2",
-      selected_teams.teamTwo.length
-    );
     if (selected_teams.teamTwo.length == 0) {
       return "area-container hide";
     } else {
@@ -64,8 +57,6 @@ class AdminTools extends React.Component {
   }
 
   marginSpacer(selected_teams) {
-    console.log("selected_teams.teamOne.length", selected_teams.teamOne.length);
-    console.log("selected_teams.teamTwo.length", selected_teams.teamTwo.length);
     const marginObj = {
       leftCont: "1rem",
       rightCont: "1rem"
@@ -78,8 +69,42 @@ class AdminTools extends React.Component {
     if (selected_teams.teamTwo.length == 0) {
       marginObj.leftCont = "51%";
     }
-    console.log("return marginObj", marginObj);
     return marginObj;
+  }
+
+  marginSpacerTwo(selected_players) {
+    const marginObj = {
+      leftCont: "1rem",
+      rightCont: "1rem"
+    };
+
+    if (selected_players.teamOne.player_id == 0) {
+      marginObj.rightCont = "51%";
+    }
+
+    if (selected_players.teamTwo.player_id == 0) {
+      marginObj.leftCont = "51%";
+    }
+
+    return marginObj;
+  }
+
+  // helper function to add class based on if team has been selected for trade
+  isHiddenPlayerSelectOne(selected_players) {
+    if (selected_players.teamOne.player_id == 0) {
+      return "area-container hide";
+    } else {
+      return "area-container";
+    }
+  }
+
+  // helper function to add class based on if team has been selected for trade
+  isHiddenPlayerSelectTwo(selected_players) {
+    if (selected_players.teamTwo.player_id == 0) {
+      return "area-container hide";
+    } else {
+      return "area-container";
+    }
   }
 
   render() {
@@ -89,8 +114,6 @@ class AdminTools extends React.Component {
     const { selected_teams } = this.props;
     const { selected_players } = this.props;
     const { team_salaries_total } = this.props;
-
-    console.log("uhhh selected_players", selected_teams);
 
     return (
       <div className="main-content-area" id="admin-tools-container">
@@ -155,9 +178,10 @@ class AdminTools extends React.Component {
           <h1>Trade Proposition:</h1>
           <div id="trade-proposition-sub-container">
             <div
-              className={this.isHiddenTeamTwo(selected_teams)}
+              id="player-list-holder-team-two"
+              className={this.isHiddenPlayerSelectTwo(selected_players)}
               style={{
-                "margin-right": this.marginSpacer(selected_teams).rightCont
+                "margin-right": this.marginSpacerTwo(selected_players).rightCont
               }}
             >
               <PlayerList
@@ -170,9 +194,9 @@ class AdminTools extends React.Component {
               />
             </div>
             <div
-              className={this.isHiddenTeamOne(selected_teams)}
+              className={this.isHiddenPlayerSelectOne(selected_players)}
               style={{
-                "margin-right": this.marginSpacer(selected_teams).leftCont
+                "margin-left": this.marginSpacerTwo(selected_players).leftCont
               }}
             >
               <PlayerList

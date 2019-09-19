@@ -48,10 +48,6 @@ class TeamList extends React.Component {
     const teams = this.props.teams;
     const currentTeams = this.props.currentTeams;
     const containerValue = this.props.containerValue;
-    console.log("<<<<<<<<< right here 1", currentTeams);
-    console.log("<<<<<<<<< right here 2", containerValue);
-    console.log("<<<<<<<<< right here 3", this.props);
-    //console.log("<<<<<<<<< right here", currentTeams[containerValue]);
 
     if (currentTeams !== undefined) {
       return (
