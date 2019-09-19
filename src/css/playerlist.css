@@ -42,3 +42,6 @@ p {
 
 .player-info-container {
   width: 90%; }
+
+#player-card-options {
+  margin: 0.25rem; }

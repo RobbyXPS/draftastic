@@ -101,5 +101,57 @@ h1 {
 }
 
 .card {
-  min-height: 13rem;
+  min-height: 12rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  #player-extended-info-container {
+    flex-direction: column;
+  }
+  #player-card-name {
+    margin-bottom: 1rem;
+  }
+  #player-card-delete {
+    height: 5rem;
+    width: 5rem;
+  }
+  #player-card-options {
+    //display: flex;
+    justify-self: center;
+    align-self: center;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  #team-selection-sub-container,
+  #trade-proposition-sub-container,
+  #team-rosters-sub-container {
+    flex-direction: column;
+    //margin: 1rem;
+  }
+  .area-container {
+    width: auto;
+  }
+  #trade-proposer-button {
+    width: 30%;
+  }
+  #trade-validator-error-message-one,
+  #trade-validator-error-message-two {
+    width: 100%;
+  }
+  #player-extended-info-container {
+    flex-direction: column;
+  }
+  #player-card-name {
+    margin-bottom: 1rem;
+  }
+  #player-card-delete {
+    height: 5rem;
+    width: 5rem;
+  }
+  #player-card-options {
+    //display: flex;
+    justify-self: center;
+    align-self: center;
+  }
 }

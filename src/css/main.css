@@ -73,6 +73,9 @@ p {
 .player-info-container {
   width: 90%; }
 
+#player-card-options {
+  margin: 0.25rem; }
+
 * {
   margin: 0;
   padding: 0;
@@ -149,4 +152,39 @@ h1 {
   box-shadow: 0 4px 2px -2px gray; }
 
 .card {
-  min-height: 13rem; }
+  min-height: 12rem; }
+
+@media only screen and (max-width: 1200px) {
+  #player-extended-info-container {
+    flex-direction: column; }
+  #player-card-name {
+    margin-bottom: 1rem; }
+  #player-card-delete {
+    height: 5rem;
+    width: 5rem; }
+  #player-card-options {
+    justify-self: center;
+    align-self: center; } }
+
+@media only screen and (max-width: 992px) {
+  #team-selection-sub-container,
+  #trade-proposition-sub-container,
+  #team-rosters-sub-container {
+    flex-direction: column; }
+  .area-container {
+    width: auto; }
+  #trade-proposer-button {
+    width: 30%; }
+  #trade-validator-error-message-one,
+  #trade-validator-error-message-two {
+    width: 100%; }
+  #player-extended-info-container {
+    flex-direction: column; }
+  #player-card-name {
+    margin-bottom: 1rem; }
+  #player-card-delete {
+    height: 5rem;
+    width: 5rem; }
+  #player-card-options {
+    justify-self: center;
+    align-self: center; } }

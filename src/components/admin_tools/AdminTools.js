@@ -154,7 +154,12 @@ class AdminTools extends React.Component {
         >
           <h1>Trade Proposition:</h1>
           <div id="trade-proposition-sub-container">
-            <div class="area-container">
+            <div
+              className={this.isHiddenTeamTwo(selected_teams)}
+              style={{
+                "margin-right": this.marginSpacer(selected_teams).rightCont
+              }}
+            >
               <PlayerList
                 class="team-list"
                 players={players}
@@ -164,7 +169,12 @@ class AdminTools extends React.Component {
                 selected_players={selected_players}
               />
             </div>
-            <div class="area-container">
+            <div
+              className={this.isHiddenTeamOne(selected_teams)}
+              style={{
+                "margin-right": this.marginSpacer(selected_teams).leftCont
+              }}
+            >
               <PlayerList
                 class="team-list"
                 players={players}
