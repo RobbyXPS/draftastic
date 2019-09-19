@@ -33,6 +33,8 @@ body {
 
 #trade-validator-success-message {
   font-weight: 900;
+  width: 50%;
+  margin: auto;
 }
 
 .team-info-highlight {
@@ -153,5 +155,8 @@ h1 {
     //display: flex;
     justify-self: center;
     align-self: center;
+  }
+  #trade-validator-success-message {
+    width: 100%;
   }
 }
