@@ -49,6 +49,24 @@ const playerReducer = (state = initialState, action) => {
         [action.player.team_container]: filteredList
       });
 
+    // add player to users trade list
+    case "CLEAR_PLAYER_LIST":
+      let clearedList = {
+        player_id: [],
+        player_contract: []
+      };
+
+      console.log(
+        "inside reducer",
+        Object.assign({}, state, {
+          [action.player.team_container]: clearedList
+        })
+      );
+
+      return Object.assign({}, state, {
+        [action.player.team_container]: clearedList
+      });
+
     default:
       return state;
   }

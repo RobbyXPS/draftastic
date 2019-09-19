@@ -12,3 +12,10 @@ export const deletePlayer = player => {
     player: player
   };
 };
+
+export const clearPlayerList = player => {
+  return {
+    type: "CLEAR_PLAYER_LIST",
+    player: player
+  };
+};

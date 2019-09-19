@@ -5,6 +5,7 @@ import TradeProposer from "../rosters/TradeProposer";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import { clearPlayerList } from "../../store/actions/playerActions";
 
 class AdminTools extends React.Component {
   constructor(props) {
@@ -107,6 +108,26 @@ class AdminTools extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    // need to do a check on prevProps so that the componentdidupdate doesn't infinitely update when state changes
+    if (
+      this.props.selected_teams.teamOne !== prevProps.selected_teams.teamOne
+    ) {
+      console.log("team changed", this.props);
+      this.props.clearPlayerList({
+        team_container: "teamOne"
+      });
+    }
+    if (
+      this.props.selected_teams.teamTwo !== prevProps.selected_teams.teamTwo
+    ) {
+      console.log("team changed 2", this.props);
+      this.props.clearPlayerList({
+        team_container: "teamTwo"
+      });
+    }
+  }
+
   render() {
     // deconstruct props passed in from state
     const { teams } = this.props;
@@ -114,6 +135,9 @@ class AdminTools extends React.Component {
     const { selected_teams } = this.props;
     const { selected_players } = this.props;
     const { team_salaries_total } = this.props;
+
+    console.log("selected_teams", selected_teams);
+    console.log("selected_teams", selected_players);
 
     return (
       <div className="main-content-area" id="admin-tools-container">
@@ -266,7 +290,16 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    clearPlayerList: player => dispatch(clearPlayerList(player))
+  };
+};
+
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   firestoreConnect([{ collection: "teams" }, { collection: "players" }])
 )(AdminTools);
