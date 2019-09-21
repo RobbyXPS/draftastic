@@ -141,6 +141,12 @@ class AdminTools extends React.Component {
 
     return (
       <div className="main-content-area" id="admin-tools-container">
+        <header>
+          <div>
+            <div class="ball"></div>
+          </div>
+        </header>
+        <div id="header-gradient"></div>
         <TradeProposer
           selected_players={selected_players}
           team_salaries_total={team_salaries_total}

@@ -14,6 +14,7 @@ export const deletePlayer = player => {
 };
 
 export const clearPlayerList = player => {
+  console.log("inside action", player);
   return {
     type: "CLEAR_PLAYER_LIST",
     player: player

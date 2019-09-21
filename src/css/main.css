@@ -87,13 +87,13 @@ body {
   -moz-osx-font-smoothing: grayscale; }
 
 .main-content-area {
-  padding: 1em;
   background: #a6a6a6;
   min-height: 100vh; }
 
 #trade-proposer-container {
   text-align: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 1rem; }
 
 #trade-validator-error-message-one,
 #trade-validator-error-message-two {
@@ -149,12 +149,49 @@ body {
   margin: auto auto 1% auto; }
 
 h1 {
-  margin-top: 2rem !important;
+  margin: 2rem 1rem 0rem 1rem;
   border-bottom: solid 5px #ff9900;
   box-shadow: 0 4px 2px -2px gray; }
 
 .card {
   min-height: 12rem; }
+
+header {
+  height: 20rem;
+  margin-bottom: 5rem;
+  /*
+  background-image: radial-gradient(
+      ellipse closest-side,
+      rgba(15, 14, 22, 0.5),
+      #100e17
+    ),
+    url("../images/wpn-20190919.webp");
+*/
+  background-image: radial-gradient(ellipse closest-side, rgba(15, 14, 22, 0.5), #100e17), url("../images/nbaLogos.png");
+  background-color: #cccccc;
+  border-bottom-right-radius: 8rem;
+  position: relative;
+  z-index: 1;
+  background-repeat: no-repeat; }
+
+#header-gradient {
+  background-color: red;
+  min-height: 24rem;
+  position: relative;
+  z-index: 0;
+  transform: translate(0px, -27rem);
+  background-image: linear-gradient(to bottom right, #ff0000, #ff6600, #ffbf00); }
+
+.ball {
+  height: 500px;
+  width: 500px;
+  border-radius: 50%;
+  border: solid 2px red;
+  position: absolute;
+  right: 100px;
+  top: -150px;
+  background: url(../images/final_bball.png) no-repeat;
+  transform: scale(0.65); }
 
 @media only screen and (max-width: 1200px) {
   #player-extended-info-container {
