@@ -5,7 +5,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Bree Serif", serif;
+  // original font, trying a new one
+  //font-family: "Bree Serif", serif;
+  font-family: Rubik, Lato, lucida grande, lucida sans unicode, Tahoma,
+    Sans-Serif;
 }
 
 body {
@@ -14,7 +17,7 @@ body {
 }
 
 .main-content-area {
-  padding: 1em;
+  //padding: 1em;
   background: #a6a6a6;
   min-height: 100vh;
 }
@@ -23,6 +26,7 @@ body {
   text-align: center;
   //  background-color: green;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 1rem;
 }
 
 #trade-validator-error-message-one,
@@ -94,8 +98,9 @@ body {
   margin: auto auto 1% auto;
 }
 
-h1 {
-  margin-top: 2rem !important;
+.section-title {
+  //margin-top: 2rem !important;
+  margin: 2rem 1rem 0rem 1rem;
   border-bottom: solid 5px #ff9900;
   //box-shadow: 0px 10px 1px rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 2px -2px gray;
@@ -104,6 +109,109 @@ h1 {
 
 .card {
   min-height: 12rem;
+}
+
+header {
+  height: 25rem;
+  margin-bottom: 5rem;
+
+  /*
+  background-image: radial-gradient(
+      ellipse closest-side,
+      rgba(15, 14, 22, 0.5),
+      #100e17
+    ),
+    url("../images/wpn-20190919.webp");
+*/
+  background-image: radial-gradient(
+      ellipse closest-side,
+      rgba(15, 14, 22, 0.5),
+      #100e17
+    ),
+    url("../images/nbaLogos.png");
+
+  background-color: #cccccc;
+  border-bottom-right-radius: 8rem;
+  position: relative;
+  z-index: 1;
+  background-repeat: no-repeat;
+}
+
+#header-gradient {
+  background-color: red;
+  min-height: 12rem;
+  position: relative;
+  //z-index: -1;
+  transform: translate(0px, -15rem);
+  background-image: linear-gradient(to bottom right, #ff0000, #ff6600, #ffbf00);
+  margin-bottom: -100px;
+}
+
+.ball {
+  //display: flex;
+  //background-color: red;
+  height: 500px;
+  width: 500px;
+  //position: relative;
+  border-radius: 50%;
+  //transform: translate(700px, -100px);
+  position: absolute;
+  right: -35px;
+  top: -150px;
+  background: url(../images/final_bball.png) no-repeat;
+  transform: scale(0.95);
+}
+
+#header-container {
+  max-width: 75%;
+  //background-color: red;
+  //margin-right: 25%;
+  padding: 5% 0% 0% 1.5%;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  height: 20rem;
+  margin: 0 2% 0 2%;
+}
+
+#header-title {
+  font-size: 4rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 3;
+  color: #fff;
+  text-shadow: 0.25rem 0.25rem 0.25rem #201c29;
+}
+
+#header-body {
+  font-size: 1rem;
+  max-width: 50%;
+  z-index: 3;
+  color: #c2c2c2;
+  text-shadow: 0.25rem 0.25rem 0.25rem #201c29;
+  font-weight: 500;
+}
+
+#trade-machine-rules {
+  color: #fff;
+  background-color: #201c29;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 65%;
+  margin: 5% 0 0 0%;
+  text-shadow: 0.1rem 0.1rem 0.1rem #4d1f00;
+  box-shadow: 0 0 5rem #100e17;
+}
+
+#trade-machine-rules-header {
+  font-size: 2rem;
+}
+
+#rule-list {
+  color: #c2c2c2;
+  margin: 1rem 0 0 2rem;
+  text-shadow: 0.1rem 0.1rem 0.1rem #4d1f00;
+  font-size: 1rem;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -121,6 +229,15 @@ h1 {
     //display: flex;
     justify-self: center;
     align-self: center;
+  }
+
+  //header content
+  .ball {
+    display: none;
+  }
+
+  #header-container {
+    max-width: 100%;
   }
 }
 
@@ -158,5 +275,36 @@ h1 {
   }
   #trade-validator-success-message {
     width: 100%;
+  }
+
+  #trade-machine-rules {
+    margin: 8% 0 0 0%;
+  }
+
+  // header content
+  header {
+    border-bottom-right-radius: 4rem;
+  }
+
+  #header-title {
+    font-size: 3rem;
+  }
+
+  #header-body {
+    font-size: 0.75rem;
+    max-width: 85%;
+  }
+
+  #trade-machine-rules {
+    width: 85%;
+    padding: 1rem;
+  }
+
+  #trade-machine-rules-header {
+    font-size: 1rem;
+  }
+
+  #rule-list {
+    font-size: 0.75rem;
   }
 }

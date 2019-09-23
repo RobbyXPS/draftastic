@@ -141,6 +141,40 @@ class AdminTools extends React.Component {
 
     return (
       <div className="main-content-area" id="admin-tools-container">
+        <header>
+          <div id="header-container">
+            <h1 id="header-title">The Robby Trade Machine</h1>
+            <p id="header-body">
+              A sub section paragraph to have some clever text. Something about
+              you're lucky enough to be one of my 5 friends or I somehow drew
+              you into looking at something dope I made. Yeah Yeah Yeah, it's
+              missing a few things like team picks and trade exceptions but
+              those will be coming shortly!
+            </p>
+            <div class="ball"></div>
+            <div id="trade-machine-rules">
+              <h2 id="trade-machine-rules-header">
+                How does the Trade Machine Work?
+              </h2>
+              <ol id="rule-list">
+                <li>Pick your favorite team + another team to trade with</li>
+                <li>
+                  Select at least one player from each team you want to be in
+                  the trade
+                </li>
+                <li>
+                  Once you have players selected for both teams, execute the
+                  trade!
+                </li>
+                <li>
+                  The trade machine will let you know if it's a successful trade
+                </li>
+              </ol>
+            </div>
+          </div>
+        </header>
+        <div id="header-gradient"></div>
+
         <TradeProposer
           selected_players={selected_players}
           team_salaries_total={team_salaries_total}
@@ -148,7 +182,7 @@ class AdminTools extends React.Component {
         />
         {/* <div id="team-trades-container"> */}
         <div id="team-selection-main-container">
-          <h1>Select Teams:</h1>
+          <h1 class="section-title">Select Teams:</h1>
           {/*<div id="team-selection-container"> */}
           <div id="team-selection-sub-container">
             {/* <div id="team-two-container-selection"> */}
@@ -199,7 +233,7 @@ class AdminTools extends React.Component {
           id="trade-proposition-main-container"
           className={this.isHiddenPlayers(selected_players)}
         >
-          <h1>Trade Proposition:</h1>
+          <h1 class="section-title">Trade Proposition:</h1>
           <div id="trade-proposition-sub-container">
             <div
               id="player-list-holder-team-two"
@@ -239,7 +273,7 @@ class AdminTools extends React.Component {
           id="team-rosters-main-container"
           className={this.isHiddenTeams(selected_teams)}
         >
-          <h1>Team Roster:</h1>
+          <h1 class="section-title">Team Roster:</h1>
           {/* <div id="team-rosters-container"> */}
           <div id="team-rosters-sub-container">
             {/* <div id="team-one-container"> */}
@@ -281,6 +315,7 @@ class AdminTools extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log("state is", state);
   return {
     teams: state.firestore.ordered.teams,
     players: state.firestore.ordered.players,
