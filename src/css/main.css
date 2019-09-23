@@ -21,12 +21,8 @@
 }
 */
 .area-container {
-  background-color: #ff9900;
   width: 50%;
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
+  margin: 1rem; }
 
 .player-card {
   background-color: gray;
@@ -111,13 +107,28 @@ body {
 .dropdown {
   margin: 1.25rem 0rem 0rem 0rem; }
 
+#team-selection-main-container {
+  padding: 0 0 0 0; }
+
+#team-rosters-main-container {
+  background-color: #f1f0f5;
+  padding: 0 0 0 0; }
+
+#team-roster-section-header {
+  color: #201c29; }
+
+#team-selection-section-header,
+#team-trade-review-section-header {
+  color: #f1f0f5; }
+
 #team-selection-main-container,
 #team-rosters-sub-container {
   display: flex; }
 
 #team-selection-main-container,
 #trade-proposition-main-container {
-  flex-direction: column; }
+  flex-direction: column;
+  background-color: #201c29; }
 
 #team-selection-sub-container,
 #trade-proposition-sub-container {
@@ -149,12 +160,10 @@ body {
   margin: auto auto 1% auto; }
 
 .section-title {
-  margin: 2rem 1rem 0rem 1rem;
-  border-bottom: solid 5px #ff9900;
-  box-shadow: 0 4px 2px -2px gray; }
+  padding: 2rem 1rem 0rem 3.7rem; }
 
 .card {
-  min-height: 12rem; }
+  min-height: 13rem; }
 
 header {
   height: 25rem;
@@ -175,7 +184,6 @@ header {
   background-repeat: no-repeat; }
 
 #header-gradient {
-  background-color: red;
   min-height: 12rem;
   position: relative;
   transform: translate(0px, -15rem);
@@ -235,6 +243,21 @@ header {
   margin: 1rem 0 0 2rem;
   text-shadow: 0.1rem 0.1rem 0.1rem #4d1f00;
   font-size: 1rem; }
+
+.step-label {
+  height: 50px;
+  width: 50px;
+  background-color: red;
+  position: absolute;
+  margin: 1rem;
+  border-radius: 50%;
+  background-image: linear-gradient(to bottom right, #ff6600, #ffbf00);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #fff;
+  box-shadow: 5px 5px 20px #ff6600; }
 
 @media only screen and (max-width: 1200px) {
   #player-extended-info-container {

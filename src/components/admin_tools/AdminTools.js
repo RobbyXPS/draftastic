@@ -175,14 +175,13 @@ class AdminTools extends React.Component {
         </header>
         <div id="header-gradient"></div>
 
-        <TradeProposer
-          selected_players={selected_players}
-          team_salaries_total={team_salaries_total}
-          currentTeams={selected_teams}
-        />
         {/* <div id="team-trades-container"> */}
+
         <div id="team-selection-main-container">
-          <h1 class="section-title">Select Teams:</h1>
+          <div class="step-label">#1</div>
+          <h1 id="team-selection-section-header" class="section-title">
+            Select Teams:
+          </h1>
           {/*<div id="team-selection-container"> */}
           <div id="team-selection-sub-container">
             {/* <div id="team-two-container-selection"> */}
@@ -230,50 +229,13 @@ class AdminTools extends React.Component {
         </div>
 
         <div
-          id="trade-proposition-main-container"
-          className={this.isHiddenPlayers(selected_players)}
-        >
-          <h1 class="section-title">Trade Proposition:</h1>
-          <div id="trade-proposition-sub-container">
-            <div
-              id="player-list-holder-team-two"
-              className={this.isHiddenPlayerSelectTwo(selected_players)}
-              style={{
-                "margin-right": this.marginSpacerTwo(selected_players).rightCont
-              }}
-            >
-              <PlayerList
-                class="team-list"
-                players={players}
-                currentTeams={selected_teams}
-                containerValue="teamTwo"
-                isTradeUI="true"
-                selected_players={selected_players}
-              />
-            </div>
-            <div
-              className={this.isHiddenPlayerSelectOne(selected_players)}
-              style={{
-                "margin-left": this.marginSpacerTwo(selected_players).leftCont
-              }}
-            >
-              <PlayerList
-                class="team-list"
-                players={players}
-                currentTeams={selected_teams}
-                containerValue="teamOne"
-                isTradeUI="true"
-                selected_players={selected_players}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div
           id="team-rosters-main-container"
           className={this.isHiddenTeams(selected_teams)}
         >
-          <h1 class="section-title">Team Roster:</h1>
+          <div class="step-label">#2</div>
+          <h1 id="team-roster-section-header" class="section-title">
+            Select Players:
+          </h1>
           {/* <div id="team-rosters-container"> */}
           <div id="team-rosters-sub-container">
             {/* <div id="team-one-container"> */}
@@ -307,6 +269,54 @@ class AdminTools extends React.Component {
                 selected_players={selected_players}
               />
             </div>
+          </div>
+        </div>
+
+        <div
+          id="trade-proposition-main-container"
+          className={this.isHiddenPlayers(selected_players)}
+        >
+          <div class="step-label">#3</div>
+          <h1 id="team-trade-review-section-header" class="section-title">
+            Review Trade:
+          </h1>
+          <div id="trade-proposition-sub-container">
+            <div
+              id="player-list-holder-team-two"
+              className={this.isHiddenPlayerSelectTwo(selected_players)}
+              style={{
+                "margin-right": this.marginSpacerTwo(selected_players).rightCont
+              }}
+            >
+              <PlayerList
+                class="team-list"
+                players={players}
+                currentTeams={selected_teams}
+                containerValue="teamTwo"
+                isTradeUI="true"
+                selected_players={selected_players}
+              />
+            </div>
+            <div
+              className={this.isHiddenPlayerSelectOne(selected_players)}
+              style={{
+                "margin-left": this.marginSpacerTwo(selected_players).leftCont
+              }}
+            >
+              <PlayerList
+                class="team-list"
+                players={players}
+                currentTeams={selected_teams}
+                containerValue="teamOne"
+                isTradeUI="true"
+                selected_players={selected_players}
+              />
+            </div>
+            <TradeProposer
+              selected_players={selected_players}
+              team_salaries_total={team_salaries_total}
+              currentTeams={selected_teams}
+            />
           </div>
         </div>
       </div>

@@ -227,7 +227,11 @@ class PlayerList extends React.Component {
         <div id="team-list-one-container">
           {/* <ListGroup id="team-list-one">{listItems}</ListGroup> */}
           <Card>
-            <CardHeader>{this.props.currentTeams[contvalue]}</CardHeader>
+            <CardHeader>
+              <span className="team-info-highlight">
+                {this.props.currentTeams[contvalue]}
+              </span>
+            </CardHeader>
             <CardBody>{listItems}</CardBody>
             <CardFooter></CardFooter>
           </Card>
