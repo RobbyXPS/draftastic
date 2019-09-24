@@ -7,6 +7,7 @@ export const selectPlayer = player => {
 };
 
 export const deletePlayer = player => {
+  console.log("inside player action", player);
   return {
     type: "DELETE_PLAYER",
     player: player

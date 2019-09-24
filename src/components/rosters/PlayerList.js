@@ -34,6 +34,10 @@ class PlayerList extends React.Component {
 
   // track when a player selects a player to be removed from the trade
   handleDelete = event => {
+    console.log(
+      "this is the event",
+      event.currentTarget.parentNode.parentNode.getAttribute("playerid")
+    );
     this.props.deletePlayer({
       team_container: this.props.containerValue,
       player_name: event.currentTarget.parentNode.parentNode.getAttribute(
@@ -177,47 +181,63 @@ class PlayerList extends React.Component {
 
       // construct the list items for each player
       const listItems = filteredList.map(player => (
-        <ListGroupItem
-          className={
-            "player-card " + this.isActive(selectedPlayerList, player.id)
-          }
-          tag="li"
-          action
-          playerid={player.id}
-          player_contract_amount={player.contract_amount}
-          key={player.id}
-          onClick={this.handleClick}
-        >
-          <div id="player-card-name">
-            <p>
-              <span className="player-info-highlight">
-                {player.first_name} {player.last_name}
-              </span>
-            </p>
-          </div>
-          <div id="player-extended-info-container">
-            <div id="player-card-position">
-              <p>
-                Position:
-                <span className="player-info-highlight">
-                  {" " + player.position}
-                </span>
-              </p>
+        <div class="list-item-player-container" playerid={player.id}>
+          <ListGroupItem
+            className={
+              "player-card " + this.isActive(selectedPlayerList, player.id)
+            }
+            tag="li"
+            action
+            playerid={player.id}
+            player_contract_amount={player.contract_amount}
+            key={player.id}
+            onClick={this.handleClick}
+          >
+            <div className="player-info-container">
+              <div id="player-card-name">
+                <p>
+                  <span className="player-info-highlight">
+                    {player.first_name} {player.last_name}
+                  </span>
+                </p>
+              </div>
+
+              <div id="player-extended-info-container">
+                <div id="player-card-position">
+                  <p>
+                    Position:
+                    <span className="player-info-highlight">
+                      {" " + player.position}
+                    </span>
+                  </p>
+                </div>
+                <p>
+                  Contract:
+                  <span className="player-info-highlight">
+                    {" " + player.contract_amount}
+                  </span>
+                </p>
+                <p>
+                  Contract Length:
+                  <span className="player-info-highlight">
+                    {" " + player.contract_length}
+                  </span>
+                </p>
+              </div>
             </div>
-            <p>
-              Contract:
-              <span className="player-info-highlight">
-                {" " + player.contract_amount}
-              </span>
-            </p>
-            <p>
-              Contract Length:
-              <span className="player-info-highlight">
-                {" " + player.contract_length}
-              </span>
-            </p>
+          </ListGroupItem>
+          <div id="player-card-options">
+            <Button
+              onClick={this.handleDelete}
+              id="player-card-delete"
+              outline
+              color="danger"
+              className="player-list-danger-button"
+            >
+              X
+            </Button>
           </div>
-        </ListGroupItem>
+        </div>
       ));
 
       const contvalue = this.props.containerValue;

@@ -1,7 +1,5 @@
 .player-card {
-  background-color: gray;
   display: flex !important;
-  flex-direction: column;
   justify-content: space-between; }
 
 #player-card-name {
@@ -45,3 +43,9 @@ p {
 
 #player-card-options {
   margin: 0.25rem; }
+
+.list-item-player-container {
+  display: flex; }
+
+.player-list-danger-button {
+  width: 4rem; }

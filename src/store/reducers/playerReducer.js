@@ -44,6 +44,14 @@ const playerReducer = (state = initialState, action) => {
         })
       };
 
+      console.log("my filtered list", filteredList);
+      console.log(
+        "inside reducer",
+        Object.assign({}, state, {
+          [action.player.team_container]: filteredList
+        })
+      );
+
       // return the array after the player has been removed
       return Object.assign({}, state, {
         [action.player.team_container]: filteredList
@@ -55,13 +63,6 @@ const playerReducer = (state = initialState, action) => {
         player_id: [],
         player_contract: []
       };
-
-      console.log(
-        "inside reducer",
-        Object.assign({}, state, {
-          [action.player.team_container]: clearedList
-        })
-      );
 
       return Object.assign({}, state, {
         [action.player.team_container]: clearedList

@@ -7,6 +7,15 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { clearPlayerList } from "../../store/actions/playerActions";
 
+import ReactDOM from "react-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCheckCircle,
+  faTimesCircle
+} from "@fortawesome/free-solid-svg-icons";
+
+import { Progress } from "reactstrap";
+
 class AdminTools extends React.Component {
   constructor(props) {
     super(props);
@@ -182,6 +191,22 @@ class AdminTools extends React.Component {
           <h1 id="team-selection-section-header" class="section-title">
             Select Teams:
           </h1>
+          <div id="new-review-panel">
+            <FontAwesomeIcon icon={faCheckCircle} id="trade-status-fail" />
+            <FontAwesomeIcon icon={faTimesCircle} id="trade-status-success" />
+            <h1>this is the new trade review area</h1>
+            <div id="bar-container-main">
+              <div className="text-center">25%</div>
+              <div id="bar-sub-container">
+                <Progress className="bar" id="flip-bar" value={90} />
+                <FontAwesomeIcon
+                  icon={faTimesCircle}
+                  id="trade-status-success"
+                />
+                <Progress className="bar" value={90} />
+              </div>
+            </div>
+          </div>
           {/*<div id="team-selection-container"> */}
           <div id="team-selection-sub-container">
             {/* <div id="team-two-container-selection"> */}
@@ -281,6 +306,8 @@ class AdminTools extends React.Component {
             Review Trade:
           </h1>
           <div id="trade-proposition-sub-container">
+            {/*}
+
             <div
               id="player-list-holder-team-two"
               className={this.isHiddenPlayerSelectTwo(selected_players)}
@@ -296,7 +323,10 @@ class AdminTools extends React.Component {
                 isTradeUI="true"
                 selected_players={selected_players}
               />
+
             </div>
+
+
             <div
               className={this.isHiddenPlayerSelectOne(selected_players)}
               style={{
@@ -312,6 +342,9 @@ class AdminTools extends React.Component {
                 selected_players={selected_players}
               />
             </div>
+
+            */}
+
             <TradeProposer
               selected_players={selected_players}
               team_salaries_total={team_salaries_total}

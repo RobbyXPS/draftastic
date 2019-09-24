@@ -10,7 +10,8 @@ import {
   CardText,
   Toast,
   ToastBody,
-  ToastHeader
+  ToastHeader,
+  Progress
 } from "reactstrap";
 
 class TradeProposer extends React.Component {
@@ -237,8 +238,9 @@ class TradeProposer extends React.Component {
       this.props.selected_players.teamTwo.player_id.length !== 0
     ) {
       return (
-        <div id="trade-proposer-container">
-          {/*
+        <div id="this-is-just-a-placeholder-div-for-now">
+          <div id="trade-proposer-container">
+            {/*
           <h2 id="trade-proposer-header">Make the TRADE!</h2>
           <button
             id="trade-proposer-button"
@@ -260,58 +262,64 @@ class TradeProposer extends React.Component {
           </div>
 */}
 
-          <Card>
-            <CardHeader>
-              <span className="team-info-highlight">Make the TRADE!</span>
-            </CardHeader>
-            <CardBody id="trade-proposer-card-body">
-              <Button
-                color="success"
-                id="trade-proposer-button"
-                type="button"
-                onClick={this.handleTrade}
-              >
-                SUBMIT
-              </Button>
+            <Card>
+              <CardHeader>
+                <span className="team-info-highlight">Make the TRADE!</span>
+              </CardHeader>
+              <CardBody id="trade-proposer-card-body">
+                <Button
+                  color="success"
+                  id="trade-proposer-button"
+                  type="button"
+                  onClick={this.handleTrade}
+                >
+                  SUBMIT
+                </Button>
 
-              <CardText>
-                <div id="trade-validator-error-message-container">
-                  <div
-                    className={this.isHiddenFailMessageOne()}
-                    id="trade-validator-error-message-one"
-                  >
-                    <Toast class="toast">
-                      <ToastHeader>TRADE UNSUCCESSFUL:</ToastHeader>
-                      <ToastBody>
-                        {this.state.team_one_failure_message}
-                      </ToastBody>
-                    </Toast>
+                <CardText>
+                  <div id="trade-validator-error-message-container">
+                    <div
+                      className={this.isHiddenFailMessageOne()}
+                      id="trade-validator-error-message-one"
+                    >
+                      <Toast class="toast">
+                        <ToastHeader>TRADE UNSUCCESSFUL:</ToastHeader>
+                        <ToastBody>
+                          {this.state.team_one_failure_message}
+                        </ToastBody>
+                      </Toast>
+                    </div>
+
+                    <div
+                      className={this.isHiddenFailMessageTwo()}
+                      id="trade-validator-error-message-two"
+                    >
+                      <Toast>
+                        <ToastHeader>TRADE UNSUCCESSFUL:</ToastHeader>
+                        <ToastBody>
+                          {this.state.team_two_failure_message}
+                        </ToastBody>
+                      </Toast>
+                    </div>
                   </div>
 
                   <div
-                    className={this.isHiddenFailMessageTwo()}
-                    id="trade-validator-error-message-two"
+                    className={this.isHiddenSuccessMessage()}
+                    id="trade-validator-success-message"
                   >
                     <Toast>
-                      <ToastHeader>TRADE UNSUCCESSFUL:</ToastHeader>
-                      <ToastBody>
-                        {this.state.team_two_failure_message}
-                      </ToastBody>
+                      <ToastBody>{this.state.success_message}</ToastBody>
                     </Toast>
                   </div>
-                </div>
-
-                <div
-                  className={this.isHiddenSuccessMessage()}
-                  id="trade-validator-success-message"
-                >
-                  <Toast>
-                    <ToastBody>{this.state.success_message}</ToastBody>
-                  </Toast>
-                </div>
-              </CardText>
-            </CardBody>
-          </Card>
+                </CardText>
+              </CardBody>
+            </Card>
+          </div>
+          <div id="new-review-panel">
+            <h1>this is the new trade review area</h1>
+            <div className="text-center">25%</div>
+            <Progress value={50} />
+          </div>
         </div>
       );
     } else {

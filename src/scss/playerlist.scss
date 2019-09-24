@@ -1,7 +1,7 @@
 .player-card {
-  background-color: gray;
+  //background-color: red;
   display: flex !important;
-  flex-direction: column;
+  //flex-direction: column;
   justify-content: space-between;
 }
 
@@ -57,4 +57,12 @@ p {
 
 #player-card-options {
   margin: 0.25rem;
+}
+
+.list-item-player-container {
+  display: flex;
+}
+
+.player-list-danger-button {
+  width: 4rem;
 }
