@@ -3,6 +3,7 @@ import { firestoreReducer } from "redux-firestore";
 import teamReducer from "./teamReducer";
 import playerReducer from "./playerReducer";
 import capReducer from "./capReducer";
+import salaryReducer from "./salaryReducer";
 
 const rootReducer = combineReducers({
   // used with FE team selection input to populate trade UI
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   selected_teams: teamReducer,
   team_salaries_total: capReducer,
   // used with db to hold all teams and players
-  firestore: firestoreReducer
+  firestore: firestoreReducer,
+  outgoing_players_salary: salaryReducer
 });
 
 export default rootReducer;

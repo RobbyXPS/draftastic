@@ -264,16 +264,26 @@ header {
   box-shadow: 5px 5px 20px #ff6600; }
 
 #bar-sub-container {
-  display: flex; }
+  display: flex;
+  padding: 3%; }
 
 .bar {
-  width: 50%; }
+  width: 50%;
+  align-self: center; }
 
 #flip-bar {
   transform: rotate(180deg); }
 
 #trade-status-live {
   background-color: red; }
+
+#trade-status-success {
+  color: red;
+  font-size: 200%;
+  margin: 0 1% 0 1%; }
+
+.text-center {
+  color: red; }
 
 @media only screen and (max-width: 1200px) {
   #player-extended-info-container {

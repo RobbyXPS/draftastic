@@ -34,10 +34,7 @@ class PlayerList extends React.Component {
 
   // track when a player selects a player to be removed from the trade
   handleDelete = event => {
-    console.log(
-      "this is the event",
-      event.currentTarget.parentNode.parentNode.getAttribute("playerid")
-    );
+    console.log("inside handleDel", event.currentTarget.parentNode.parentNode);
     this.props.deletePlayer({
       team_container: this.props.containerValue,
       player_name: event.currentTarget.parentNode.parentNode.getAttribute(
@@ -181,7 +178,12 @@ class PlayerList extends React.Component {
 
       // construct the list items for each player
       const listItems = filteredList.map(player => (
-        <div class="list-item-player-container" playerid={player.id}>
+        <div
+          className="list-item-player-container"
+          key={player.id}
+          playerid={player.id}
+          player_contract_amount={player.contract_amount}
+        >
           <ListGroupItem
             className={
               "player-card " + this.isActive(selectedPlayerList, player.id)

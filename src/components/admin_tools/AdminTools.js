@@ -2,19 +2,11 @@ import React from "react";
 import PlayerList from "../rosters/PlayerList";
 import TradeInfo from "../rosters/TradeInfo";
 import TradeProposer from "../rosters/TradeProposer";
+import ReviewTrade from "../rosters/ReviewTrade";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { clearPlayerList } from "../../store/actions/playerActions";
-
-import ReactDOM from "react-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCheckCircle,
-  faTimesCircle
-} from "@fortawesome/free-solid-svg-icons";
-
-import { Progress } from "reactstrap";
 
 class AdminTools extends React.Component {
   constructor(props) {
@@ -122,7 +114,6 @@ class AdminTools extends React.Component {
     if (
       this.props.selected_teams.teamOne !== prevProps.selected_teams.teamOne
     ) {
-      console.log("team changed", this.props);
       this.props.clearPlayerList({
         team_container: "teamOne"
       });
@@ -130,7 +121,6 @@ class AdminTools extends React.Component {
     if (
       this.props.selected_teams.teamTwo !== prevProps.selected_teams.teamTwo
     ) {
-      console.log("team changed 2", this.props);
       this.props.clearPlayerList({
         team_container: "teamTwo"
       });
@@ -144,9 +134,7 @@ class AdminTools extends React.Component {
     const { selected_teams } = this.props;
     const { selected_players } = this.props;
     const { team_salaries_total } = this.props;
-
-    console.log("selected_teams", selected_teams);
-    console.log("selected_teams", selected_players);
+    const { outgoing_players_salary } = this.props;
 
     return (
       <div className="main-content-area" id="admin-tools-container">
@@ -160,7 +148,7 @@ class AdminTools extends React.Component {
               missing a few things like team picks and trade exceptions but
               those will be coming shortly!
             </p>
-            <div class="ball"></div>
+            <div className="ball"></div>
             <div id="trade-machine-rules">
               <h2 id="trade-machine-rules-header">
                 How does the Trade Machine Work?
@@ -187,30 +175,20 @@ class AdminTools extends React.Component {
         {/* <div id="team-trades-container"> */}
 
         <div id="team-selection-main-container">
-          <div class="step-label">#1</div>
-          <h1 id="team-selection-section-header" class="section-title">
+          <div className="step-label">#1</div>
+          <h1 id="team-selection-section-header" className="section-title">
             Select Teams:
           </h1>
-          <div id="new-review-panel">
-            <FontAwesomeIcon icon={faCheckCircle} id="trade-status-fail" />
-            <FontAwesomeIcon icon={faTimesCircle} id="trade-status-success" />
-            <h1>this is the new trade review area</h1>
-            <div id="bar-container-main">
-              <div className="text-center">25%</div>
-              <div id="bar-sub-container">
-                <Progress className="bar" id="flip-bar" value={90} />
-                <FontAwesomeIcon
-                  icon={faTimesCircle}
-                  id="trade-status-success"
-                />
-                <Progress className="bar" value={90} />
-              </div>
-            </div>
-          </div>
+          <ReviewTrade
+            selected_players={selected_players}
+            currentTeams={selected_teams}
+            outgoing_players_salary={outgoing_players_salary}
+            team_salaries_total={team_salaries_total}
+          />
           {/*<div id="team-selection-container"> */}
           <div id="team-selection-sub-container">
             {/* <div id="team-two-container-selection"> */}
-            <div class="area-container">
+            <div className="area-container">
               <TradeInfo
                 selected_players={selected_players}
                 players={players}
@@ -233,7 +211,7 @@ class AdminTools extends React.Component {
             */}
             </div>
             {/* <div id="team-one-container-selection"> */}
-            <div class="area-container">
+            <div className="area-container">
               <TradeInfo
                 selected_players={selected_players}
                 players={players}
@@ -257,8 +235,8 @@ class AdminTools extends React.Component {
           id="team-rosters-main-container"
           className={this.isHiddenTeams(selected_teams)}
         >
-          <div class="step-label">#2</div>
-          <h1 id="team-roster-section-header" class="section-title">
+          <div className="step-label">#2</div>
+          <h1 id="team-roster-section-header" className="section-title">
             Select Players:
           </h1>
           {/* <div id="team-rosters-container"> */}
@@ -268,7 +246,7 @@ class AdminTools extends React.Component {
               id="team-rosters-team-one"
               className={this.isHiddenTeamOne(selected_teams)}
               style={{
-                "margin-right": this.marginSpacer(selected_teams).leftCont
+                marginRight: this.marginSpacer(selected_teams).leftCont
               }}
             >
               <PlayerList
@@ -284,7 +262,7 @@ class AdminTools extends React.Component {
               className={this.isHiddenTeamTwo(selected_teams)}
               //style="color:red"
               style={{
-                "margin-left": this.marginSpacer(selected_teams).rightCont
+                marginLeft: this.marginSpacer(selected_teams).rightCont
               }}
             >
               <PlayerList
@@ -301,8 +279,8 @@ class AdminTools extends React.Component {
           id="trade-proposition-main-container"
           className={this.isHiddenPlayers(selected_players)}
         >
-          <div class="step-label">#3</div>
-          <h1 id="team-trade-review-section-header" class="section-title">
+          <div className="step-label">#3</div>
+          <h1 id="team-trade-review-section-header" className="section-title">
             Review Trade:
           </h1>
           <div id="trade-proposition-sub-container">
@@ -358,13 +336,13 @@ class AdminTools extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state is", state);
   return {
     teams: state.firestore.ordered.teams,
     players: state.firestore.ordered.players,
     selected_teams: state.selected_teams,
     selected_players: state.selected_players,
-    team_salaries_total: state.team_salaries_total
+    team_salaries_total: state.team_salaries_total,
+    outgoing_players_salary: state.outgoing_players_salary
   };
 };
 

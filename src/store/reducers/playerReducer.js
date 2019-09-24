@@ -28,6 +28,7 @@ const playerReducer = (state = initialState, action) => {
 
     // remove player to users trade list
     case "DELETE_PLAYER":
+      console.log("inside reducer", action);
       // get the info for which side the trade is on
       let playersList = state[action.player.team_container];
       // get the player id to be removed
@@ -43,14 +44,6 @@ const playerReducer = (state = initialState, action) => {
           return player !== contractBeingRemoved;
         })
       };
-
-      console.log("my filtered list", filteredList);
-      console.log(
-        "inside reducer",
-        Object.assign({}, state, {
-          [action.player.team_container]: filteredList
-        })
-      );
 
       // return the array after the player has been removed
       return Object.assign({}, state, {
