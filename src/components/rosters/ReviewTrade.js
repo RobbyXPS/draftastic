@@ -469,7 +469,6 @@ class ReviewTrade extends React.Component {
 
       return (
         <div>
-          <div>{this.state.team_one_failure_message}</div>
           <div>
             <span className="fail">{teamNameTemp1}</span>{" "}
             {sectionOneSlice.join(" ")}{" "}
@@ -491,7 +490,6 @@ class ReviewTrade extends React.Component {
 
       return (
         <div>
-          <div>{this.state.team_one_failure_message}</div>
           <div>
             <span className="fail">{teamNameTemp1}</span>{" "}
             {sectionOneSlice.join(" ")}{" "}
@@ -512,77 +510,42 @@ class ReviewTrade extends React.Component {
 
   render() {
     return (
-      <div id="new-review-panel">
-        <FontAwesomeIcon icon={faCheckCircle} id="trade-status-fail" />
-        <FontAwesomeIcon icon={faTimesCircle} id="trade-status-success" />
-        <h1>this is the new trade review area</h1>
-        <div id="bar-container-main">
-          <div className="text-center">
-            {" "}
-            incoming salary for team ONE 25%{" "}
-            {this.props.outgoing_players_salary.teamTwo}
-          </div>
+      <div id="bar-container-main">
+        <h2
+          id="trade-status-text"
+          class={this.statusTextColor(this.state.tradeIcon)}
+        >
+          {this.state.success_message}
+        </h2>
 
-          <div className="text-center">
-            {" "}
-            incoming salary for team TWO 25%{" "}
-            {this.props.outgoing_players_salary.teamOne}
-          </div>
-          <div className="text-center">
-            TEAM ONES NAME IS: {this.props.currentTeams.teamOne} AND{" "}
-            {this.state.teamTwoTradeDeficit}
-          </div>
-          <div className="text-center">
-            TEAM ONES ERROR IS: {this.state.team_one_failure_message}
-          </div>
-          <div className="text-center">
-            TEAM ONES BAR IS: {this.state.teamOneBarPercent}
-          </div>
+        <div id="trade-helper-text">
+          {this.tradeHelperText(this.state.team_one_failure_message.length)}
+        </div>
 
-          <div className="text-center">
-            TEAM TWOS NAME IS: {this.props.currentTeams.teamTwo} AND{" "}
-            {this.state.teamTwoTradeDeficit}
-          </div>
-          <div className="text-center">
-            TEAM TWOS ERROR IS: {this.state.team_two_failure_message}
-          </div>
-          <div className="text-center">
-            TEAM TWOS BAR IS: {this.state.teamTwoBarPercent}
-          </div>
+        <div id="bar-sub-container">
+          <Progress
+            className="bar"
+            animated
+            color="warning"
+            id="flip-bar"
+            value={this.state.teamOneBarPercent}
+          />
+          <FontAwesomeIcon
+            icon={this.state.tradeIcon}
+            id="trade-status-success"
+            className={this.tradeIconStatus()}
+          />
+          <Progress
+            className="bar"
+            animated
+            color="warning"
+            value={this.state.teamTwoBarPercent}
+          />
+        </div>
 
-          <div className="text-center">
-            SUCCESSFUL ERROR IS: {this.state.success_message}
-          </div>
-
-          <h2
-            id="trade-status-text"
-            class={this.statusTextColor(this.state.tradeIcon)}
-          >
-            {this.state.success_message}
-          </h2>
-          <div id="trade-helper-text">
-            {this.tradeHelperText(this.state.team_one_failure_message.length)}
-          </div>
-
-          <div id="bar-sub-container">
-            <Progress
-              className="bar"
-              id="flip-bar"
-              value={this.state.teamOneBarPercent}
-            />
-
-            <FontAwesomeIcon
-              icon={this.state.tradeIcon}
-              id="trade-status-success"
-              className={this.tradeIconStatus()}
-            />
-            <Progress className="bar" value={this.state.teamTwoBarPercent} />
-          </div>
-
-          <div id="player-list-review-container">
-            <div id="review-list-one">{this.handleListOne(this.props)}</div>
-            <div id="review-list-one">{this.handleListTwo(this.props)}</div>
-          </div>
+        <div id="player-list-review-container">
+          <div id="review-list-one">{this.handleListOne(this.props)}</div>
+          <div id="review-list-one">{this.handleListTwo(this.props)}</div>
         </div>
       </div>
     );

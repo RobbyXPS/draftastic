@@ -283,6 +283,7 @@ header {
 #trade-helper-text {
   color: #fff;
   align-self: center;
+  padding: 1rem;
 }
 
 #trade-status-text {
@@ -314,6 +315,9 @@ header {
   text-align: center;
   text-decoration: underline;
   font-size: 2.5rem;
+}
+
+trade-review-player-list {
 }
 
 @media only screen and (max-width: 1200px) {
@@ -408,5 +412,14 @@ header {
 
   #rule-list {
     font-size: 0.75rem;
+  }
+
+  // trade review
+  #player-list-review-container {
+    font-size: 1rem;
+  }
+
+  .list-review-header {
+    font-size: 1.5rem;
   }
 }

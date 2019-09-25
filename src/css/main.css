@@ -286,7 +286,8 @@ header {
 
 #trade-helper-text {
   color: #fff;
-  align-self: center; }
+  align-self: center;
+  padding: 1rem; }
 
 #trade-status-text {
   align-self: center; }
@@ -369,4 +370,8 @@ header {
   #trade-machine-rules-header {
     font-size: 1rem; }
   #rule-list {
-    font-size: 0.75rem; } }
+    font-size: 0.75rem; }
+  #player-list-review-container {
+    font-size: 1rem; }
+  .list-review-header {
+    font-size: 1.5rem; } }

@@ -1,7 +1,6 @@
 import React from "react";
 import PlayerList from "../rosters/PlayerList";
 import TradeInfo from "../rosters/TradeInfo";
-import TradeProposer from "../rosters/TradeProposer";
 import ReviewTrade from "../rosters/ReviewTrade";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -19,6 +18,7 @@ class AdminTools extends React.Component {
     this.marginSpacerTwo = this.marginSpacerTwo.bind(this);
     this.isHiddenPlayerSelectOne = this.isHiddenPlayerSelectOne.bind(this);
     this.isHiddenPlayerSelectTwo = this.isHiddenPlayerSelectTwo.bind(this);
+    this.isHiddenTradeReview = this.isHiddenTradeReview.bind(this);
   }
   // helper function to add class based on if player has been selected for trade
   isHiddenPlayers(selected_players) {
@@ -109,6 +109,30 @@ class AdminTools extends React.Component {
     }
   }
 
+  isHiddenTradeReview(selected_players) {
+    console.log("&*&*&*&*&*&*&*&*&*&*& selected_players", selected_players);
+
+    console.log("inside hide trade");
+    console.log(
+      "selected_players.teamOne.player_id == 0",
+      selected_players.teamOne.player_id == 0
+    );
+    console.log(
+      "selected_players.teamTwo.player_id == 0",
+      selected_players.teamTwo.player_id == 0
+    );
+    if (
+      selected_players.teamOne.player_id == 0 ||
+      selected_players.teamTwo.player_id == 0
+    ) {
+      return "hide";
+      console.log("!!!!! return top");
+    } else {
+      console.log("!!!!! return bottom");
+      return "no-hide";
+    }
+  }
+
   componentDidUpdate(prevProps) {
     // need to do a check on prevProps so that the componentdidupdate doesn't infinitely update when state changes
     if (
@@ -179,13 +203,7 @@ class AdminTools extends React.Component {
           <h1 id="team-selection-section-header" className="section-title">
             Select Teams:
           </h1>
-          <ReviewTrade
-            selected_players={selected_players}
-            players={players}
-            currentTeams={selected_teams}
-            outgoing_players_salary={outgoing_players_salary}
-            team_salaries_total={team_salaries_total}
-          />
+
           {/*<div id="team-selection-container"> */}
           <div id="team-selection-sub-container">
             {/* <div id="team-two-container-selection"> */}
@@ -278,56 +296,20 @@ class AdminTools extends React.Component {
 
         <div
           id="trade-proposition-main-container"
-          className={this.isHiddenPlayers(selected_players)}
+          className={this.isHiddenTradeReview(selected_players)}
         >
           <div className="step-label">#3</div>
           <h1 id="team-trade-review-section-header" className="section-title">
             Review Trade:
           </h1>
-          <div id="trade-proposition-sub-container">
-            {/*}
 
-            <div
-              id="player-list-holder-team-two"
-              className={this.isHiddenPlayerSelectTwo(selected_players)}
-              style={{
-                "margin-right": this.marginSpacerTwo(selected_players).rightCont
-              }}
-            >
-              <PlayerList
-                class="team-list"
-                players={players}
-                currentTeams={selected_teams}
-                containerValue="teamTwo"
-                isTradeUI="true"
-                selected_players={selected_players}
-              />
-
-            </div>
-
-
-            <div
-              className={this.isHiddenPlayerSelectOne(selected_players)}
-              style={{
-                "margin-left": this.marginSpacerTwo(selected_players).leftCont
-              }}
-            >
-              <PlayerList
-                class="team-list"
-                players={players}
-                currentTeams={selected_teams}
-                containerValue="teamOne"
-                isTradeUI="true"
-                selected_players={selected_players}
-              />
-            </div>
-
-            */}
-
-            <TradeProposer
+          <div className={this.isHiddenTradeReview(selected_players)}>
+            <ReviewTrade
               selected_players={selected_players}
-              team_salaries_total={team_salaries_total}
+              players={players}
               currentTeams={selected_teams}
+              outgoing_players_salary={outgoing_players_salary}
+              team_salaries_total={team_salaries_total}
             />
           </div>
         </div>
