@@ -56,13 +56,6 @@ const playerReducer = (state = initialState, action) => {
         player_contract: []
       };
 
-      console.log(
-        "inside reducer",
-        Object.assign({}, state, {
-          [action.player.team_container]: clearedList
-        })
-      );
-
       return Object.assign({}, state, {
         [action.player.team_container]: clearedList
       });

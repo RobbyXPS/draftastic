@@ -1,7 +1,7 @@
 import React from "react";
 import PlayerList from "../rosters/PlayerList";
 import TradeInfo from "../rosters/TradeInfo";
-import TradeProposer from "../rosters/TradeProposer";
+import ReviewTrade from "../rosters/ReviewTrade";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
@@ -18,6 +18,7 @@ class AdminTools extends React.Component {
     this.marginSpacerTwo = this.marginSpacerTwo.bind(this);
     this.isHiddenPlayerSelectOne = this.isHiddenPlayerSelectOne.bind(this);
     this.isHiddenPlayerSelectTwo = this.isHiddenPlayerSelectTwo.bind(this);
+    this.isHiddenTradeReview = this.isHiddenTradeReview.bind(this);
   }
   // helper function to add class based on if player has been selected for trade
   isHiddenPlayers(selected_players) {
@@ -108,12 +109,22 @@ class AdminTools extends React.Component {
     }
   }
 
+  isHiddenTradeReview(selected_players) {
+    if (
+      selected_players.teamOne.player_id == 0 ||
+      selected_players.teamTwo.player_id == 0
+    ) {
+      return "hide";
+    } else {
+      return "no-hide";
+    }
+  }
+
   componentDidUpdate(prevProps) {
     // need to do a check on prevProps so that the componentdidupdate doesn't infinitely update when state changes
     if (
       this.props.selected_teams.teamOne !== prevProps.selected_teams.teamOne
     ) {
-      console.log("team changed", this.props);
       this.props.clearPlayerList({
         team_container: "teamOne"
       });
@@ -121,7 +132,6 @@ class AdminTools extends React.Component {
     if (
       this.props.selected_teams.teamTwo !== prevProps.selected_teams.teamTwo
     ) {
-      console.log("team changed 2", this.props);
       this.props.clearPlayerList({
         team_container: "teamTwo"
       });
@@ -135,58 +145,42 @@ class AdminTools extends React.Component {
     const { selected_teams } = this.props;
     const { selected_players } = this.props;
     const { team_salaries_total } = this.props;
-
-    console.log("selected_teams", selected_teams);
-    console.log("selected_teams", selected_players);
+    const { outgoing_players_salary } = this.props;
 
     return (
       <div className="main-content-area" id="admin-tools-container">
         <header>
           <div id="header-container">
             <h1 id="header-title">The Robby Trade Machine</h1>
-            <p id="header-body">
-              A sub section paragraph to have some clever text. Something about
-              you're lucky enough to be one of my 5 friends or I somehow drew
-              you into looking at something dope I made. Yeah Yeah Yeah, it's
-              missing a few things like team picks and trade exceptions but
-              those will be coming shortly!
-            </p>
-            <div class="ball"></div>
+            <div className="ball"></div>
             <div id="trade-machine-rules">
-              <h2 id="trade-machine-rules-header">
-                How does the Trade Machine Work?
-              </h2>
-              <ol id="rule-list">
-                <li>Pick your favorite team + another team to trade with</li>
-                <li>
-                  Select at least one player from each team you want to be in
-                  the trade
-                </li>
-                <li>
-                  Once you have players selected for both teams, execute the
-                  trade!
-                </li>
-                <li>
-                  The trade machine will let you know if it's a successful trade
-                </li>
-              </ol>
+              <h2 id="trade-machine-rules-header">Welcome!</h2>
+              <p>
+                You found the Robby Trade Machine...that means you're either one
+                of my five and a half friends or I somehow coerced you into
+                looking at something awesome I built. Yeah...Yeah...Yeah...it
+                doesn't let you trade between more than two teams, use trade
+                exceptions, or trade draft picks, but who cares. If you come
+                back in a month the trade machine might be able to do those
+                things, until then...please give it a go and enjoy.
+              </p>
             </div>
           </div>
         </header>
         <div id="header-gradient"></div>
 
-        <TradeProposer
-          selected_players={selected_players}
-          team_salaries_total={team_salaries_total}
-          currentTeams={selected_teams}
-        />
         {/* <div id="team-trades-container"> */}
+
         <div id="team-selection-main-container">
-          <h1 class="section-title">Select Teams:</h1>
+          <div className="step-label">#1</div>
+          <h1 id="team-selection-section-header" className="section-title">
+            Select Teams:
+          </h1>
+
           {/*<div id="team-selection-container"> */}
           <div id="team-selection-sub-container">
             {/* <div id="team-two-container-selection"> */}
-            <div class="area-container">
+            <div className="area-container">
               <TradeInfo
                 selected_players={selected_players}
                 players={players}
@@ -209,7 +203,7 @@ class AdminTools extends React.Component {
             */}
             </div>
             {/* <div id="team-one-container-selection"> */}
-            <div class="area-container">
+            <div className="area-container">
               <TradeInfo
                 selected_players={selected_players}
                 players={players}
@@ -230,50 +224,13 @@ class AdminTools extends React.Component {
         </div>
 
         <div
-          id="trade-proposition-main-container"
-          className={this.isHiddenPlayers(selected_players)}
-        >
-          <h1 class="section-title">Trade Proposition:</h1>
-          <div id="trade-proposition-sub-container">
-            <div
-              id="player-list-holder-team-two"
-              className={this.isHiddenPlayerSelectTwo(selected_players)}
-              style={{
-                "margin-right": this.marginSpacerTwo(selected_players).rightCont
-              }}
-            >
-              <PlayerList
-                class="team-list"
-                players={players}
-                currentTeams={selected_teams}
-                containerValue="teamTwo"
-                isTradeUI="true"
-                selected_players={selected_players}
-              />
-            </div>
-            <div
-              className={this.isHiddenPlayerSelectOne(selected_players)}
-              style={{
-                "margin-left": this.marginSpacerTwo(selected_players).leftCont
-              }}
-            >
-              <PlayerList
-                class="team-list"
-                players={players}
-                currentTeams={selected_teams}
-                containerValue="teamOne"
-                isTradeUI="true"
-                selected_players={selected_players}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div
           id="team-rosters-main-container"
           className={this.isHiddenTeams(selected_teams)}
         >
-          <h1 class="section-title">Team Roster:</h1>
+          <div className="step-label">#2</div>
+          <h1 id="team-roster-section-header" className="section-title">
+            Select Players:
+          </h1>
           {/* <div id="team-rosters-container"> */}
           <div id="team-rosters-sub-container">
             {/* <div id="team-one-container"> */}
@@ -281,7 +238,7 @@ class AdminTools extends React.Component {
               id="team-rosters-team-one"
               className={this.isHiddenTeamOne(selected_teams)}
               style={{
-                "margin-right": this.marginSpacer(selected_teams).leftCont
+                marginRight: this.marginSpacer(selected_teams).leftCont
               }}
             >
               <PlayerList
@@ -297,7 +254,7 @@ class AdminTools extends React.Component {
               className={this.isHiddenTeamTwo(selected_teams)}
               //style="color:red"
               style={{
-                "margin-left": this.marginSpacer(selected_teams).rightCont
+                marginLeft: this.marginSpacer(selected_teams).rightCont
               }}
             >
               <PlayerList
@@ -309,19 +266,39 @@ class AdminTools extends React.Component {
             </div>
           </div>
         </div>
+
+        <div
+          id="trade-proposition-main-container"
+          className={this.isHiddenTradeReview(selected_players)}
+        >
+          <div className="step-label">#3</div>
+          <h1 id="team-trade-review-section-header" className="section-title">
+            Review Trade:
+          </h1>
+
+          <div className={this.isHiddenTradeReview(selected_players)}>
+            <ReviewTrade
+              selected_players={selected_players}
+              players={players}
+              currentTeams={selected_teams}
+              outgoing_players_salary={outgoing_players_salary}
+              team_salaries_total={team_salaries_total}
+            />
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log("state is", state);
   return {
     teams: state.firestore.ordered.teams,
     players: state.firestore.ordered.players,
     selected_teams: state.selected_teams,
     selected_players: state.selected_players,
-    team_salaries_total: state.team_salaries_total
+    team_salaries_total: state.team_salaries_total,
+    outgoing_players_salary: state.outgoing_players_salary
   };
 };
 

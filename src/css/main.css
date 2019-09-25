@@ -21,17 +21,11 @@
 }
 */
 .area-container {
-  background-color: #ff9900;
   width: 50%;
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
+  margin: 1rem; }
 
 .player-card {
-  background-color: gray;
   display: flex !important;
-  flex-direction: column;
   justify-content: space-between; }
 
 #player-card-name {
@@ -76,6 +70,12 @@ p {
 #player-card-options {
   margin: 0.25rem; }
 
+.list-item-player-container {
+  display: flex; }
+
+.player-list-danger-button {
+  width: 4rem; }
+
 * {
   margin: 0;
   padding: 0;
@@ -89,6 +89,9 @@ body {
 .main-content-area {
   background: #a6a6a6;
   min-height: 100vh; }
+
+.main-content-area {
+  background-color: #f0eef6 !important; }
 
 #trade-proposer-container {
   text-align: center;
@@ -111,13 +114,29 @@ body {
 .dropdown {
   margin: 1.25rem 0rem 0rem 0rem; }
 
+#team-roster-section-header {
+  color: #201c29; }
+
+#team-selection-section-header,
+#team-trade-review-section-header {
+  color: #f1f0f5; }
+
 #team-selection-main-container,
 #team-rosters-sub-container {
   display: flex; }
 
+.trade-review-player-list {
+  list-style-type: none; }
+
+#team-selection-main-container,
+#trade-proposition-main-container,
+#team-rosters-main-container {
+  padding: 1.5rem 0.5rem 1.5rem 0.5rem; }
+
 #team-selection-main-container,
 #trade-proposition-main-container {
-  flex-direction: column; }
+  flex-direction: column;
+  background-color: #201c29; }
 
 #team-selection-sub-container,
 #trade-proposition-sub-container {
@@ -149,15 +168,13 @@ body {
   margin: auto auto 1% auto; }
 
 .section-title {
-  margin: 2rem 1rem 0rem 1rem;
-  border-bottom: solid 5px #ff9900;
-  box-shadow: 0 4px 2px -2px gray; }
+  padding: 2rem 1rem 0rem 3.7rem; }
 
 .card {
-  min-height: 12rem; }
+  min-height: 13rem; }
 
 header {
-  height: 25rem;
+  height: 20rem;
   margin-bottom: 5rem;
   /*
   background-image: radial-gradient(
@@ -175,7 +192,6 @@ header {
   background-repeat: no-repeat; }
 
 #header-gradient {
-  background-color: red;
   min-height: 12rem;
   position: relative;
   transform: translate(0px, -15rem);
@@ -236,6 +252,80 @@ header {
   text-shadow: 0.1rem 0.1rem 0.1rem #4d1f00;
   font-size: 1rem; }
 
+.step-label {
+  height: 50px;
+  width: 50px;
+  background-color: red;
+  position: absolute;
+  margin: 1rem;
+  border-radius: 50%;
+  background-image: linear-gradient(to bottom right, #ff6600, #ffbf00);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #fff;
+  box-shadow: 5px 5px 20px #ff6600; }
+
+#bar-sub-container {
+  display: flex;
+  padding: 3%; }
+
+.bar {
+  width: 50%;
+  align-self: center; }
+
+#flip-bar {
+  transform: rotate(180deg); }
+
+#trade-status-live {
+  background-color: red; }
+
+#trade-status-success {
+  font-size: 200%;
+  margin: 0 1% 0 1%; }
+
+.text-center {
+  color: orange; }
+
+#trade-helper-text {
+  color: #fff;
+  align-self: center;
+  padding: 1rem; }
+
+#trade-status-text {
+  align-self: center; }
+
+#bar-container-main {
+  display: flex;
+  flex-direction: column; }
+
+.success {
+  color: green;
+  font-weight: 900; }
+
+.fail {
+  color: red;
+  font-weight: 900; }
+
+#player-list-review-main-container {
+  display: flex;
+  flex-direction: row; }
+
+.player-list-review-container {
+  width: 50%;
+  font-size: 1.5rem !important;
+  padding: 0rem 2rem 0rem 2rem; }
+
+.list-review-sub-container {
+  color: #fff;
+  text-align: center; }
+
+.list-review-header {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 2.5rem; }
+
 @media only screen and (max-width: 1200px) {
   #player-extended-info-container {
     flex-direction: column; }
@@ -269,11 +359,12 @@ header {
   #player-card-name {
     margin-bottom: 1rem; }
   #player-card-delete {
-    height: 5rem;
-    width: 5rem; }
+    width: 3rem;
+    height: 6.5rem; }
   #player-card-options {
     justify-self: center;
-    align-self: center; }
+    align-self: center;
+    margin: 0 !important; }
   #trade-validator-success-message {
     width: 100%; }
   #trade-machine-rules {
@@ -291,4 +382,21 @@ header {
   #trade-machine-rules-header {
     font-size: 1rem; }
   #rule-list {
-    font-size: 0.75rem; } }
+    font-size: 0.75rem; }
+  .player-list-review-container {
+    font-size: 1rem; }
+  .list-review-header {
+    font-size: 1.5rem; }
+  .player-card {
+    font-size: 0.75rem; }
+  #player-card-name {
+    margin-bottom: 0.75rem; }
+  #trade-machine-rules {
+    font-size: 0.75rem; }
+  header {
+    height: 20rem; }
+  .player-list-review-container {
+    font-size: 0.75rem !important; }
+  #team-rosters-team-one,
+  #team-rosters-team-two {
+    margin: 1rem !important; } }

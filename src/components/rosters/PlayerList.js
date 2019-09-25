@@ -19,6 +19,7 @@ class PlayerList extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.filterByPlayer = this.filterByPlayer.bind(this);
     this.isActive = this.isActive;
+    this.isButtonActive = this.isButtonActive.bind(this);
   }
 
   // track when a player selects a player to be added to the trade
@@ -62,6 +63,17 @@ class PlayerList extends React.Component {
       return "";
     } else {
       return "disabled";
+    }
+  }
+
+  // helper function to add class based on if player has been selected for trade
+  isButtonActive(selectedPlayers, playerId) {
+    console.log("inside button active - selectedPlayers", selectedPlayers);
+    console.log("inside button active - playerId", playerId);
+    if (selectedPlayers.player_id.indexOf(playerId) == -1) {
+      return "player-list-danger-button hide";
+    } else {
+      return "player-list-danger-button";
     }
   }
 
@@ -177,47 +189,70 @@ class PlayerList extends React.Component {
 
       // construct the list items for each player
       const listItems = filteredList.map(player => (
-        <ListGroupItem
-          className={
-            "player-card " + this.isActive(selectedPlayerList, player.id)
-          }
-          tag="li"
-          action
+        <div
+          className="list-item-player-container"
+          key={player.id}
           playerid={player.id}
           player_contract_amount={player.contract_amount}
-          key={player.id}
-          onClick={this.handleClick}
         >
-          <div id="player-card-name">
-            <p>
-              <span className="player-info-highlight">
-                {player.first_name} {player.last_name}
-              </span>
-            </p>
-          </div>
-          <div id="player-extended-info-container">
-            <div id="player-card-position">
-              <p>
-                Position:
-                <span className="player-info-highlight">
-                  {" " + player.position}
-                </span>
-              </p>
+          <ListGroupItem
+            className={
+              "player-card " + this.isActive(selectedPlayerList, player.id)
+            }
+            tag="li"
+            action
+            playerid={player.id}
+            player_contract_amount={player.contract_amount}
+            key={player.id}
+            onClick={this.handleClick}
+          >
+            <div className="player-info-container">
+              <div id="player-card-name">
+                <p>
+                  <span className="player-info-highlight">
+                    {player.first_name} {player.last_name}
+                  </span>
+                </p>
+              </div>
+
+              <div id="player-extended-info-container">
+                <div id="player-card-position">
+                  <p>
+                    Position:
+                    <span className="player-info-highlight">
+                      {" " + player.position}
+                    </span>
+                  </p>
+                </div>
+                <p>
+                  Contract:
+                  <span className="player-info-highlight">
+                    {" " + player.contract_amount}
+                  </span>
+                </p>
+                <p>
+                  Contract Length:
+                  <span className="player-info-highlight">
+                    {" " + player.contract_length}
+                  </span>
+                </p>
+              </div>
             </div>
-            <p>
-              Contract:
-              <span className="player-info-highlight">
-                {" " + player.contract_amount}
-              </span>
-            </p>
-            <p>
-              Contract Length:
-              <span className="player-info-highlight">
-                {" " + player.contract_length}
-              </span>
-            </p>
+          </ListGroupItem>
+
+          <div id="player-card-options">
+            <Button
+              onClick={this.handleDelete}
+              id="player-card-delete"
+              outline
+              color="danger"
+              className=""
+              className={this.isButtonActive(selectedPlayerList, player.id)}
+            >
+              X
+            </Button>
           </div>
-        </ListGroupItem>
+        </div>
       ));
 
       const contvalue = this.props.containerValue;
@@ -227,7 +262,11 @@ class PlayerList extends React.Component {
         <div id="team-list-one-container">
           {/* <ListGroup id="team-list-one">{listItems}</ListGroup> */}
           <Card>
-            <CardHeader>{this.props.currentTeams[contvalue]}</CardHeader>
+            <CardHeader>
+              <span className="team-info-highlight">
+                {this.props.currentTeams[contvalue]}
+              </span>
+            </CardHeader>
             <CardBody>{listItems}</CardBody>
             <CardFooter></CardFooter>
           </Card>
