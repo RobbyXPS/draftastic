@@ -29,6 +29,8 @@ class ReviewTrade extends React.Component {
     this.handleListTwo = this.handleListTwo.bind(this);
     this.filterByPlayerTeamOne = this.filterByPlayerTeamOne.bind(this);
     this.filterByPlayerTeamTwo = this.filterByPlayerTeamTwo.bind(this);
+    this.statusTextColor = this.statusTextColor.bind(this);
+    this.tradeHelperText = this.tradeHelperText.bind(this);
   }
 
   tradeIconStatus() {
@@ -89,18 +91,10 @@ class ReviewTrade extends React.Component {
       (accumulator, currentValue) => accumulator + Number(currentValue),
       0
     );
+    console.log("trigger teamTwoTotalContracts", teamTwoTotalContracts);
     // do the math for the trade buffer per NBA rules
     let tradeBufferTwo = teamTwoTotalContracts * 1.25 + 100000;
-
-    console.log("<<<<<<<< - teamONETotalSalary", teamOneTotalSalary);
-    console.log("<<<<<<<< - teamONEContractList", teamOneContractList);
-    console.log("<<<<<<<< - teamONETotalContracts", teamOneTotalContracts);
-    console.log("<<<<<<<< - tradeBufferONE", tradeBufferOne);
-
-    console.log("<<<<<<<< - teamTWOTotalSalary", teamTwoTotalSalary);
-    console.log("<<<<<<<< - teamTWOContractList", teamTwoContractList);
-    console.log("<<<<<<<< - teamTWOTotalContracts", teamTwoTotalContracts);
-    console.log("<<<<<<<< - tradeBufferTWO", tradeBufferTwo);
+    console.log("trigger tradeBufferTwo", tradeBufferTwo);
 
     // TRADE LOGIC FORMULAS
     // IF TEAM INITIATES TRADE WHILE OVER THE CAP (scenario 1)
@@ -128,14 +122,7 @@ class ReviewTrade extends React.Component {
         });
 
         console.log("TEAM 1 SCEN 1 ---- IF BLOCK .. CK STATE", this.state);
-        console.log(
-          "TEAM 1 SCEN 1 ---- IF BLOCK .. tradeBufferOne",
-          tradeBufferOne
-        );
-        console.log(
-          "TEAM 1 SCEN 1 ---- IF BLOCK .. teamOneTradeDeficit",
-          teamOneTradeDeficit
-        );
+
         // if team one is over the cap, and their incoming contracts are more then they outgoing contracts...the trade fails
         teamOneTradeTest = "fail";
 
@@ -144,11 +131,15 @@ class ReviewTrade extends React.Component {
         ).toFixed(2);
 
         this.setState({
-          team_one_failure_message: `${teamOneName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
+          team_one_failure_message: `${teamOneName} incoming salaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
         });
 
         this.setState({
           tradeIcon: faTimesCircle
+        });
+
+        this.setState({
+          success_message: "TRADE INVALID"
         });
 
         this.setState({
@@ -205,7 +196,7 @@ class ReviewTrade extends React.Component {
 
           teamOneTradeTest = "fail";
           this.setState({
-            team_one_failure_message: `${teamOneName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
+            team_one_failure_message: `${teamOneName} incoming salaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
           });
 
           // bar setting
@@ -215,6 +206,10 @@ class ReviewTrade extends React.Component {
 
           this.setState({
             tradeIcon: faTimesCircle
+          });
+
+          this.setState({
+            success_message: "TRADE INVALID"
           });
         } else {
           this.setState({
@@ -242,23 +237,16 @@ class ReviewTrade extends React.Component {
         let teamTwoTradeDeficit = Math.ceil(
           teamOneTotalContracts - tradeBufferTwo
         );
-        console.log("$$$$$ uhhhhh teamTwoTradeDeficit", teamTwoTradeDeficit);
 
         // if team two is over the cap, and their incoming contracts are more then they outgoing contracts...the trade fails
         teamTwoTradeTest = "fail";
         this.setState({
-          team_two_failure_message: `${teamTwoName} incoming slaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
+          team_two_failure_message: `${teamTwoName} incoming salaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
         });
 
-        console.log("+++++ short numb", teamTwoTradeDeficit / tradeBufferOne);
-        console.log(
-          "+++++ short numb 2",
-          (teamTwoTradeDeficit / tradeBufferOne).toFixed(2)
-        );
         const teamTwoBarPercentTemp = (
           teamTwoTradeDeficit / tradeBufferOne
         ).toFixed(2);
-        //console.log("+++++ short numb 3", test.slice(-2));
 
         // bar setting
         this.setState({
@@ -267,6 +255,10 @@ class ReviewTrade extends React.Component {
 
         this.setState({
           tradeIcon: faTimesCircle
+        });
+
+        this.setState({
+          success_message: "TRADE INVALID"
         });
       }
       // if team two is over the cap, and their incoming contracts are not more then their outgoing contracts...the trade is successful
@@ -312,9 +304,12 @@ class ReviewTrade extends React.Component {
             teamOneTotalContracts - tradeBufferTwo
           );
 
-          console.log("$$$$$ uhhhhh teamTwoTradeDeficit", teamTwoTradeDeficit);
-
           teamTwoTradeTest = "fail";
+
+          this.setState({
+            team_two_failure_message: `${teamTwoName} incoming salaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
+          });
+
           this.setState({
             teamTwoTradeDeficit: teamTwoTradeDeficit
           });
@@ -330,6 +325,9 @@ class ReviewTrade extends React.Component {
 
           this.setState({
             tradeIcon: faTimesCircle
+          });
+          this.setState({
+            success_message: "TRADE INVALID"
           });
         } else {
           this.setState({
@@ -357,23 +355,10 @@ class ReviewTrade extends React.Component {
   }
 
   handleListOne() {
-    console.log(
-      "inside handlelist - team1 players",
-      this.props.selected_players.teamOne
-    );
-    console.log(
-      "inside handlelist - team2 players",
-      this.props.selected_players.teamTwo
-    );
-
-    console.log("%%%%% props", this.props);
-
     const playerList = this.props.players;
-    console.log("******* playerList !== undefined", playerList);
 
     if (playerList !== undefined) {
       const playerListOne = this.props.selected_players.teamOne;
-      console.log("eff", playerListOne);
 
       const filteredPlayerListOne = playerList.filter(
         this.filterByPlayerTeamOne
@@ -383,18 +368,18 @@ class ReviewTrade extends React.Component {
 
       //const filteredPlayerListOne = playerList.filter(this.filterByPlayer);
 
-      console.log("filteredPlayerList", filteredPlayerListOne);
-
       const listItems = filteredPlayerListOne.map(player => (
-        <li>
+        <li key={player.id}>
           {player.first_name} {player.last_name}{" "}
           {"( " + player.contract_amount + " )"}
         </li>
       ));
 
       return (
-        <div>
-          <p>{this.props.currentTeams.teamOne}</p>
+        <div className="list-review-sub-container">
+          <h3 className="list-review-header">
+            {this.props.currentTeams.teamOne}
+          </h3>
           <div>{/* <ListGroup>{listItems}</ListGroup> */}</div>
           <ul>{listItems}</ul>
         </div>
@@ -404,28 +389,10 @@ class ReviewTrade extends React.Component {
   }
 
   handleListTwo() {
-    console.log(
-      "inside handlelist - team1 players",
-      this.props.selected_players.teamOne
-    );
-    console.log(
-      "inside handlelist - team2 players",
-      this.props.selected_players.teamTwo
-    );
-
-    console.log("%%%%% props", this.props);
-
     const playerList = this.props.players;
-    console.log("******* playerList !== undefined", playerList);
 
     if (playerList !== undefined) {
       const playerListTwo = this.props.selected_players.teamTwo;
-      //console.log("eff", playerListOne);
-
-      console.log(
-        "!!!!!!!!!!!!!!! - !!!!!!!!!!!!!!!!!!!! playerList",
-        playerList
-      );
 
       const filteredPlayerListTwo = playerList.filter(
         this.filterByPlayerTeamTwo
@@ -435,8 +402,6 @@ class ReviewTrade extends React.Component {
 
       //const filteredPlayerListOne = playerList.filter(this.filterByPlayer);
 
-      console.log("filteredPlayerList", filteredPlayerListTwo);
-
       const listItems = filteredPlayerListTwo.map(player => (
         <li>
           {player.first_name} {player.last_name}{" "}
@@ -445,8 +410,10 @@ class ReviewTrade extends React.Component {
       ));
 
       return (
-        <div>
-          <p>{this.props.currentTeams.teamTwo}</p>
+        <div className="list-review-sub-container">
+          <h3 className="list-review-header">
+            {this.props.currentTeams.teamTwo}
+          </h3>
           <div>{/* <ListGroup>{listItems}</ListGroup> */}</div>
           <ul>{listItems}</ul>
         </div>
@@ -456,13 +423,52 @@ class ReviewTrade extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log("^^^ this 1", this);
+    console.log(
+      "^^^ this.props.currentTeams !== prevProps.currentTeams",
+      this.props.currentTeams !== prevProps.currentTeams
+    );
+    console.log(
+      "^^^ this.props.selected_players !== prevProps.selected_players",
+      this.props.selected_players !== prevProps.selected_players
+    );
     if (
       this.props.currentTeams !== prevProps.currentTeams ||
       this.props.selected_players !== prevProps.selected_players
     ) {
       this.handleTrade();
+      console.log("^^^ this 2", this);
+      console.log("~~~~~~MY STATE IS", this.state);
+      console.log("~~~~~~MY PROPS IS", this.props);
     }
   }
+
+  statusTextColor(state_status) {
+    if (state_status == faCheckCircle) {
+      return "success";
+    } else {
+      return "fail";
+    }
+  }
+
+  tradeHelperText(team_one_failure_message) {
+    if (team_one_failure_message == 0) {
+      const tempMessage = this.state.team_two_failure_message;
+      console.log("MINES TEMP MESSAGE 1", tempMessage);
+      return this.state.team_two_failure_message;
+    } else {
+      const tempMessage = this.state.team_one_failure_message;
+      console.log("MINES TEMP MESSAGE 2", tempMessage);
+      return this.state.team_one_failure_message;
+    }
+  }
+
+  /*
+    {this.state.team_one_failure_message.length == 0
+        ? this.state.team_two_failure_message
+        : this.state.team_one_failure_message}
+        */
+  //}
 
   render() {
     return (
@@ -507,10 +513,15 @@ class ReviewTrade extends React.Component {
           <div className="text-center">
             SUCCESSFUL ERROR IS: {this.state.success_message}
           </div>
+
+          <div
+            id="trade-status-text"
+            class={this.statusTextColor(this.state.tradeIcon)}
+          >
+            {this.state.success_message}
+          </div>
           <div id="trade-helper-text">
-            {this.state.team_one_failure_message.length == 0
-              ? this.state.team_two_failure_message
-              : this.state.team_one_failure_message}
+            {this.tradeHelperText(this.state.team_one_failure_message.length)}
           </div>
 
           <div id="bar-sub-container">
@@ -519,10 +530,7 @@ class ReviewTrade extends React.Component {
               id="flip-bar"
               value={this.state.teamOneBarPercent}
             />
-            {console.log(
-              "####### this.state.tradeIcon ######",
-              this.state.tradeIcon
-            )}
+
             <FontAwesomeIcon
               icon={this.state.tradeIcon}
               id="trade-status-success"

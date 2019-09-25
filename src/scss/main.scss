@@ -276,22 +276,44 @@ header {
   margin: 0 1% 0 1%;
 }
 
-.text-center,
-#trade-helper-text {
+.text-center {
   color: orange;
+}
+
+#trade-helper-text {
+  color: #fff;
+  align-self: center;
+}
+
+#trade-status-text {
+  align-self: center;
+}
+
+#bar-container-main {
+  display: flex;
+  flex-direction: column;
 }
 
 .success {
   color: green;
+  font-weight: 900;
 }
 .fail {
   color: red;
+  font-weight: 900;
 }
 
 #player-list-review-container {
   display: flex;
-  color: blue;
+  color: #fff;
   justify-content: space-around;
+  font-size: 1.5rem;
+}
+
+.list-review-header {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 2.5rem;
 }
 
 @media only screen and (max-width: 1200px) {

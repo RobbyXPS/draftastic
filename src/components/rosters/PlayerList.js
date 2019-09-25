@@ -34,7 +34,6 @@ class PlayerList extends React.Component {
 
   // track when a player selects a player to be removed from the trade
   handleDelete = event => {
-    console.log("inside handleDel", event.currentTarget.parentNode.parentNode);
     this.props.deletePlayer({
       team_container: this.props.containerValue,
       player_name: event.currentTarget.parentNode.parentNode.getAttribute(

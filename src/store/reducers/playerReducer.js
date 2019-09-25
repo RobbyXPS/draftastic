@@ -28,7 +28,6 @@ const playerReducer = (state = initialState, action) => {
 
     // remove player to users trade list
     case "DELETE_PLAYER":
-      console.log("inside reducer", action);
       // get the info for which side the trade is on
       let playersList = state[action.player.team_container];
       // get the player id to be removed
