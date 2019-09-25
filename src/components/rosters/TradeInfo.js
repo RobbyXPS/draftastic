@@ -26,6 +26,7 @@ class TradeInfo extends React.Component {
     this.handleSendingPlayerOutgoingSalaries = this.handleSendingPlayerOutgoingSalaries.bind(
       this
     );
+    this.handleTeamSelectHeader = this.handleTeamSelectHeader.bind(this);
   }
 
   handleSendingSalaries(containerValue, wholeTeamSalary) {
@@ -140,6 +141,20 @@ class TradeInfo extends React.Component {
     }
   }
 
+  handleTeamSelectHeader(containerValue, currentTeams) {
+    if (containerValue == "teamOne") {
+      console.log("this is header for team one");
+      return this.props.currentTeams[containerValue]
+        ? this.props.currentTeams[containerValue]
+        : "Select a team";
+    } else {
+      console.log("this is header for team two");
+      return this.props.currentTeams[containerValue]
+        ? this.props.currentTeams[containerValue]
+        : "Select another team";
+    }
+  }
+
   render() {
     const containerValue = this.props.containerValue;
     const currentTeams = this.props.currentTeams;
@@ -151,9 +166,11 @@ class TradeInfo extends React.Component {
           <Card>
             <CardHeader>
               <span className="team-info-highlight">
-                {this.props.currentTeams[containerValue]
+                {this.handleTeamSelectHeader(containerValue, currentTeams)}
+
+                {/* {this.props.currentTeams[containerValue]
                   ? this.props.currentTeams[containerValue]
-                  : "Select a team"}
+                : "Select a team"} */}
               </span>
             </CardHeader>
             <CardBody>

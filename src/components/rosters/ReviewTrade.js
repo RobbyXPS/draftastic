@@ -402,7 +402,7 @@ class ReviewTrade extends React.Component {
       //const filteredPlayerListOne = playerList.filter(this.filterByPlayer);
 
       const listItems = filteredPlayerListTwo.map(player => (
-        <li>
+        <li key={player.id}>
           {player.first_name} {player.last_name}{" "}
           {"( " + player.contract_amount + " )"}
         </li>
@@ -414,7 +414,7 @@ class ReviewTrade extends React.Component {
             {this.props.currentTeams.teamTwo}
           </h3>
           <div>{/* <ListGroup>{listItems}</ListGroup> */}</div>
-          <ul>{listItems}</ul>
+          <ul className="trade-review-player-list">{listItems}</ul>
         </div>
       );
     } else {

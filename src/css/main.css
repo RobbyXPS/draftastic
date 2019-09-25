@@ -316,9 +316,6 @@ header {
   text-decoration: underline;
   font-size: 2.5rem; }
 
-.review-list {
-  color: blue; }
-
 @media only screen and (max-width: 1200px) {
   #player-extended-info-container {
     flex-direction: column; }
