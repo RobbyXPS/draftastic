@@ -272,13 +272,26 @@ header {
 }
 
 #trade-status-success {
-  color: red;
   font-size: 200%;
   margin: 0 1% 0 1%;
 }
 
-.text-center {
+.text-center,
+#trade-helper-text {
+  color: orange;
+}
+
+.success {
+  color: green;
+}
+.fail {
   color: red;
+}
+
+#player-list-review-container {
+  display: flex;
+  color: blue;
+  justify-content: space-around;
 }
 
 @media only screen and (max-width: 1200px) {

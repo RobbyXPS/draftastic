@@ -181,6 +181,7 @@ class AdminTools extends React.Component {
           </h1>
           <ReviewTrade
             selected_players={selected_players}
+            players={players}
             currentTeams={selected_teams}
             outgoing_players_salary={outgoing_players_salary}
             team_salaries_total={team_salaries_total}
