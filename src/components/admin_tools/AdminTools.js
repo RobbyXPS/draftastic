@@ -152,32 +152,18 @@ class AdminTools extends React.Component {
         <header>
           <div id="header-container">
             <h1 id="header-title">The Robby Trade Machine</h1>
-            <p id="header-body">
-              A sub section paragraph to have some clever text. Something about
-              you're lucky enough to be one of my 5 friends or I somehow drew
-              you into looking at something dope I made. Yeah Yeah Yeah, it's
-              missing a few things like team picks and trade exceptions but
-              those will be coming shortly!
-            </p>
             <div className="ball"></div>
             <div id="trade-machine-rules">
-              <h2 id="trade-machine-rules-header">
-                How does the Trade Machine Work?
-              </h2>
-              <ol id="rule-list">
-                <li>Pick your favorite team + another team to trade with</li>
-                <li>
-                  Select at least one player from each team you want to be in
-                  the trade
-                </li>
-                <li>
-                  Once you have players selected for both teams, execute the
-                  trade!
-                </li>
-                <li>
-                  The trade machine will let you know if it's a successful trade
-                </li>
-              </ol>
+              <h2 id="trade-machine-rules-header">Welcome!</h2>
+              <p>
+                You found the Robby Trade Machine...that means you're either one
+                of my five and a half friends or I somehow coerced you into
+                looking at something awesome I built. Yeah...Yeah...Yeah...it
+                doesn't let you trade between more than two teams, use trade
+                exceptions, or trade draft picks, but who cares. If you come
+                back in a month the trade machine might be able to do those
+                things, until then...please give it a go and enjoy.
+              </p>
             </div>
           </div>
         </header>

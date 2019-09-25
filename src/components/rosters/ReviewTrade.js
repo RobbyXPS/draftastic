@@ -369,8 +369,7 @@ class ReviewTrade extends React.Component {
 
       const listItems = filteredPlayerListOne.map(player => (
         <li key={player.id}>
-          {player.first_name} {player.last_name}{" "}
-          {"( " + player.contract_amount + " )"}
+          {player.first_name} {player.last_name}
         </li>
       ));
 
@@ -403,8 +402,7 @@ class ReviewTrade extends React.Component {
 
       const listItems = filteredPlayerListTwo.map(player => (
         <li key={player.id}>
-          {player.first_name} {player.last_name}{" "}
-          {"( " + player.contract_amount + " )"}
+          {player.first_name} {player.last_name}
         </li>
       ));
 
@@ -530,9 +528,13 @@ class ReviewTrade extends React.Component {
           />
         </div>
 
-        <div id="player-list-review-container">
-          <div>{this.handleListOne(this.props)}</div>
-          <div>{this.handleListTwo(this.props)}</div>
+        <div id="player-list-review-main-container">
+          <div className="player-list-review-container">
+            {this.handleListOne(this.props)}
+          </div>
+          <div className="player-list-review-container">
+            {this.handleListTwo(this.props)}
+          </div>
         </div>
       </div>
     );

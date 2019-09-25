@@ -188,7 +188,7 @@ class TradeInfo extends React.Component {
                 currentTeams={currentTeams}
               />
             </CardBody>
-            <CardFooter>{this.state.incomingPlayersMessage}</CardFooter>
+            <CardFooter></CardFooter>
           </Card>
         </div>
       );
