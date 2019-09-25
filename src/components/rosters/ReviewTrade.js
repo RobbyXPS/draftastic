@@ -453,13 +453,53 @@ class ReviewTrade extends React.Component {
 
   tradeHelperText(team_one_failure_message) {
     if (team_one_failure_message == 0) {
-      const tempMessage = this.state.team_two_failure_message;
-      console.log("MINES TEMP MESSAGE 1", tempMessage);
-      return this.state.team_two_failure_message;
+      //const tempMessage = this.state.team_two_failure_message;
+      //console.log("MINES TEMP MESSAGE 1", tempMessage);
+      //return this.state.team_two_failure_message;
+
+      const tempMessage = this.state.team_two_failure_message.split(" ");
+
+      const teamNameTemp1 = tempMessage[0];
+
+      const teamSalTemp1 = tempMessage[10];
+
+      const sectionOneSlice = tempMessage.slice(1, 10);
+
+      const sectionTwoSlice = tempMessage.slice(11);
+
+      return (
+        <div>
+          <div>{this.state.team_one_failure_message}</div>
+          <div>
+            <span className="fail">{teamNameTemp1}</span>{" "}
+            {sectionOneSlice.join(" ")}{" "}
+            <span className="fail">{teamSalTemp1}</span>{" "}
+            {sectionTwoSlice.join(" ")}
+          </div>
+        </div>
+      );
     } else {
-      const tempMessage = this.state.team_one_failure_message;
-      console.log("MINES TEMP MESSAGE 2", tempMessage);
-      return this.state.team_one_failure_message;
+      const tempMessage = this.state.team_one_failure_message.split(" ");
+
+      const teamNameTemp1 = tempMessage[0];
+
+      const teamSalTemp1 = tempMessage[10];
+
+      const sectionOneSlice = tempMessage.slice(1, 10);
+
+      const sectionTwoSlice = tempMessage.slice(11);
+
+      return (
+        <div>
+          <div>{this.state.team_one_failure_message}</div>
+          <div>
+            <span className="fail">{teamNameTemp1}</span>{" "}
+            {sectionOneSlice.join(" ")}{" "}
+            <span className="fail">{teamSalTemp1}</span>{" "}
+            {sectionTwoSlice.join(" ")}
+          </div>
+        </div>
+      );
     }
   }
 
@@ -514,12 +554,12 @@ class ReviewTrade extends React.Component {
             SUCCESSFUL ERROR IS: {this.state.success_message}
           </div>
 
-          <div
+          <h2
             id="trade-status-text"
             class={this.statusTextColor(this.state.tradeIcon)}
           >
             {this.state.success_message}
-          </div>
+          </h2>
           <div id="trade-helper-text">
             {this.tradeHelperText(this.state.team_one_failure_message.length)}
           </div>
