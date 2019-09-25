@@ -49,14 +49,15 @@ body {
   margin: 1.25rem 0rem 0rem 0rem;
 }
 
+//
 #team-selection-main-container {
   //background-color: #201c29;
-  padding: 0 0 0 0;
+  //padding: 0 0 0 0;
 }
-
+//
 #team-rosters-main-container {
   background-color: #f1f0f5;
-  padding: 0 0 0 0;
+  //padding: 0 0 0 0;
 }
 
 #team-roster-section-header {
@@ -74,6 +75,12 @@ body {
   display: flex;
 
   //justify-content: space-between;
+}
+
+#team-selection-main-container,
+#trade-proposition-main-container,
+#team-rosters-main-container {
+  padding: 1.5rem 0.5rem 1.5rem 0.5rem;
 }
 
 #team-selection-main-container,
@@ -316,7 +323,10 @@ header {
   text-decoration: underline;
   font-size: 2.5rem;
 }
-
+.review-list {
+  //text-align: center;
+  color: blue;
+}
 trade-review-player-list {
 }
 

@@ -19,6 +19,7 @@ class PlayerList extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.filterByPlayer = this.filterByPlayer.bind(this);
     this.isActive = this.isActive;
+    this.isButtonActive = this.isButtonActive.bind(this);
   }
 
   // track when a player selects a player to be added to the trade
@@ -62,6 +63,17 @@ class PlayerList extends React.Component {
       return "";
     } else {
       return "disabled";
+    }
+  }
+
+  // helper function to add class based on if player has been selected for trade
+  isButtonActive(selectedPlayers, playerId) {
+    console.log("inside button active - selectedPlayers", selectedPlayers);
+    console.log("inside button active - playerId", playerId);
+    if (selectedPlayers.player_id.indexOf(playerId) == -1) {
+      return "player-list-danger-button hide";
+    } else {
+      return "player-list-danger-button";
     }
   }
 
@@ -227,13 +239,15 @@ class PlayerList extends React.Component {
               </div>
             </div>
           </ListGroupItem>
+
           <div id="player-card-options">
             <Button
               onClick={this.handleDelete}
               id="player-card-delete"
               outline
               color="danger"
-              className="player-list-danger-button"
+              className=""
+              className={this.isButtonActive(selectedPlayerList, player.id)}
             >
               X
             </Button>

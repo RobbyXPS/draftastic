@@ -91,10 +91,9 @@ class ReviewTrade extends React.Component {
       (accumulator, currentValue) => accumulator + Number(currentValue),
       0
     );
-    console.log("trigger teamTwoTotalContracts", teamTwoTotalContracts);
+
     // do the math for the trade buffer per NBA rules
     let tradeBufferTwo = teamTwoTotalContracts * 1.25 + 100000;
-    console.log("trigger tradeBufferTwo", tradeBufferTwo);
 
     // TRADE LOGIC FORMULAS
     // IF TEAM INITIATES TRADE WHILE OVER THE CAP (scenario 1)
@@ -381,7 +380,7 @@ class ReviewTrade extends React.Component {
             {this.props.currentTeams.teamOne}
           </h3>
           <div>{/* <ListGroup>{listItems}</ListGroup> */}</div>
-          <ul>{listItems}</ul>
+          <ul className="trade-review-player-list">{listItems}</ul>
         </div>
       );
     } else {
@@ -423,23 +422,11 @@ class ReviewTrade extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log("^^^ this 1", this);
-    console.log(
-      "^^^ this.props.currentTeams !== prevProps.currentTeams",
-      this.props.currentTeams !== prevProps.currentTeams
-    );
-    console.log(
-      "^^^ this.props.selected_players !== prevProps.selected_players",
-      this.props.selected_players !== prevProps.selected_players
-    );
     if (
       this.props.currentTeams !== prevProps.currentTeams ||
       this.props.selected_players !== prevProps.selected_players
     ) {
       this.handleTrade();
-      console.log("^^^ this 2", this);
-      console.log("~~~~~~MY STATE IS", this.state);
-      console.log("~~~~~~MY PROPS IS", this.props);
     }
   }
 
@@ -454,7 +441,7 @@ class ReviewTrade extends React.Component {
   tradeHelperText(team_one_failure_message) {
     if (team_one_failure_message == 0) {
       //const tempMessage = this.state.team_two_failure_message;
-      //console.log("MINES TEMP MESSAGE 1", tempMessage);
+
       //return this.state.team_two_failure_message;
 
       const tempMessage = this.state.team_two_failure_message.split(" ");
@@ -513,7 +500,7 @@ class ReviewTrade extends React.Component {
       <div id="bar-container-main">
         <h2
           id="trade-status-text"
-          class={this.statusTextColor(this.state.tradeIcon)}
+          className={this.statusTextColor(this.state.tradeIcon)}
         >
           {this.state.success_message}
         </h2>
@@ -544,8 +531,8 @@ class ReviewTrade extends React.Component {
         </div>
 
         <div id="player-list-review-container">
-          <div id="review-list-one">{this.handleListOne(this.props)}</div>
-          <div id="review-list-one">{this.handleListTwo(this.props)}</div>
+          <div>{this.handleListOne(this.props)}</div>
+          <div>{this.handleListTwo(this.props)}</div>
         </div>
       </div>
     );

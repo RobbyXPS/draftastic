@@ -110,25 +110,12 @@ class AdminTools extends React.Component {
   }
 
   isHiddenTradeReview(selected_players) {
-    console.log("&*&*&*&*&*&*&*&*&*&*& selected_players", selected_players);
-
-    console.log("inside hide trade");
-    console.log(
-      "selected_players.teamOne.player_id == 0",
-      selected_players.teamOne.player_id == 0
-    );
-    console.log(
-      "selected_players.teamTwo.player_id == 0",
-      selected_players.teamTwo.player_id == 0
-    );
     if (
       selected_players.teamOne.player_id == 0 ||
       selected_players.teamTwo.player_id == 0
     ) {
       return "hide";
-      console.log("!!!!! return top");
     } else {
-      console.log("!!!!! return bottom");
       return "no-hide";
     }
   }
