@@ -174,7 +174,7 @@ body {
   min-height: 13rem; }
 
 header {
-  height: 20rem;
+  height: 25rem;
   margin-bottom: 5rem;
   /*
   background-image: radial-gradient(
@@ -203,7 +203,7 @@ header {
   width: 500px;
   border-radius: 50%;
   position: absolute;
-  right: -35px;
+  right: 0px;
   top: -150px;
   background: url(../images/final_bball.png) no-repeat;
   transform: scale(0.95); }
@@ -394,7 +394,7 @@ header {
   #trade-machine-rules {
     font-size: 0.75rem; }
   header {
-    height: 20rem; }
+    height: 25rem; }
   .player-list-review-container {
     font-size: 0.75rem !important; }
   #team-rosters-team-one,

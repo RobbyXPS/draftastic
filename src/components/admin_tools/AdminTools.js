@@ -156,13 +156,18 @@ class AdminTools extends React.Component {
             <div id="trade-machine-rules">
               <h2 id="trade-machine-rules-header">Welcome!</h2>
               <p>
-                You found the Robby Trade Machine...that means you're either one
-                of my five and a half friends or I somehow coerced you into
-                looking at something awesome I built. Yeah...Yeah...Yeah...it
-                doesn't let you trade between more than two teams, use trade
-                exceptions, or trade draft picks, but who cares. If you come
-                back in a month the trade machine might be able to do those
-                things, until then...please give it a go and enjoy.
+                You found The Robby Trade Machine, if you're like me you are
+                obsessed with the NBA and are in at least one fantasy league.
+                I'm in a keeper league that is 100% custom with a 38 page rule
+                book, you read that right....38 pages! Our league commissioner
+                is losing his mind trying to track all our information in
+                spreadsheets and mobile chats. I built this trade machine to
+                help facilitate our messy league, it's one small step in a
+                modular custom fantasy app for everyone.
+                <br />
+                <br />
+                The Robby Trade Machine is ever evolving so keep an eye out for
+                cool new things it can do, get going...make some trades!
               </p>
             </div>
           </div>
