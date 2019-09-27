@@ -19,6 +19,7 @@ class AdminTools extends React.Component {
     this.isHiddenPlayerSelectOne = this.isHiddenPlayerSelectOne.bind(this);
     this.isHiddenPlayerSelectTwo = this.isHiddenPlayerSelectTwo.bind(this);
     this.isHiddenTradeReview = this.isHiddenTradeReview.bind(this);
+    this.isHiddenFooter = this.isHiddenFooter.bind(this);
   }
   // helper function to add class based on if player has been selected for trade
   isHiddenPlayers(selected_players) {
@@ -120,6 +121,17 @@ class AdminTools extends React.Component {
     }
   }
 
+  isHiddenFooter(selected_players) {
+    if (
+      selected_players.teamOne.player_id.length == 0 ||
+      selected_players.teamTwo.player_id.length == 0
+    ) {
+      return "no-hide";
+    } else {
+      return "hide";
+    }
+  }
+
   componentDidUpdate(prevProps) {
     // need to do a check on prevProps so that the componentdidupdate doesn't infinitely update when state changes
     if (
@@ -156,18 +168,23 @@ class AdminTools extends React.Component {
             <div id="trade-machine-rules">
               <h2 id="trade-machine-rules-header">Welcome!</h2>
               <p>
-                You found The Robby Trade Machine, if you're like me you are
-                obsessed with the NBA and are in at least one fantasy league.
-                I'm in a keeper league that is 100% custom with a 38 page rule
-                book, you read that right....38 pages! Our league commissioner
-                is losing his mind trying to track all our information in
-                spreadsheets and mobile chats. I built this trade machine to
-                help facilitate our messy league, it's one small step in a
-                modular custom fantasy app for everyone.
+                If you are looking at this, that means you are either one of my
+                12 fantasy basketball friends, a potential employer, or you just
+                got really lucky and stumbled upon the awesomeness that is The
+                Robby Trade Machine.
                 <br />
                 <br />
-                The Robby Trade Machine is ever evolving so keep an eye out for
-                cool new things it can do, get going...make some trades!
+                Now that you are here, call a timeout and give it a try...
+                <br />
+                <br />
+                <span class="bold">Step 1:</span> Select Teams
+                <br />
+                <span class="bold">Step 2:</span> Select Players to Trade
+                <br />
+                <span class="bold">Step 3:</span> Review the Trade
+                <br />
+                <br />
+                Game on!
               </p>
             </div>
           </div>
@@ -291,6 +308,7 @@ class AdminTools extends React.Component {
             />
           </div>
         </div>
+        <footer class={this.isHiddenFooter(selected_players)}></footer>
       </div>
     );
   }
