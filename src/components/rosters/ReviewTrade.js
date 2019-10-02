@@ -64,6 +64,11 @@ class ReviewTrade extends React.Component {
   }
 
   handleTrade() {
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0
+    });
     // SET VARS THAT TRADE WILL USE FOR FORMULAS
 
     // setting local vars to check for trade success because setstate is having race conditions
@@ -106,21 +111,18 @@ class ReviewTrade extends React.Component {
 
     // team 1 | scenario 1
     if (teamOneTotalSalary > 109140000) {
-      console.log("TEAM 1 SCEN 1");
       // check to see if incoming contracts from team two are less then the outgoing contracts
       if (teamTwoTotalContracts <= tradeBufferOne == false) {
         let teamOneName = this.props.currentTeams.teamOne;
         let teamOneTradeDeficit = Math.ceil(
           teamTwoTotalContracts - tradeBufferOne
         );
-        console.log("TEAM 1 SCEN 1 ---- IF BLOCK", teamOneTradeDeficit);
+
         //const teamOneBarPercentVar = tradeBufferOne / teamOneTradeDeficit;
 
         this.setState({
           teamOneBarPercent: tradeBufferOne / teamOneTradeDeficit
         });
-
-        console.log("TEAM 1 SCEN 1 ---- IF BLOCK .. CK STATE", this.state);
 
         // if team one is over the cap, and their incoming contracts are more then they outgoing contracts...the trade fails
         teamOneTradeTest = "fail";
@@ -130,7 +132,13 @@ class ReviewTrade extends React.Component {
         ).toFixed(2);
 
         this.setState({
-          team_one_failure_message: `${teamOneName} incoming salaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
+          team_one_failure_message:
+            teamOneName +
+            " incoming salaries exceed the 125% plus $100,000 rule. Cut " +
+            formatter.format(teamOneTradeDeficit) +
+            " from the " +
+            teamOneName +
+            " incoming trade value to make the trade successful."
         });
 
         this.setState({
@@ -147,7 +155,6 @@ class ReviewTrade extends React.Component {
       }
       // if team one is over the cap, and their incoming contracts are not more then their outgoing contracts...the trade is successful
       else {
-        console.log("TEAM 1 SCEN 1 ---- ELSE BLOCK");
         this.setState({
           team_one_failure_message: ""
         });
@@ -160,7 +167,6 @@ class ReviewTrade extends React.Component {
     }
     // if the team has a team salary under the cap then they can trade however they want as long as they stay under the cap
     else {
-      console.log("TEAM 1 SCEN 2");
       // team 1 | scenario 2
       // check to see if team will remain under the cap after trade, if so its valid
       if (
@@ -178,7 +184,6 @@ class ReviewTrade extends React.Component {
       }
       // if they will end up over the cap they must follow scenario 1 rules
       else {
-        console.log("TEAM 1 SCEN 1 REVISITED");
         // back to team 1 | scenario 1
         // TODO (reast): copied logic from top of if statement, combine them
 
@@ -194,8 +199,15 @@ class ReviewTrade extends React.Component {
           ).toFixed(2);
 
           teamOneTradeTest = "fail";
+
           this.setState({
-            team_one_failure_message: `${teamOneName} incoming salaries exceed the 125% plus $100,000 rule. Cut ${teamOneTradeDeficit} from the ${teamOneName} incoming trade value to make the trade successful.`
+            team_one_failure_message:
+              teamOneName +
+              " incoming salaries exceed the 125% plus $100,000 rule. Cut " +
+              formatter.format(teamOneTradeDeficit) +
+              " from the " +
+              teamOneName +
+              " incoming trade value to make the trade successful."
           });
 
           // bar setting
@@ -227,7 +239,6 @@ class ReviewTrade extends React.Component {
 
     // team 2 | scenario 1
     if (teamTwoTotalSalary > 109140000) {
-      console.log("TEAM 2 SCEN 1");
       // sceanrio one
 
       // check to see if incoming contracts from team one are less then the outgoing contracts
@@ -239,8 +250,15 @@ class ReviewTrade extends React.Component {
 
         // if team two is over the cap, and their incoming contracts are more then they outgoing contracts...the trade fails
         teamTwoTradeTest = "fail";
+
         this.setState({
-          team_two_failure_message: `${teamTwoName} incoming salaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
+          team_two_failure_message:
+            teamTwoName +
+            " incoming salaries exceed the 125% plus $100,000 rule. Cut " +
+            formatter.format(teamTwoTradeDeficit) +
+            " from the " +
+            teamTwoName +
+            " incoming trade value to make the trade successful."
         });
 
         const teamTwoBarPercentTemp = (
@@ -274,7 +292,6 @@ class ReviewTrade extends React.Component {
     }
     // if the team has a team salary under the cap then they can trade however they want as long as they stay under the cap
     else {
-      console.log("TEAM 2 SCEN 2");
       // team 2 | scenario 2
       // check to see if team will remain under the cap after trade, if so its valid
       if (
@@ -292,7 +309,6 @@ class ReviewTrade extends React.Component {
       }
       // if they will end up over the cap they must follow scenario 1 rules
       else {
-        console.log("TEAM 2 SCEN 1 REVISITED");
         // back to team 2 | scenario 1
         // TODO (reast): copied logic from top of if statement, combine them
 
@@ -306,7 +322,13 @@ class ReviewTrade extends React.Component {
           teamTwoTradeTest = "fail";
 
           this.setState({
-            team_two_failure_message: `${teamTwoName} incoming salaries exceed the 125% plus $100,000 rule. Cut ${teamTwoTradeDeficit} from the ${teamTwoName} incoming trade value to make the trade successful.`
+            team_two_failure_message:
+              teamTwoName +
+              " incoming salaries exceed the 125% plus $100,000 rule. Cut " +
+              formatter.format(teamTwoTradeDeficit) +
+              " from the " +
+              teamTwoName +
+              " incoming trade value to make the trade successful."
           });
 
           this.setState({

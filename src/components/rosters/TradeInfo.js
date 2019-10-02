@@ -143,12 +143,10 @@ class TradeInfo extends React.Component {
 
   handleTeamSelectHeader(containerValue, currentTeams) {
     if (containerValue == "teamOne") {
-      console.log("this is header for team one");
       return this.props.currentTeams[containerValue]
         ? this.props.currentTeams[containerValue]
         : "Select a team";
     } else {
-      console.log("this is header for team two");
       return this.props.currentTeams[containerValue]
         ? this.props.currentTeams[containerValue]
         : "Select another team";
@@ -159,6 +157,12 @@ class TradeInfo extends React.Component {
     const containerValue = this.props.containerValue;
     const currentTeams = this.props.currentTeams;
     const teams = this.props.teams;
+
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0
+    });
 
     if (teams !== undefined) {
       return (
@@ -178,7 +182,7 @@ class TradeInfo extends React.Component {
                 <span className="team-info-highlight">
                   {this.state.capAmountMessagePrefix}
                 </span>
-                {this.state.capAmountMessage}
+                {formatter.format(this.state.capAmountMessage)}
               </CardText>
 
               <TeamList
