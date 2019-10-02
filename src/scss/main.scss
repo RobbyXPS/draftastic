@@ -425,7 +425,8 @@ footer {
   }
 
   #trade-machine-rules {
-    margin: 8% 0 0 0%;
+    margin: 10% 0 0 0%;
+    font-size: 0.85rem !important;
   }
 
   // header content
@@ -447,12 +448,8 @@ footer {
     padding: 1rem;
   }
 
-  #trade-machine-rules-header {
-    font-size: 1rem;
-  }
-
   #rule-list {
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
 
   // trade review
@@ -472,11 +469,11 @@ footer {
     margin-bottom: 0.75rem;
   }
   #trade-machine-rules {
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
 
   header {
-    height: 25rem;
+    height: 20rem;
   }
   .player-list-review-container {
     font-size: 0.75rem !important;

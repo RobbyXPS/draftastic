@@ -177,11 +177,11 @@ class AdminTools extends React.Component {
                 Now that you are here, call a timeout and give it a try...
                 <br />
                 <br />
-                <span class="bold">Step 1:</span> Select Teams
+                <span className="bold">Step 1:</span> Select Teams
                 <br />
-                <span class="bold">Step 2:</span> Select Players to Trade
+                <span className="bold">Step 2:</span> Select Players to Trade
                 <br />
-                <span class="bold">Step 3:</span> Review the Trade
+                <span className="bold">Step 3:</span> Review the Trade
                 <br />
                 <br />
                 Game on!
@@ -308,7 +308,7 @@ class AdminTools extends React.Component {
             />
           </div>
         </div>
-        <footer class={this.isHiddenFooter(selected_players)}></footer>
+        <footer className={this.isHiddenFooter(selected_players)}></footer>
       </div>
     );
   }

@@ -68,8 +68,6 @@ class PlayerList extends React.Component {
 
   // helper function to add class based on if player has been selected for trade
   isButtonActive(selectedPlayers, playerId) {
-    console.log("inside button active - selectedPlayers", selectedPlayers);
-    console.log("inside button active - playerId", playerId);
     if (selectedPlayers.player_id.indexOf(playerId) == -1) {
       return "player-list-danger-button hide";
     } else {
@@ -78,6 +76,12 @@ class PlayerList extends React.Component {
   }
 
   render() {
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0
+    });
+
     const contvalue = this.props.containerValue;
     // HANDLE LISTS THAT ARE FOR THE TRADE UI
 
@@ -227,7 +231,7 @@ class PlayerList extends React.Component {
                 <p>
                   Contract:
                   <span className="player-info-highlight">
-                    {" " + player.contract_amount}
+                    {" " + formatter.format(player.contract_amount)}
                   </span>
                 </p>
                 <p>

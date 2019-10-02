@@ -377,7 +377,8 @@ footer {
   #trade-validator-success-message {
     width: 100%; }
   #trade-machine-rules {
-    margin: 8% 0 0 0%; }
+    margin: 10% 0 0 0%;
+    font-size: 0.85rem !important; }
   header {
     border-bottom-right-radius: 4rem; }
   #header-title {
@@ -388,10 +389,8 @@ footer {
   #trade-machine-rules {
     width: 85%;
     padding: 1rem; }
-  #trade-machine-rules-header {
-    font-size: 1rem; }
   #rule-list {
-    font-size: 0.75rem; }
+    font-size: 1rem; }
   .player-list-review-container {
     font-size: 1rem; }
   .list-review-header {
@@ -401,9 +400,9 @@ footer {
   #player-card-name {
     margin-bottom: 0.75rem; }
   #trade-machine-rules {
-    font-size: 0.75rem; }
+    font-size: 1rem; }
   header {
-    height: 25rem; }
+    height: 20rem; }
   .player-list-review-container {
     font-size: 0.75rem !important; }
   #team-rosters-team-one,
