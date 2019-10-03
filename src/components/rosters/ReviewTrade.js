@@ -6,15 +6,14 @@ import {
   faCheckCircle,
   faTimesCircle
 } from "@fortawesome/free-solid-svg-icons";
-
-import { Progress, ListGroupItem, ListGroup } from "reactstrap";
+import { Progress } from "reactstrap";
 
 class ReviewTrade extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      incomingPlayersMessage: "",
-      capAmountMessage: "",
+      //incomingPlayersMessage: "",
+      //capAmountMessage: "",
       team_one_failure_message: "",
       team_two_failure_message: "",
       success_message: "",
@@ -540,7 +539,10 @@ class ReviewTrade extends React.Component {
           <FontAwesomeIcon
             icon={this.state.tradeIcon}
             id="trade-status-success"
-            className={this.tradeIconStatus()}
+            //className={this.tradeIconStatus()}
+            className={
+              this.state.tradeIcon == faTimesCircle ? "fail" : "success"
+            }
           />
           <Progress
             className="bar"
