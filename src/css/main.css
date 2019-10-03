@@ -327,7 +327,9 @@ header {
 .list-review-header {
   text-align: center;
   text-decoration: underline;
-  font-size: 2.5rem; }
+  font-size: 2.5rem;
+  word-wrap: break-word;
+  white-space: normal; }
 
 .bold {
   font-weight: 900; }
@@ -400,11 +402,21 @@ footer {
   #player-card-name {
     margin-bottom: 0.75rem; }
   #trade-machine-rules {
-    font-size: 1rem; }
+    font-size: 1rem !important; }
   header {
     height: 20rem; }
   .player-list-review-container {
     font-size: 0.75rem !important; }
   #team-rosters-team-one,
   #team-rosters-team-two {
-    margin: 1rem !important; } }
+    margin: 1rem !important; }
+  #team-selection-main-container {
+    margin-top: 20vh; } }
+
+@media only screen and (max-width: 380px) {
+  #team-selection-main-container {
+    margin-top: 35vh; } }
+
+@media only screen and (max-width: 320px) {
+  #team-selection-main-container {
+    margin-top: 45vh; } }
