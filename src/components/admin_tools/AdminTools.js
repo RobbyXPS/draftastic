@@ -69,8 +69,6 @@ class AdminTools extends React.Component {
     const { team_salaries_total } = this.props;
     const { outgoing_players_salary } = this.props;
 
-    console.log("selected_teams", selected_teams);
-
     return (
       <div className="main-content-area" id="admin-tools-container">
         <header>
