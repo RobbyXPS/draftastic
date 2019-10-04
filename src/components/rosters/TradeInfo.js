@@ -3,23 +3,17 @@ import { connect } from "react-redux";
 import { storeSalariesTotal } from "../../store/actions/capActions";
 import { storeOutgoingSalaries } from "../../store/actions/capActions";
 import TeamList from "../rosters/TeamList";
-import {
-  Card,
-  Button,
-  CardHeader,
-  CardFooter,
-  CardBody,
-  CardTitle,
-  CardText
-} from "reactstrap";
+import { Card, CardHeader, CardFooter, CardBody, CardText } from "reactstrap";
 
 class TradeInfo extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      incomingPlayersMessage: "",
+      //incomingPlayersMessage: "",
       capAmountMessage: ""
     };
+
     this.filterIncomingPlayers = this.filterIncomingPlayers.bind(this);
     this.calculateSalaries = this.calculateSalaries.bind(this);
     this.handleSendingSalaries = this.handleSendingSalaries.bind(this);
@@ -29,6 +23,7 @@ class TradeInfo extends React.Component {
     this.handleTeamSelectHeader = this.handleTeamSelectHeader.bind(this);
   }
 
+  // update redux store with total team salary when user selects one
   handleSendingSalaries(containerValue, wholeTeamSalary) {
     this.props.storeSalariesTotal({
       team_container: containerValue,
@@ -36,6 +31,7 @@ class TradeInfo extends React.Component {
     });
   }
 
+  // update redux store with total salaries of all selected players
   handleSendingPlayerOutgoingSalaries(containerValue, outgoingPlayerSalaries) {
     this.props.storeOutgoingSalaries({
       team_container: containerValue,
@@ -43,6 +39,7 @@ class TradeInfo extends React.Component {
     });
   }
 
+  // helper function to calculate total salaries of all selected players
   calculateSalaries(list) {
     return list.reduce(function(accumulator, currentValue) {
       return accumulator + currentValue.contract_amount;
@@ -50,12 +47,13 @@ class TradeInfo extends React.Component {
   }
 
   filterIncomingPlayers(item) {
+    //console.log("itemz", item);
+    //console.log("itemz 2", this.props.containerValue);
     // filp which container value is because we want the top portion populating for the other teams players
     let selectedPlayersList = "teamOne";
     if (this.props.containerValue == "teamOne") {
       selectedPlayersList = "teamTwo";
     }
-
     if (
       this.props.selected_players[selectedPlayersList].player_id.includes(
         item.id
@@ -83,14 +81,17 @@ class TradeInfo extends React.Component {
           this.filterIncomingPlayers
         );
 
+        //console.log("incomingPlayersList", incomingPlayersList);
+
         // construct text that should be displayed when user selects a player to trade
         let numofplayers = incomingPlayersList.length;
-        let incomingPlayersMessage;
+        //let incomingPlayersMessage;
         const totalSalary = this.calculateSalaries(incomingPlayersList);
 
         // store the salaries being traded in state so other components can access them
         this.handleSendingPlayerOutgoingSalaries(containerValue, totalSalary);
 
+        /*
         if (numofplayers == 0) {
           incomingPlayersMessage = "";
         } else {
@@ -100,6 +101,7 @@ class TradeInfo extends React.Component {
             " players with salaries totaling " +
             totalSalary;
         }
+        */
 
         let currentTeams = this.props.currentTeams;
 
@@ -134,7 +136,7 @@ class TradeInfo extends React.Component {
           capAmountMessage = caproom;
           capAmountMessagePrefix = "Cap Room: ";
         }
-        this.setState({ incomingPlayersMessage: incomingPlayersMessage });
+        //this.setState({ incomingPlayersMessage: incomingPlayersMessage });
         this.setState({ capAmountMessage: capAmountMessage });
         this.setState({ capAmountMessagePrefix: capAmountMessagePrefix });
       }
@@ -154,10 +156,12 @@ class TradeInfo extends React.Component {
   }
 
   render() {
+    //console.log("this.props", this.props);
     const containerValue = this.props.containerValue;
     const currentTeams = this.props.currentTeams;
     const teams = this.props.teams;
 
+    // helper function to format # to $
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
