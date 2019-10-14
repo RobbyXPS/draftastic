@@ -1,51 +1,72 @@
+/*
+
 .player-card {
+  //background-color: red;
   display: flex !important;
-  justify-content: space-between; }
+  //flex-direction: column;
+  justify-content: space-between;
+}
 
 #player-card-name {
-  width: 100%; }
+  width: 100%;
+}
 
 #player-extended-info-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between; }
+  justify-content: space-between;
+}
 
 p {
-  margin: 0 !important; }
+  margin: 0 !important;
+}
 
 .disabled {
   pointer-events: none;
   cursor: none;
-  background-color: gray; }
+  //background-color: lighten($accent-color-one-gray-light, 5%) !important;
+  background-color: gray;
+}
 
 .player-info-highlight {
-  font-weight: 900; }
+  font-weight: 900;
+}
 
 #player-info-container {
   display: flex;
   flex-direction: row;
-  pointer-events: none; }
+  pointer-events: none;
+}
 
 .player-card {
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .trade-card {
   display: flex;
   flex-direction: row;
-  pointer-events: none; }
+  pointer-events: none;
+}
 
 #player-card-delete {
   pointer-events: auto;
-  height: 100%; }
+  height: 100%;
+}
 
 .player-info-container {
-  width: 90%; }
+  width: 90%;
+}
 
 #player-card-options {
-  margin: 0.25rem; }
+  margin: 0.25rem;
+}
 
 .list-item-player-container {
-  display: flex; }
+  display: flex;
+}
 
 .player-list-danger-button {
-  width: 4rem; }
+  width: 4rem;
+}
+
+*/

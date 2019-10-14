@@ -1,53 +1,54 @@
-@import "teamlist";
-@import "playerlist";
-
+// MAIN CONTENT
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  // original font, trying a new one
-  //font-family: "Bree Serif", serif;
   font-family: Rubik, Lato, lucida grande, lucida sans unicode, Tahoma,
     Sans-Serif;
 }
 
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
+/*
 .main-content-area {
   //padding: 1em;
-  background: #a6a6a6;
-  min-height: 100vh;
+  //background: #a6a6a6;
+  //min-height: 100vh;
 }
+*/
 
 .main-content-area {
   background-color: #f0eef6 !important;
+  min-height: 100vh;
 }
+
+/*
 #trade-proposer-container {
   text-align: center;
-  //  background-color: green;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin: 1rem;
 }
+*/
 
+/*
 #trade-validator-error-message-one,
 #trade-validator-error-message-two {
   width: 50%;
   display: inline-block;
 }
+*/
 
+/*
 #trade-validator-success-message {
   font-weight: 900;
   width: 50%;
   margin: auto;
 }
+*/
 
 .team-info-highlight {
   font-weight: 900;
 }
 
+// SELECT TEAMS
 .dropdown {
   margin: 1.25rem 0rem 0rem 0rem;
 }
@@ -64,21 +65,21 @@ body {
   //padding: 0 0 0 0;
 }
 
+// HEADERS
+// dark header for light background
 #team-roster-section-header {
   color: #201c29;
 }
 
+// light header for dark background
 #team-selection-section-header,
 #team-trade-review-section-header {
   color: #f1f0f5;
 }
 
-//#team-rosters-container,
 #team-selection-main-container,
 #team-rosters-sub-container {
   display: flex;
-
-  //justify-content: space-between;
 }
 
 .trade-review-player-list {
@@ -359,6 +360,85 @@ footer {
 
 .dropdown-menu {
   //max-height: 500px;
+}
+
+.area-container {
+  //background-color: #ff9900;
+  width: 50%;
+  //padding: 1rem;
+  margin: 1rem;
+  //margin: 0.5%;
+  //border-radius: 0.5rem;
+  //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.player-card {
+  //background-color: red;
+  display: flex !important;
+  //flex-direction: column;
+  justify-content: space-between;
+}
+
+#player-card-name {
+  width: 100%;
+}
+
+#player-extended-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+p {
+  margin: 0 !important;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: none;
+  //background-color: lighten($accent-color-one-gray-light, 5%) !important;
+  background-color: gray;
+}
+
+.player-info-highlight {
+  font-weight: 900;
+}
+
+#player-info-container {
+  display: flex;
+  flex-direction: row;
+  pointer-events: none;
+}
+
+.player-card {
+  cursor: pointer;
+}
+
+.trade-card {
+  display: flex;
+  flex-direction: row;
+  pointer-events: none;
+}
+
+#player-card-delete {
+  pointer-events: auto;
+  height: 100%;
+}
+
+.player-info-container {
+  width: 90%;
+}
+
+#player-card-options {
+  margin: 0.25rem;
+}
+
+.list-item-player-container {
+  display: flex;
+}
+
+.player-list-danger-button {
+  width: 4rem;
 }
 
 @media only screen and (max-width: 1200px) {

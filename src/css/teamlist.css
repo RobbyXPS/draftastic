@@ -1,14 +1,18 @@
+/*
 .btn-group button {
   border: 1px solid green;
   color: pink;
   padding: 1em 2em;
   cursor: pointer;
-  float: left; }
-
+  float: left;
+}
+*/
+/*
 .team-list {
   display: flex;
-  flex-direction: column; }
-
+  flex-direction: column;
+}
+*/
 /*
 //team-two-container-selection
 #team-one-container,
@@ -20,6 +24,15 @@
   padding: 1%;
 }
 */
+/*
+
 .area-container {
+  //background-color: #ff9900;
   width: 50%;
-  margin: 1rem; }
+  //padding: 1rem;
+  margin: 1rem;
+  //margin: 0.5%;
+  //border-radius: 0.5rem;
+  //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+*/

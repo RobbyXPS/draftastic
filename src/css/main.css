@@ -1,113 +1,41 @@
-.btn-group button {
-  border: 1px solid green;
-  color: pink;
-  padding: 1em 2em;
-  cursor: pointer;
-  float: left; }
-
-.team-list {
-  display: flex;
-  flex-direction: column; }
-
-/*
-//team-two-container-selection
-#team-one-container,
-#team-two-container,
-#team-one-container-selection,
-#team-two-container-selection {
-  background-color: #ff9900;
-  width: 50%;
-  padding: 1%;
-}
-*/
-.area-container {
-  width: 50%;
-  margin: 1rem; }
-
-.player-card {
-  display: flex !important;
-  justify-content: space-between; }
-
-#player-card-name {
-  width: 100%; }
-
-#player-extended-info-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; }
-
-p {
-  margin: 0 !important; }
-
-.disabled {
-  pointer-events: none;
-  cursor: none;
-  background-color: gray; }
-
-.player-info-highlight {
-  font-weight: 900; }
-
-#player-info-container {
-  display: flex;
-  flex-direction: row;
-  pointer-events: none; }
-
-.player-card {
-  cursor: pointer; }
-
-.trade-card {
-  display: flex;
-  flex-direction: row;
-  pointer-events: none; }
-
-#player-card-delete {
-  pointer-events: auto;
-  height: 100%; }
-
-.player-info-container {
-  width: 90%; }
-
-#player-card-options {
-  margin: 0.25rem; }
-
-.list-item-player-container {
-  display: flex; }
-
-.player-list-danger-button {
-  width: 4rem; }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Rubik, Lato, lucida grande, lucida sans unicode, Tahoma, Sans-Serif; }
 
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
-
+/*
 .main-content-area {
-  background: #a6a6a6;
+  //padding: 1em;
+  //background: #a6a6a6;
+  //min-height: 100vh;
+}
+*/
+.main-content-area {
+  background-color: #f0eef6 !important;
   min-height: 100vh; }
 
-.main-content-area {
-  background-color: #f0eef6 !important; }
-
+/*
 #trade-proposer-container {
   text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin: 1rem; }
-
+  margin: 1rem;
+}
+*/
+/*
 #trade-validator-error-message-one,
 #trade-validator-error-message-two {
   width: 50%;
-  display: inline-block; }
-
+  display: inline-block;
+}
+*/
+/*
 #trade-validator-success-message {
   font-weight: 900;
   width: 50%;
-  margin: auto; }
-
+  margin: auto;
+}
+*/
 .team-info-highlight {
   font-weight: 900; }
 
@@ -336,6 +264,62 @@ header {
 
 footer {
   min-height: 15vh; }
+
+.area-container {
+  width: 50%;
+  margin: 1rem; }
+
+.player-card {
+  display: flex !important;
+  justify-content: space-between; }
+
+#player-card-name {
+  width: 100%; }
+
+#player-extended-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+p {
+  margin: 0 !important; }
+
+.disabled {
+  pointer-events: none;
+  cursor: none;
+  background-color: gray; }
+
+.player-info-highlight {
+  font-weight: 900; }
+
+#player-info-container {
+  display: flex;
+  flex-direction: row;
+  pointer-events: none; }
+
+.player-card {
+  cursor: pointer; }
+
+.trade-card {
+  display: flex;
+  flex-direction: row;
+  pointer-events: none; }
+
+#player-card-delete {
+  pointer-events: auto;
+  height: 100%; }
+
+.player-info-container {
+  width: 90%; }
+
+#player-card-options {
+  margin: 0.25rem; }
+
+.list-item-player-container {
+  display: flex; }
+
+.player-list-danger-button {
+  width: 4rem; }
 
 @media only screen and (max-width: 1200px) {
   #player-extended-info-container {

@@ -10,7 +10,6 @@ class TradeInfo extends React.Component {
     super(props);
 
     this.state = {
-      //incomingPlayersMessage: "",
       capAmountMessage: ""
     };
 
@@ -47,8 +46,6 @@ class TradeInfo extends React.Component {
   }
 
   filterIncomingPlayers(item) {
-    //console.log("itemz", item);
-    //console.log("itemz 2", this.props.containerValue);
     // filp which container value is because we want the top portion populating for the other teams players
     let selectedPlayersList = "teamOne";
     if (this.props.containerValue == "teamOne") {
@@ -81,8 +78,6 @@ class TradeInfo extends React.Component {
           this.filterIncomingPlayers
         );
 
-        //console.log("incomingPlayersList", incomingPlayersList);
-
         // construct text that should be displayed when user selects a player to trade
         let numofplayers = incomingPlayersList.length;
         //let incomingPlayersMessage;
@@ -90,18 +85,6 @@ class TradeInfo extends React.Component {
 
         // store the salaries being traded in state so other components can access them
         this.handleSendingPlayerOutgoingSalaries(containerValue, totalSalary);
-
-        /*
-        if (numofplayers == 0) {
-          incomingPlayersMessage = "";
-        } else {
-          incomingPlayersMessage =
-            "aquireing " +
-            numofplayers +
-            " players with salaries totaling " +
-            totalSalary;
-        }
-        */
 
         let currentTeams = this.props.currentTeams;
 
@@ -132,11 +115,9 @@ class TradeInfo extends React.Component {
         }
         // once they select a team show the cap room for that team
         else {
-          //capAmountMessage = "Cap Room: " + caproom;
           capAmountMessage = caproom;
           capAmountMessagePrefix = "Cap Room: ";
         }
-        //this.setState({ incomingPlayersMessage: incomingPlayersMessage });
         this.setState({ capAmountMessage: capAmountMessage });
         this.setState({ capAmountMessagePrefix: capAmountMessagePrefix });
       }
@@ -175,10 +156,6 @@ class TradeInfo extends React.Component {
             <CardHeader>
               <span className="team-info-highlight">
                 {this.handleTeamSelectHeader(containerValue, currentTeams)}
-
-                {/* {this.props.currentTeams[containerValue]
-                  ? this.props.currentTeams[containerValue]
-                : "Select a team"} */}
               </span>
             </CardHeader>
             <CardBody>
