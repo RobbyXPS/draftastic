@@ -44,7 +44,7 @@ class PlayerList extends React.Component {
 
   // helper function to add class based on if player has been selected for trade
   isActive(selectedPlayers, playerId) {
-    if (selectedPlayers.player_id.indexOf(playerId) == -1) {
+    if (selectedPlayers.player_id.indexOf(playerId) === -1) {
       return "";
     } else {
       return "disabled";
@@ -53,7 +53,7 @@ class PlayerList extends React.Component {
 
   // helper function to add class based on if player has been selected for trade
   isButtonActive(selectedPlayers, playerId) {
-    if (selectedPlayers.player_id.indexOf(playerId) == -1) {
+    if (selectedPlayers.player_id.indexOf(playerId) === -1) {
       return "player-list-danger-button hide";
     } else {
       return "player-list-danger-button";
@@ -145,7 +145,6 @@ class PlayerList extends React.Component {
               id="player-card-delete"
               outline
               color="danger"
-              className=""
               className={this.isButtonActive(selectedPlayerList, player.id)}
             >
               X

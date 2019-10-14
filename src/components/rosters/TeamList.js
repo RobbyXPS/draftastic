@@ -71,8 +71,8 @@ class TeamList extends React.Component {
                         onClick={this.handleClick}
                         key={team.id}
                         className={
-                          currentTeams.teamOne == team.name ||
-                          currentTeams.teamTwo == team.name
+                          currentTeams.teamOne === team.name ||
+                          currentTeams.teamTwo === team.name
                             ? "disabled"
                             : "enabled"
                         }

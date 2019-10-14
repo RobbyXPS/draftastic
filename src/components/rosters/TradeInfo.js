@@ -48,7 +48,7 @@ class TradeInfo extends React.Component {
   filterIncomingPlayers(item) {
     // filp which container value is because we want the top portion populating for the other teams players
     let selectedPlayersList = "teamOne";
-    if (this.props.containerValue == "teamOne") {
+    if (this.props.containerValue === "teamOne") {
       selectedPlayersList = "teamTwo";
     }
     if (
@@ -78,8 +78,6 @@ class TradeInfo extends React.Component {
           this.filterIncomingPlayers
         );
 
-        // construct text that should be displayed when user selects a player to trade
-        let numofplayers = incomingPlayersList.length;
         //let incomingPlayersMessage;
         const totalSalary = this.calculateSalaries(incomingPlayersList);
 
@@ -109,7 +107,7 @@ class TradeInfo extends React.Component {
         let capAmountMessagePrefix;
         let capAmountMessage;
         // if a user hasn't selected a team yet don't display anything
-        if (wholeTeamSalary == 0) {
+        if (wholeTeamSalary === 0) {
           capAmountMessage = "";
           capAmountMessagePrefix = "";
         }
@@ -125,7 +123,7 @@ class TradeInfo extends React.Component {
   }
 
   handleTeamSelectHeader(containerValue, currentTeams) {
-    if (containerValue == "teamOne") {
+    if (containerValue === "teamOne") {
       return this.props.currentTeams[containerValue]
         ? this.props.currentTeams[containerValue]
         : "Select a team";

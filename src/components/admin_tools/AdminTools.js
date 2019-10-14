@@ -8,10 +8,6 @@ import { compose } from "redux";
 import { clearPlayerList } from "../../store/actions/playerActions";
 
 class AdminTools extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   // helper function to adjust UI elements until user selects a team to trade with
   hideUntilTeamsSelected(selected_teams, selected_players) {
     const styleObj = {
@@ -23,18 +19,18 @@ class AdminTools extends React.Component {
       playerGeneric: "",
       playerGenericReverse: "hide"
     };
-    if (selected_teams.teamOne.length == 0) {
+    if (selected_teams.teamOne.length === 0) {
       styleObj.teamGeneric = "hide";
       styleObj.teamOneClass = "area-container hide";
       styleObj.teamTwoMargin = "51%";
     }
-    if (selected_teams.teamTwo.length == 0) {
+    if (selected_teams.teamTwo.length === 0) {
       styleObj.teamTwoClass = "area-container hide";
       styleObj.teamOneMargin = "51%";
     }
     if (
-      selected_players.teamOne.player_id.length == 0 ||
-      selected_players.teamTwo.player_id.length == 0
+      selected_players.teamOne.player_id.length === 0 ||
+      selected_players.teamTwo.player_id.length === 0
     ) {
       styleObj.playerGeneric = "hide";
       styleObj.playerGenericReverse = "";
@@ -206,6 +202,7 @@ class AdminTools extends React.Component {
             />
           </div>
         </div>
+
         <footer
           className={
             this.hideUntilTeamsSelected(selected_teams, selected_players)

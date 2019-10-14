@@ -72,7 +72,7 @@ class ReviewTrade extends React.Component {
     // team 1 | scenario 1
     if (teamOneTotalSalary > 109140000) {
       // check to see if incoming contracts from team two are less then the outgoing contracts
-      if (teamTwoTotalContracts <= tradeBufferOne == false) {
+      if (teamTwoTotalContracts <= tradeBufferOne === false) {
         let teamOneName = this.props.currentTeams.teamOne;
         let teamOneTradeDeficit = Math.ceil(
           teamTwoTotalContracts - tradeBufferOne
@@ -148,7 +148,7 @@ class ReviewTrade extends React.Component {
         // TODO (reast): copied logic from top of if statement, combine them
 
         // check to see if the trade logic is valid for team two
-        if (teamTwoTotalContracts <= tradeBufferOne == false) {
+        if (teamTwoTotalContracts <= tradeBufferOne === false) {
           let teamOneName = this.props.currentTeams.teamOne;
           let teamOneTradeDeficit = Math.ceil(
             teamTwoTotalContracts - tradeBufferOne
@@ -202,7 +202,7 @@ class ReviewTrade extends React.Component {
       // sceanrio one
 
       // check to see if incoming contracts from team one are less then the outgoing contracts
-      if (teamOneTotalContracts <= tradeBufferTwo == false) {
+      if (teamOneTotalContracts <= tradeBufferTwo === false) {
         let teamTwoName = this.props.currentTeams.teamTwo;
         let teamTwoTradeDeficit = Math.ceil(
           teamOneTotalContracts - tradeBufferTwo
@@ -273,7 +273,7 @@ class ReviewTrade extends React.Component {
         // TODO (reast): copied logic from top of if statement, combine them
 
         // check to see if the trade logic is valid for team one
-        if (teamOneTotalContracts <= tradeBufferTwo == false) {
+        if (teamOneTotalContracts <= tradeBufferTwo === false) {
           let teamTwoName = this.props.currentTeams.teamTwo;
           let teamTwoTradeDeficit = Math.ceil(
             teamOneTotalContracts - tradeBufferTwo
@@ -324,7 +324,7 @@ class ReviewTrade extends React.Component {
     }
 
     // BOTH TEAM SUCCESS LOGIC
-    if (teamOneTradeTest.length == 0 && teamTwoTradeTest.length == 0) {
+    if (teamOneTradeTest.length === 0 && teamTwoTradeTest.length === 0) {
       this.setState({
         success_message: "TRADE SUCCESSFUL"
       });
@@ -400,7 +400,7 @@ class ReviewTrade extends React.Component {
 
   // helper function to display error message if trade does't have successful contract amounts
   tradeHelperText(team_one_failure_message) {
-    if (team_one_failure_message == 0) {
+    if (team_one_failure_message === 0) {
       // deconstruct the string stored in react state
       const tempMessage = this.state.team_two_failure_message.split(" ");
       const teamNameTemp1 = tempMessage[0];
@@ -446,7 +446,9 @@ class ReviewTrade extends React.Component {
       <div id="bar-container-main">
         <h2
           id="trade-status-text"
-          className={this.state.tradeIcon == faCheckCircle ? "success" : "fail"}
+          className={
+            this.state.tradeIcon === faCheckCircle ? "success" : "fail"
+          }
         >
           {this.state.success_message}
         </h2>
@@ -465,7 +467,7 @@ class ReviewTrade extends React.Component {
             icon={this.state.tradeIcon}
             id="trade-status-success"
             className={
-              this.state.tradeIcon == faTimesCircle ? "fail" : "success"
+              this.state.tradeIcon === faTimesCircle ? "fail" : "success"
             }
           />
           <Progress
