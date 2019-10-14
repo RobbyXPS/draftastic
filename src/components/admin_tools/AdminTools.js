@@ -8,128 +8,34 @@ import { compose } from "redux";
 import { clearPlayerList } from "../../store/actions/playerActions";
 
 class AdminTools extends React.Component {
-  constructor(props) {
-    super(props);
-    this.isHiddenPlayers = this.isHiddenPlayers.bind(this);
-    this.isHiddenTeams = this.isHiddenTeams.bind(this);
-    this.isHiddenTeamOne = this.isHiddenTeamOne.bind(this);
-    this.isHiddenTeamTwo = this.isHiddenTeamTwo.bind(this);
-    this.marginSpacer = this.marginSpacer.bind(this);
-    this.marginSpacerTwo = this.marginSpacerTwo.bind(this);
-    this.isHiddenPlayerSelectOne = this.isHiddenPlayerSelectOne.bind(this);
-    this.isHiddenPlayerSelectTwo = this.isHiddenPlayerSelectTwo.bind(this);
-    this.isHiddenTradeReview = this.isHiddenTradeReview.bind(this);
-    this.isHiddenFooter = this.isHiddenFooter.bind(this);
-  }
-  // helper function to add class based on if player has been selected for trade
-  isHiddenPlayers(selected_players) {
-    if (
-      selected_players.teamOne.player_id.length == 0 &&
-      selected_players.teamTwo.player_id.length == 0
-    ) {
-      return "hide";
-    }
-  }
-
-  // helper function to add class based on if team has been selected for trade
-  isHiddenTeams(selected_teams) {
-    if (
-      selected_teams.teamOne.length == 0 &&
-      selected_teams.teamTwo.length == 0
-    ) {
-      return "hide";
-    }
-  }
-
-  // helper function to add class based on if team has been selected for trade
-  isHiddenTeamOne(selected_teams) {
-    if (selected_teams.teamOne.length == 0) {
-      return "area-container hide";
-    } else {
-      return "area-container";
-    }
-  }
-
-  // helper function to add class based on if team has been selected for trade
-  isHiddenTeamTwo(selected_teams) {
-    if (selected_teams.teamTwo.length == 0) {
-      return "area-container hide";
-    } else {
-      return "area-container";
-    }
-  }
-
-  marginSpacer(selected_teams) {
-    const marginObj = {
-      leftCont: "1rem",
-      rightCont: "1rem"
+  // helper function to adjust UI elements until user selects a team to trade with
+  hideUntilTeamsSelected(selected_teams, selected_players) {
+    const styleObj = {
+      teamGeneric: "",
+      teamOneMargin: "1rem",
+      teamOneClass: "area-container",
+      teamTwoMargin: "1rem",
+      teamTwoClass: "area-container",
+      playerGeneric: "",
+      playerGenericReverse: "hide"
     };
-
-    if (selected_teams.teamOne.length == 0) {
-      marginObj.rightCont = "51%";
+    if (selected_teams.teamOne.length === 0) {
+      styleObj.teamGeneric = "hide";
+      styleObj.teamOneClass = "area-container hide";
+      styleObj.teamTwoMargin = "51%";
     }
-
-    if (selected_teams.teamTwo.length == 0) {
-      marginObj.leftCont = "51%";
+    if (selected_teams.teamTwo.length === 0) {
+      styleObj.teamTwoClass = "area-container hide";
+      styleObj.teamOneMargin = "51%";
     }
-    return marginObj;
-  }
-
-  marginSpacerTwo(selected_players) {
-    const marginObj = {
-      leftCont: "1rem",
-      rightCont: "1rem"
-    };
-
-    if (selected_players.teamOne.player_id == 0) {
-      marginObj.rightCont = "51%";
-    }
-
-    if (selected_players.teamTwo.player_id == 0) {
-      marginObj.leftCont = "51%";
-    }
-
-    return marginObj;
-  }
-
-  // helper function to add class based on if team has been selected for trade
-  isHiddenPlayerSelectOne(selected_players) {
-    if (selected_players.teamOne.player_id == 0) {
-      return "area-container hide";
-    } else {
-      return "area-container";
-    }
-  }
-
-  // helper function to add class based on if team has been selected for trade
-  isHiddenPlayerSelectTwo(selected_players) {
-    if (selected_players.teamTwo.player_id == 0) {
-      return "area-container hide";
-    } else {
-      return "area-container";
-    }
-  }
-
-  isHiddenTradeReview(selected_players) {
     if (
-      selected_players.teamOne.player_id == 0 ||
-      selected_players.teamTwo.player_id == 0
+      selected_players.teamOne.player_id.length === 0 ||
+      selected_players.teamTwo.player_id.length === 0
     ) {
-      return "hide";
-    } else {
-      return "no-hide";
+      styleObj.playerGeneric = "hide";
+      styleObj.playerGenericReverse = "";
     }
-  }
-
-  isHiddenFooter(selected_players) {
-    if (
-      selected_players.teamOne.player_id.length == 0 ||
-      selected_players.teamTwo.player_id.length == 0
-    ) {
-      return "no-hide";
-    } else {
-      return "hide";
-    }
+    return styleObj;
   }
 
   componentDidUpdate(prevProps) {
@@ -190,18 +96,12 @@ class AdminTools extends React.Component {
           </div>
         </header>
         <div id="header-gradient"></div>
-
-        {/* <div id="team-trades-container"> */}
-
         <div id="team-selection-main-container">
           <div className="step-label">#1</div>
           <h1 id="team-selection-section-header" className="section-title">
             Select Teams:
           </h1>
-
-          {/*<div id="team-selection-container"> */}
           <div id="team-selection-sub-container">
-            {/* <div id="team-two-container-selection"> */}
             <div className="area-container">
               <TradeInfo
                 selected_players={selected_players}
@@ -210,21 +110,7 @@ class AdminTools extends React.Component {
                 containerValue="teamOne"
                 teams={teams}
               />
-
-              {/* 
-            
-            <PlayerList
-              class="team-list"
-              players={players}
-              currentTeams={selected_teams}
-              containerValue="teamTwo"
-              isTradeUI="true"
-              selected_players={selected_players}
-            />
-            
-            */}
             </div>
-            {/* <div id="team-one-container-selection"> */}
             <div className="area-container">
               <TradeInfo
                 selected_players={selected_players}
@@ -233,34 +119,32 @@ class AdminTools extends React.Component {
                 containerValue="teamTwo"
                 teams={teams}
               />
-              {/*<PlayerList
-              class="team-list"
-              players={players}
-              currentTeams={selected_teams}
-              containerValue="teamOne"
-              isTradeUI="true"
-              selected_players={selected_players}
-            /> */}
             </div>
           </div>
         </div>
-
         <div
           id="team-rosters-main-container"
-          className={this.isHiddenTeams(selected_teams)}
+          className={
+            this.hideUntilTeamsSelected(selected_teams, selected_players)
+              .teamGeneric
+          }
         >
           <div className="step-label">#2</div>
           <h1 id="team-roster-section-header" className="section-title">
             Select Players:
           </h1>
-          {/* <div id="team-rosters-container"> */}
           <div id="team-rosters-sub-container">
-            {/* <div id="team-one-container"> */}
             <div
               id="team-rosters-team-one"
-              className={this.isHiddenTeamOne(selected_teams)}
+              className={
+                this.hideUntilTeamsSelected(selected_teams, selected_players)
+                  .teamOneClass
+              }
               style={{
-                marginRight: this.marginSpacer(selected_teams).leftCont
+                marginRight: this.hideUntilTeamsSelected(
+                  selected_teams,
+                  selected_players
+                ).teamOneMargin
               }}
             >
               <PlayerList
@@ -270,13 +154,17 @@ class AdminTools extends React.Component {
                 selected_players={selected_players}
               />
             </div>
-            {/* <div id="team-two-container"> */}
             <div
               id="team-rosters-team-two"
-              className={this.isHiddenTeamTwo(selected_teams)}
-              //style="color:red"
+              className={
+                this.hideUntilTeamsSelected(selected_teams, selected_players)
+                  .teamTwoClass
+              }
               style={{
-                marginLeft: this.marginSpacer(selected_teams).rightCont
+                marginLeft: this.hideUntilTeamsSelected(
+                  selected_teams,
+                  selected_players
+                ).teamTwoMargin
               }}
             >
               <PlayerList
@@ -288,17 +176,23 @@ class AdminTools extends React.Component {
             </div>
           </div>
         </div>
-
         <div
           id="trade-proposition-main-container"
-          className={this.isHiddenTradeReview(selected_players)}
+          className={
+            this.hideUntilTeamsSelected(selected_teams, selected_players)
+              .playerGeneric
+          }
         >
           <div className="step-label">#3</div>
           <h1 id="team-trade-review-section-header" className="section-title">
             Review Trade:
           </h1>
-
-          <div className={this.isHiddenTradeReview(selected_players)}>
+          <div
+            className={
+              this.hideUntilTeamsSelected(selected_teams, selected_players)
+                .playerGeneric
+            }
+          >
             <ReviewTrade
               selected_players={selected_players}
               players={players}
@@ -308,7 +202,13 @@ class AdminTools extends React.Component {
             />
           </div>
         </div>
-        <footer className={this.isHiddenFooter(selected_players)}></footer>
+
+        <footer
+          className={
+            this.hideUntilTeamsSelected(selected_teams, selected_players)
+              .playerGenericReverse
+          }
+        ></footer>
       </div>
     );
   }

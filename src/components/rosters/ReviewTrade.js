@@ -1,20 +1,17 @@
 import React from "react";
-import { connect } from "react-redux";
-import ReactDOM from "react-dom";
+//import { connect } from "react-redux";
+//import ReactDOM from "react-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheckCircle,
   faTimesCircle
 } from "@fortawesome/free-solid-svg-icons";
-
-import { Progress, ListGroupItem, ListGroup } from "reactstrap";
+import { Progress } from "reactstrap";
 
 class ReviewTrade extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      incomingPlayersMessage: "",
-      capAmountMessage: "",
       team_one_failure_message: "",
       team_two_failure_message: "",
       success_message: "",
@@ -24,43 +21,6 @@ class ReviewTrade extends React.Component {
       teamTwoBarPercent: "",
       tradeIcon: faCheckCircle
     };
-    this.handleTrade = this.handleTrade.bind(this);
-    this.handleListOne = this.handleListOne.bind(this);
-    this.handleListTwo = this.handleListTwo.bind(this);
-    this.filterByPlayerTeamOne = this.filterByPlayerTeamOne.bind(this);
-    this.filterByPlayerTeamTwo = this.filterByPlayerTeamTwo.bind(this);
-    this.statusTextColor = this.statusTextColor.bind(this);
-    this.tradeHelperText = this.tradeHelperText.bind(this);
-  }
-
-  tradeIconStatus() {
-    if (this.state.tradeIcon == faTimesCircle) {
-      return "fail";
-    } else {
-      return "success";
-    }
-  }
-
-  filterByPlayerTeamOne(item) {
-    const containerValue = "teamOne";
-    if (
-      this.props.selected_players[containerValue].player_id.includes(item.id)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  filterByPlayerTeamTwo(item) {
-    const containerValue = "teamTwo";
-    if (
-      this.props.selected_players[containerValue].player_id.includes(item.id)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   handleTrade() {
@@ -112,7 +72,7 @@ class ReviewTrade extends React.Component {
     // team 1 | scenario 1
     if (teamOneTotalSalary > 109140000) {
       // check to see if incoming contracts from team two are less then the outgoing contracts
-      if (teamTwoTotalContracts <= tradeBufferOne == false) {
+      if (teamTwoTotalContracts <= tradeBufferOne === false) {
         let teamOneName = this.props.currentTeams.teamOne;
         let teamOneTradeDeficit = Math.ceil(
           teamTwoTotalContracts - tradeBufferOne
@@ -188,7 +148,7 @@ class ReviewTrade extends React.Component {
         // TODO (reast): copied logic from top of if statement, combine them
 
         // check to see if the trade logic is valid for team two
-        if (teamTwoTotalContracts <= tradeBufferOne == false) {
+        if (teamTwoTotalContracts <= tradeBufferOne === false) {
           let teamOneName = this.props.currentTeams.teamOne;
           let teamOneTradeDeficit = Math.ceil(
             teamTwoTotalContracts - tradeBufferOne
@@ -242,7 +202,7 @@ class ReviewTrade extends React.Component {
       // sceanrio one
 
       // check to see if incoming contracts from team one are less then the outgoing contracts
-      if (teamOneTotalContracts <= tradeBufferTwo == false) {
+      if (teamOneTotalContracts <= tradeBufferTwo === false) {
         let teamTwoName = this.props.currentTeams.teamTwo;
         let teamTwoTradeDeficit = Math.ceil(
           teamOneTotalContracts - tradeBufferTwo
@@ -313,7 +273,7 @@ class ReviewTrade extends React.Component {
         // TODO (reast): copied logic from top of if statement, combine them
 
         // check to see if the trade logic is valid for team one
-        if (teamOneTotalContracts <= tradeBufferTwo == false) {
+        if (teamOneTotalContracts <= tradeBufferTwo === false) {
           let teamTwoName = this.props.currentTeams.teamTwo;
           let teamTwoTradeDeficit = Math.ceil(
             teamOneTotalContracts - tradeBufferTwo
@@ -364,7 +324,7 @@ class ReviewTrade extends React.Component {
     }
 
     // BOTH TEAM SUCCESS LOGIC
-    if (teamOneTradeTest.length == 0 && teamTwoTradeTest.length == 0) {
+    if (teamOneTradeTest.length === 0 && teamTwoTradeTest.length === 0) {
       this.setState({
         success_message: "TRADE SUCCESSFUL"
       });
@@ -375,69 +335,57 @@ class ReviewTrade extends React.Component {
     }
   }
 
-  handleListOne() {
-    const playerList = this.props.players;
-
-    if (playerList !== undefined) {
-      const playerListOne = this.props.selected_players.teamOne;
-
-      const filteredPlayerListOne = playerList.filter(
-        this.filterByPlayerTeamOne
-      );
-
-      // only filter in players that the user has selected in the roster ui
-
-      //const filteredPlayerListOne = playerList.filter(this.filterByPlayer);
-
-      const listItems = filteredPlayerListOne.map(player => (
-        <li key={player.id}>
-          {player.first_name} {player.last_name}
-        </li>
-      ));
-
-      return (
-        <div className="list-review-sub-container">
-          <h3 className="list-review-header">
-            {this.props.currentTeams.teamOne}
-          </h3>
-          <div>{/* <ListGroup>{listItems}</ListGroup> */}</div>
-          <ul className="trade-review-player-list">{listItems}</ul>
-        </div>
-      );
+  // helper function to filter out any player that was not selected by the user
+  filterByPlayer(team, item) {
+    if (this.props.selected_players[team].player_id.includes(item.id)) {
+      return true;
     } else {
+      return false;
     }
   }
 
-  handleListTwo() {
+  // function to construct lists of players selected for trade
+  handleTradedPlayers() {
     const playerList = this.props.players;
+    const currentTeams = this.props.currentTeams;
+    const listHolder = [];
 
+    // wait for data to be retrieved from db before list construction
     if (playerList !== undefined) {
-      const playerListTwo = this.props.selected_players.teamTwo;
-
-      const filteredPlayerListTwo = playerList.filter(
-        this.filterByPlayerTeamTwo
-      );
-
-      // only filter in players that the user has selected in the roster ui
-
-      //const filteredPlayerListOne = playerList.filter(this.filterByPlayer);
-
-      const listItems = filteredPlayerListTwo.map(player => (
-        <li key={player.id}>
-          {player.first_name} {player.last_name}
-        </li>
-      ));
-
+      // perform the list construction for both teamOne & teamTwo
+      for (var team in currentTeams) {
+        const filteredPlayerList = playerList.filter(
+          this.filterByPlayer.bind(this, team)
+        );
+        // for each player in the filtered list, create a list item for them
+        const listItems = filteredPlayerList.map(
+          player =>
+            `<li key=${player.id}>
+            ${player.first_name} ${player.last_name}
+          </li>`
+        );
+        // push the list item into a holding array because it loops twice
+        listHolder.push(
+          `
+          <div class="player-list-review-container">
+            <div class="list-review-sub-container">
+              <h3 class="list-review-header">
+                ${this.props.currentTeams[team]}
+              </h3>
+              <ul class="trade-review-player-list">${listItems.join("")}</ul>
+            </div>
+          </div>
+          `
+        );
+      }
+      // return the main div element that contains both lists
       return (
-        <div className="list-review-sub-container">
-          <h3 className="list-review-header">
-            {this.props.currentTeams.teamTwo}
-          </h3>
-          <div>{/* <ListGroup>{listItems}</ListGroup> */}</div>
-          <ul className="trade-review-player-list">{listItems}</ul>
-        </div>
+        <div
+          id="player-list-review-main-container"
+          // dangerouslySetInnerHTML is subject to XSS, sanitize later
+          dangerouslySetInnerHTML={{ __html: listHolder }}
+        ></div>
       );
-    } else {
     }
   }
 
@@ -450,30 +398,16 @@ class ReviewTrade extends React.Component {
     }
   }
 
-  statusTextColor(state_status) {
-    if (state_status == faCheckCircle) {
-      return "success";
-    } else {
-      return "fail";
-    }
-  }
-
+  // helper function to display error message if trade does't have successful contract amounts
   tradeHelperText(team_one_failure_message) {
-    if (team_one_failure_message == 0) {
-      //const tempMessage = this.state.team_two_failure_message;
-
-      //return this.state.team_two_failure_message;
-
+    if (team_one_failure_message === 0) {
+      // deconstruct the string stored in react state
       const tempMessage = this.state.team_two_failure_message.split(" ");
-
       const teamNameTemp1 = tempMessage[0];
-
       const teamSalTemp1 = tempMessage[10];
-
       const sectionOneSlice = tempMessage.slice(1, 10);
-
       const sectionTwoSlice = tempMessage.slice(11);
-
+      // reconstruct the string inside html so it can be styled
       return (
         <div>
           <div>
@@ -484,17 +418,16 @@ class ReviewTrade extends React.Component {
           </div>
         </div>
       );
-    } else {
+    }
+    // if team one does have an error
+    else {
+      // deconstruct the string stored in react state
       const tempMessage = this.state.team_one_failure_message.split(" ");
-
       const teamNameTemp1 = tempMessage[0];
-
       const teamSalTemp1 = tempMessage[10];
-
       const sectionOneSlice = tempMessage.slice(1, 10);
-
       const sectionTwoSlice = tempMessage.slice(11);
-
+      // reconstruct the string inside html so it can be styled
       return (
         <div>
           <div>
@@ -507,28 +440,21 @@ class ReviewTrade extends React.Component {
       );
     }
   }
-
-  /*
-    {this.state.team_one_failure_message.length == 0
-        ? this.state.team_two_failure_message
-        : this.state.team_one_failure_message}
-        */
-  //}
 
   render() {
     return (
       <div id="bar-container-main">
         <h2
           id="trade-status-text"
-          className={this.statusTextColor(this.state.tradeIcon)}
+          className={
+            this.state.tradeIcon === faCheckCircle ? "success" : "fail"
+          }
         >
           {this.state.success_message}
         </h2>
-
         <div id="trade-helper-text">
           {this.tradeHelperText(this.state.team_one_failure_message.length)}
         </div>
-
         <div id="bar-sub-container">
           <Progress
             className="bar"
@@ -540,7 +466,9 @@ class ReviewTrade extends React.Component {
           <FontAwesomeIcon
             icon={this.state.tradeIcon}
             id="trade-status-success"
-            className={this.tradeIconStatus()}
+            className={
+              this.state.tradeIcon === faTimesCircle ? "fail" : "success"
+            }
           />
           <Progress
             className="bar"
@@ -549,15 +477,7 @@ class ReviewTrade extends React.Component {
             value={this.state.teamTwoBarPercent}
           />
         </div>
-
-        <div id="player-list-review-main-container">
-          <div className="player-list-review-container">
-            {this.handleListOne(this.props)}
-          </div>
-          <div className="player-list-review-container">
-            {this.handleListTwo(this.props)}
-          </div>
-        </div>
+        {this.handleTradedPlayers()}
       </div>
     );
   }

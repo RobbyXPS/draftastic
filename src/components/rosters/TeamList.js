@@ -5,8 +5,7 @@ import {
   Dropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
-  Button
+  DropdownItem
 } from "reactstrap";
 
 class TeamList extends React.Component {
@@ -17,31 +16,19 @@ class TeamList extends React.Component {
       dropdownOpen: false
     };
     this.handleClick = this.handleClick.bind(this);
-    this.isActive = this.isActive.bind(this);
   }
-
+  // let redux store know when a team is selected
   handleClick = event => {
     this.props.selectTeam({
       team_container: this.props.containerValue,
       team_name: event.target.innerHTML
     });
   };
-
+  // helper function for reactstrap dropdown
   toggle() {
     this.setState(prevState => ({
       dropdownOpen: !prevState.dropdownOpen
     }));
-  }
-
-  isActive(currentTeams, team_name) {
-    if (
-      currentTeams["teamOne"] == team_name ||
-      currentTeams["teamTwo"] == team_name
-    ) {
-      return "disabled";
-    } else {
-      return "enabled";
-    }
   }
 
   render() {
@@ -55,20 +42,10 @@ class TeamList extends React.Component {
           <div>
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
               <DropdownToggle caret>
-                {/*{currentTeams[containerValue]}*/}
                 {currentTeams[containerValue]
                   ? currentTeams[containerValue]
                   : "Select Team"}
               </DropdownToggle>
-              {/* 
-    <DropdownToggle caret>
-      {currentTeams[containerValue]
-                  ? currentTeams[containerValue]
-                  : "Select Team"}
-  
-              </DropdownToggle>
-    */}
-
               <DropdownMenu
                 modifiers={{
                   setMaxHeight: {
@@ -93,7 +70,12 @@ class TeamList extends React.Component {
                       <DropdownItem
                         onClick={this.handleClick}
                         key={team.id}
-                        className={this.isActive(currentTeams, team.name)}
+                        className={
+                          currentTeams.teamOne === team.name ||
+                          currentTeams.teamTwo === team.name
+                            ? "disabled"
+                            : "enabled"
+                        }
                       >
                         {team.name}
                       </DropdownItem>
@@ -104,8 +86,6 @@ class TeamList extends React.Component {
           </div>
         </div>
       );
-    } else {
-      return <div>loading...</div>;
     }
   }
 }

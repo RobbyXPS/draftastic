@@ -3,23 +3,16 @@ import { connect } from "react-redux";
 import { storeSalariesTotal } from "../../store/actions/capActions";
 import { storeOutgoingSalaries } from "../../store/actions/capActions";
 import TeamList from "../rosters/TeamList";
-import {
-  Card,
-  Button,
-  CardHeader,
-  CardFooter,
-  CardBody,
-  CardTitle,
-  CardText
-} from "reactstrap";
+import { Card, CardHeader, CardFooter, CardBody, CardText } from "reactstrap";
 
 class TradeInfo extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      incomingPlayersMessage: "",
       capAmountMessage: ""
     };
+
     this.filterIncomingPlayers = this.filterIncomingPlayers.bind(this);
     this.calculateSalaries = this.calculateSalaries.bind(this);
     this.handleSendingSalaries = this.handleSendingSalaries.bind(this);
@@ -29,6 +22,7 @@ class TradeInfo extends React.Component {
     this.handleTeamSelectHeader = this.handleTeamSelectHeader.bind(this);
   }
 
+  // update redux store with total team salary when user selects one
   handleSendingSalaries(containerValue, wholeTeamSalary) {
     this.props.storeSalariesTotal({
       team_container: containerValue,
@@ -36,6 +30,7 @@ class TradeInfo extends React.Component {
     });
   }
 
+  // update redux store with total salaries of all selected players
   handleSendingPlayerOutgoingSalaries(containerValue, outgoingPlayerSalaries) {
     this.props.storeOutgoingSalaries({
       team_container: containerValue,
@@ -43,6 +38,7 @@ class TradeInfo extends React.Component {
     });
   }
 
+  // helper function to calculate total salaries of all selected players
   calculateSalaries(list) {
     return list.reduce(function(accumulator, currentValue) {
       return accumulator + currentValue.contract_amount;
@@ -52,10 +48,9 @@ class TradeInfo extends React.Component {
   filterIncomingPlayers(item) {
     // filp which container value is because we want the top portion populating for the other teams players
     let selectedPlayersList = "teamOne";
-    if (this.props.containerValue == "teamOne") {
+    if (this.props.containerValue === "teamOne") {
       selectedPlayersList = "teamTwo";
     }
-
     if (
       this.props.selected_players[selectedPlayersList].player_id.includes(
         item.id
@@ -83,23 +78,11 @@ class TradeInfo extends React.Component {
           this.filterIncomingPlayers
         );
 
-        // construct text that should be displayed when user selects a player to trade
-        let numofplayers = incomingPlayersList.length;
-        let incomingPlayersMessage;
+        //let incomingPlayersMessage;
         const totalSalary = this.calculateSalaries(incomingPlayersList);
 
         // store the salaries being traded in state so other components can access them
         this.handleSendingPlayerOutgoingSalaries(containerValue, totalSalary);
-
-        if (numofplayers == 0) {
-          incomingPlayersMessage = "";
-        } else {
-          incomingPlayersMessage =
-            "aquireing " +
-            numofplayers +
-            " players with salaries totaling " +
-            totalSalary;
-        }
 
         let currentTeams = this.props.currentTeams;
 
@@ -124,17 +107,15 @@ class TradeInfo extends React.Component {
         let capAmountMessagePrefix;
         let capAmountMessage;
         // if a user hasn't selected a team yet don't display anything
-        if (wholeTeamSalary == 0) {
+        if (wholeTeamSalary === 0) {
           capAmountMessage = "";
           capAmountMessagePrefix = "";
         }
         // once they select a team show the cap room for that team
         else {
-          //capAmountMessage = "Cap Room: " + caproom;
           capAmountMessage = caproom;
           capAmountMessagePrefix = "Cap Room: ";
         }
-        this.setState({ incomingPlayersMessage: incomingPlayersMessage });
         this.setState({ capAmountMessage: capAmountMessage });
         this.setState({ capAmountMessagePrefix: capAmountMessagePrefix });
       }
@@ -142,7 +123,7 @@ class TradeInfo extends React.Component {
   }
 
   handleTeamSelectHeader(containerValue, currentTeams) {
-    if (containerValue == "teamOne") {
+    if (containerValue === "teamOne") {
       return this.props.currentTeams[containerValue]
         ? this.props.currentTeams[containerValue]
         : "Select a team";
@@ -154,10 +135,12 @@ class TradeInfo extends React.Component {
   }
 
   render() {
+    //console.log("this.props", this.props);
     const containerValue = this.props.containerValue;
     const currentTeams = this.props.currentTeams;
     const teams = this.props.teams;
 
+    // helper function to format # to $
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
@@ -171,10 +154,6 @@ class TradeInfo extends React.Component {
             <CardHeader>
               <span className="team-info-highlight">
                 {this.handleTeamSelectHeader(containerValue, currentTeams)}
-
-                {/* {this.props.currentTeams[containerValue]
-                  ? this.props.currentTeams[containerValue]
-                : "Select a team"} */}
               </span>
             </CardHeader>
             <CardBody>
